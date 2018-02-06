@@ -76,28 +76,33 @@ public class Opponent
 	/*
 	 * onePair() : sets the boolean onePair to true if there is a pair inside a players hand.
 	 * 
+	 * For Opponent this method returns an integer that will represent the Rank of what card has a Pair,
+	 * this will aid the think() method in order to help locate the cards in the hand and their posiiton so that the computer
+	 * does not return said cards.
+	 * 
 	 */
-	public void onePair()
+	public int onePair()
 	{
+		int cardNum = 0;
 		Card card1;
 		Card tempCard;
 		card1 = this.hand.get(0);
 		for(int j = 1; j < 5; j++)
 		{
-			
 			for(int i = 1; i < 5; i++)
 			{
 				// next card
 				tempCard = this.hand.get(i);
 				if(tempCard.getRank().equals(card1.getRank()) && !(tempCard.getSuit().equals(card1.getSuit())))
 				{
+					cardNum = rankACard(tempCard.getRank());
 					this.onePair = true;
 				}
 			}
 			
 			card1 = this.hand.get(j);
 		}		
-		return;
+		return cardNum;
 	}
 	
 	
@@ -421,19 +426,18 @@ public class Opponent
 				giveBack(0);
 				numOfCards = 3;
 			}
-//			if(this.winPoints == 0) /* has nothing */
-//			{
-//				// For simplicity remove 3 random cards.
-//				giveBack(0);
-//				giveBack(0);
-//				giveBack(0);
-//				numOfCards = 3;
-//			}
-//			else if(this.winPoints == 5) /* has one pair */
-//			{
-//				// find which are the pair cards.
-//
-//			}
+			else if(winPoints == 5) // onePair is present
+			{
+				int rankToLookFor = onePair(); // These are the ranks that you have two of. remove all cards w/o that rank.
+				for(int i = 4; i >= 0; i--)
+				{
+					if(rankACard(hand.get(i).getRank()) != rankToLookFor)
+					{
+						giveBack(i);
+					}
+				}
+				numOfCards = 3;
+			}
 
 		}
 		this.winPoints = 0; // reset win points so that it doesn't double calculated from Poker.java "AnnounceWinner"

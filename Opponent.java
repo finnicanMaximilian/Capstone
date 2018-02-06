@@ -414,21 +414,29 @@ public class Opponent
 		int numOfCards = 0;
 		if(level == 0)
 		{
-			if(this.winPoints == 0) /* has nothing */
+			if(winPoints == 0)
 			{
-				// For simplicity remove 3 random cards.
 				giveBack(0);
 				giveBack(0);
 				giveBack(0);
 				numOfCards = 3;
 			}
-			else if(this.winPoints == 5) /* has one pair */
-			{
-				
-				
-			}
+//			if(this.winPoints == 0) /* has nothing */
+//			{
+//				// For simplicity remove 3 random cards.
+//				giveBack(0);
+//				giveBack(0);
+//				giveBack(0);
+//				numOfCards = 3;
+//			}
+//			else if(this.winPoints == 5) /* has one pair */
+//			{
+//				// find which are the pair cards.
+//
+//			}
 
 		}
+		this.winPoints = 0; // reset win points so that it doesn't double calculated from Poker.java "AnnounceWinner"
 		return numOfCards;
 	}
 }

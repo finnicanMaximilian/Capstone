@@ -47,17 +47,17 @@ public class GuiTest extends Application
         gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
         Image cardImage = new Image("cheetah-card.gif");
         gc.drawImage(cardImage, 1040, 8, 150, 200);
-        gc.drawImage(cardImage, 890, 8, 150, 200);
-        gc.drawImage(cardImage, 735, 8, 150, 200);
-        gc.drawImage(cardImage, 580, 8, 150, 200);
-        gc.drawImage(cardImage, 425, 8, 150, 200);
+        gc.drawImage(cardImage, 885, 8, 150, 200);
+        gc.drawImage(cardImage, 730, 8, 150, 200);
+        gc.drawImage(cardImage, 575, 8, 150, 200);
+        gc.drawImage(cardImage, 420, 8, 150, 200);
         
         gc.drawImage(cardImage, 540, 350, 150, 200);
         
         gc.setFill(Color.WHITE);
         gc.fillRoundRect(15, 15, 350, 180, 5, 5);
         gc.setFill(Color.BLACK);
-        gc.fillText("Poker Fanatic", 140, 110);
+        gc.strokeText("Poker Fanatic", 140, 110);
 
 
 	}

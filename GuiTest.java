@@ -1,5 +1,3 @@
-
-
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -55,6 +53,11 @@ public class GuiTest extends Application
         gc.drawImage(cardImage, 425, 8, 150, 200);
         
         gc.drawImage(cardImage, 540, 350, 150, 200);
+        
+        gc.setFill(Color.WHITE);
+        gc.fillRoundRect(15, 15, 350, 180, 5, 5);
+        gc.setFill(Color.BLACK);
+        gc.fillText("Poker Fanatic", 140, 110);
 
 
 	}

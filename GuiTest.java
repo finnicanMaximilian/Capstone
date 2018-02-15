@@ -16,11 +16,14 @@ import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
  
 
 
 public class GuiTest extends Application implements EventHandler<ActionEvent>
 {  
+	Stage window;
     Image cardImage = new Image("cheetah-card.gif");
  
 	Poker game = new Poker();
@@ -35,34 +38,33 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
+		window = primaryStage;
 		// TODO Auto-generated method stub
-        primaryStage.setTitle("Poker Fanatic!");
-        Group root = new Group();
-        Canvas canvas = new Canvas(1200, 900);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        window.setTitle("Poker Fanatic!");
+        // Creating a VBox with a play / giveBack button.
+        VBox leftMenu = new VBox(10);
+        Button playButton = new Button("Play!");
+        Button giveBackButton = new Button("Give Back");
+        leftMenu.getChildren().addAll(playButton, giveBackButton);
         
-        drawBoard(gc);
-        dealCard(gc);
+        BorderPane borderPane = new BorderPane();
+        borderPane.getChildren().add(leftMenu);
+        Scene scene = new Scene(borderPane, 1200, 900);
+        window.setScene(scene);
+        window.show();
         
-        // assemble players hand
-        // Player Hand
-        Button Card1 = new Button();
-        Card1.setText("Card1");
-        Card1.setAlignment(Pos.BOTTOM_LEFT);
-        Button card2 = new Button();
-        Button card3 = new Button();
-        Button card4 = new Button();
-        Button card5 = new Button();
-        root.getChildren().add(Card1);
- 
-        
-        
-        
- 
-        root.getChildren().add(canvas);
-        primaryStage.setScene(new Scene(root));
-        gc.setFill(Color.GREEN);
-        primaryStage.show();
+//        Group root = new Group();
+//        Canvas canvas = new Canvas(1200, 900);
+//        GraphicsContext gc = canvas.getGraphicsContext2D();
+//        
+//        drawBoard(gc);
+//        dealCard(gc);
+//        
+//            
+//        root.getChildren().add(canvas);
+//        window.setScene(new Scene(root));
+//        gc.setFill(Color.GREEN);
+        window.show();
 		return;
 	}
 	

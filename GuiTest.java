@@ -25,8 +25,11 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 {  
 	Stage window;
     Image cardImage = new Image("cheetah-card.gif");
- 
 	Poker game = new Poker();
+	String  vbox_style = "-fx-border-color: black;\n" +
+						"-fx-border-insets: 10;\n" +
+						"-fx-border-width: 5;\n" +
+						"-fx-border-style: groove;\n";
     
     
 	
@@ -44,8 +47,13 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         // Creating a VBox with a play / giveBack button.
         VBox leftMenu = new VBox(10);
         Button playButton = new Button("Play!");
+        playButton.setMinHeight(150);
+        playButton.setMinWidth(100);
         Button giveBackButton = new Button("Give Back");
+        giveBackButton.setMinHeight(150);
+        giveBackButton.setMinWidth(100);
         leftMenu.getChildren().addAll(playButton, giveBackButton);
+        leftMenu.setStyle(vbox_style);
         
         BorderPane borderPane = new BorderPane();
         borderPane.getChildren().add(leftMenu);

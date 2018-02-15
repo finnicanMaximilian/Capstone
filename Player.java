@@ -321,34 +321,34 @@ public class Player
 	
 	public void calcHand()
 	{
-		highCard(); // completed
-		twoPair(); // completed
-		if(this.twoPair == true)
-			this.winPoints += 10;
-		onePair(); // completed
+		highCard(); 
+		onePair(); 
 		if(this.onePair == true)
 			this.winPoints += 5;
-		threeOfKind(); // completed
+		twoPair(); 
+		if(this.twoPair == true)
+			this.winPoints += 10;
+		threeOfKind(); 
 		if(this.threeOfKind == true)
 			this.winPoints += 15;
-		fullHouse(); // completed
-		if(this.fullHouse == true)
-			this.winPoints += 30;
-		flush(); // completed
-		if(this.flush == true)
-			this.winPoints += 25;
-		straight(); // completed
+		straight(); 
 		if(this.straight == true)
 			this.winPoints += 20;
-		fourOfKind();
+		flush(); 
+		if(this.flush == true)
+			this.winPoints += 25;
+		fullHouse(); 
+		if(this.fullHouse == true)
+			this.winPoints += 30;
+		fourOfKind(); 
 		if(this.fourOfKind == true)
 			this.winPoints += 35;
-		royalFlush(); // completed
-		if(this.royalFlush == true)
-			this.winPoints += 100;
-		straightFlush(); // completed
+		straightFlush(); 
 		if(this.straightFlush == true)
 			this.winPoints += 40;
+		royalFlush(); 
+		if(this.royalFlush == true)
+			this.winPoints += 100;
 		return;
 	}
 	
@@ -360,11 +360,9 @@ public class Player
 		this.hand = new ArrayList<Card>(5);
 	}
 
-	public Card getCard(int i)
-	{
-		return this.hand.get(i);
-	}
-
+	/*
+	 * setCard(Card card) : takes in a card and places it within the players hand.
+	 */
 	public void setCard(Card card)
 	{
 		//Card newCard = card;
@@ -385,6 +383,7 @@ public class Player
 		}
 		return index;
 	}
+	
 
 	public void giveBack(int indexOfCard)
 	{

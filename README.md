@@ -8,7 +8,7 @@ A Program to engage in poker! This app allows a user to play poker aginst a Comp
 ---
 
 ## Running the Project
-To run the poker game download Card.java, Deck.java Player.java Poker.java, Opponent.java. All of these files will be required to run the game in "Console" When the files have been downloaded and placed within your own IDE run the "Poker.java" file to begin the poker game. When playin the game you will be prompted to enter in the amount of cards wanted to give back from your dealt hand, enter in the numbers 0-3, or 4 if you have an Ace in your hand, then you type the rank and suit then hit enter after each card you would like to give back. Once you give back all the cards you do not want the game will give you more cards from the deck then will calculate the winner.[M X3
+To run the poker game download Card.java, Deck.java Player.java Poker.java, Opponent.java. All of these files will be required to run the game in "Console" When the files have been downloaded and placed within your own IDE run the "Poker.java" file to begin the poker game. When playing the game you will be prompted to enter in the amount of cards wanted to give back from your dealt hand, enter in the numbers 0-3, or 4 if you have an Ace in your hand, then you type the rank and suit then hit enter after each card you would like to give back. Once you give back all the cards you do not want the game will give you more cards from the deck then will calculate the winner.
 
 ---
 

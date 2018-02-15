@@ -192,9 +192,20 @@ public class Poker
 		{
 			System.out.println("Computer wins!");
 		}
-		else
+		else if(opponent.winPoints == player.winPoints)
 		{
-			System.out.println("Tie!!");
+			if(opponent.highCard > player.highCard)
+			{
+				System.out.println("Computer wins!");
+			}
+			else if(player.highCard > opponent.highCard)
+			{
+				System.out.println("Player wins!");
+			}
+			else
+			{
+				System.out.println("dafaqqq?!?!!?");
+			}
 		}
 	}
 }

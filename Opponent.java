@@ -83,7 +83,7 @@ public class Opponent
 	 */
 	public int onePair()
 	{
-		int cardNum = 0;
+		int cardNum = 0; // new
 		Card card1;
 		Card tempCard;
 		card1 = this.hand.get(0);

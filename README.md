@@ -12,6 +12,12 @@ To run the poker game download Card.java, Deck.java Player.java Poker.java, Oppo
 
 ---
 
+## Testing the Project (Skateboard)
+Three test classes are provided to test the pokers games base functionality. (testCard.java, testDeck.java, testPlayer.java)
+All of these test classes provde that the functions do what they are intended to do, if furthur bug inspection is wanted to be done each test case is built to be customized toward each particular function inside the classes, hopefully making it easier to find tricky bugs within the code. To run all these files download them form the repository place within personal IDE then run each file.(The corresponding class will be needed for testing, I.E. (Card.java, Deck.java, Player.java). as For Opponent.java Testing can be done within the Poker.java file by playing the game and analyizing the computers behavior, futhur test classes will be made if deemed neccisary for these classes.
+
+---
+
 ## Project Proposal and Product Backlog
 
 ## Metadata section 

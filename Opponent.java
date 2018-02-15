@@ -373,7 +373,14 @@ public class Opponent
 	public void setCard(Card card)
 	{
 		//Card newCard = card;
-		this.hand.add(card);
+		if(hand.size() < 5)
+		{
+			this.hand.add(card);
+		}
+		else
+		{
+			System.out.println("Hand is full..");
+		}
 		return;
 	}
 

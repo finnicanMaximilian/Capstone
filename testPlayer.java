@@ -8,21 +8,40 @@ public class testPlayer {
 	static Player testPlayer;
 	public static void main(String[] args)
 	{
-		
 		// Testing setCard
-			//TODO
 		testPlayer = new Player();
-		System.out.println("setCard puts a card into a players hand.");
+		System.out.println("setCard(Card card) puts a card into a players hand.");
 		testPlayer.setCard(new Card("Clubs", "2"));
-		System.out.println("Placed a 2 Of Clubs in the testPlayers hand, card in hand: " 
+		System.out.println("to test the function i placed a 2 Of Clubs in the testPlayers hand, card in hand: " 
 		+ testPlayer.hand.get(0).getRank() + " " + testPlayer.hand.get(0).getSuit());
-
+		testPlayer.setCard(new Card("Clubs", "3"));
+		testPlayer.setCard(new Card("Clubs", "4"));
+		testPlayer.setCard(new Card("Clubs", "5"));
+		testPlayer.setCard(new Card("Clubs", "6"));
+		System.out.println("setCard Should restrict the amount of cards given to the player and limit the hand to 5 Cards.");
+		printPHand();
+		System.out.println("Attemping to add another card to the players hand.");
+		testPlayer.setCard(new Card("Clubs", "7"));
 		
 		
 		// Testing searchHand
-			//TODO
+		System.out.println("searchHand(String rank, String suit) finds the index of a particular card in a players hand then returns that index.");
+		System.out.println("To test this function i will place a 2 Of Clubs in the players hand then run searchHand(2, clubs) the function should return 0. ");
+		testPlayer = new Player();
+		testPlayer.setCard(new Card("Clubs", "2"));
+		System.out.println("Test: " + testPlayer.searchHand("2", "Clubs"));
+		
 		// Testing giveBack
-			//TODO
+		System.out.println("giveBack(int index) is basically the arrayList's remove function but tweaked so that the function only accepts indicies 0 - 4");
+		System.out.println("To test this function i will place 5 cards inside the hand Clubs, 2-6; print the hand; then giveBack all the cards; then print the hand again");
+		testPlayer = new Player();
+		System.out.println();
+		for(int i = 0; i < 5; i++) testPlayer.setCard(new Card("Clubs", Integer.toString(i+2)));
+		printPHand();
+		System.out.println("Giving back all cards..");
+		for(int i = 0; i < 5; i++) testPlayer.giveBack(0);
+		printPHand();
+		System.out.println("End of the giveBack testing...");
 		
 		// Testing Rank A Card
 		testPlayer = new Player();

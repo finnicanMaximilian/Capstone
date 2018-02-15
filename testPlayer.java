@@ -9,10 +9,16 @@ public class testPlayer {
 	public static void main(String[] args)
 	{
 		
-		// Testing GetACard
-			//TODO
 		// Testing setCard
 			//TODO
+		testPlayer = new Player();
+		System.out.println("setCard puts a card into a players hand.");
+		testPlayer.setCard(new Card("Clubs", "2"));
+		System.out.println("Placed a 2 Of Clubs in the testPlayers hand, card in hand: " 
+		+ testPlayer.hand.get(0).getRank() + " " + testPlayer.hand.get(0).getSuit());
+
+		
+		
 		// Testing searchHand
 			//TODO
 		// Testing giveBack

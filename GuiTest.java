@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -25,16 +26,23 @@ import javafx.scene.layout.VBox;
 
 public class GuiTest extends Application implements EventHandler<ActionEvent>
 {  
+	 Deck deck = new Deck();
+     ArrayList<Card> theDeck = deck.getDeck();
+     Player player = new Player();
+     Opponent opponent = new Opponent();
+    
+    
 	Stage window;
     Image cardImage = new Image("cheetah-card.gif");
-	Poker game = new Poker();
-	Deck deck;
 	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
 						"-fx-border-insets: 10;\n" +
 						"-fx-border-width: 5;\n" +
 						"-fx-border-style: groove;\n" +
 						"-fx-background-color: #FFFFFF;";
+    Group root = new Group();
+    Canvas canvas = new Canvas(1200, 900);
+    GraphicsContext gc = canvas.getGraphicsContext2D();
     
     
 	
@@ -68,18 +76,25 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 //        window.setScene(scene);
 //        window.show();
 //        
-        Group root = new Group();
-        Canvas canvas = new Canvas(1200, 900);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+
         gc.setFill(Color.GREEN);
         gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
-
+        Collections.shuffle(theDeck);
         //drawBoard(gc);
-        dealCard(gc);
+        Button playButton = new Button("Play Poker!");
+        playButton.setId("playButton");
+        playButton.setMinWidth(40);
+        playButton.setMinHeight(40);
+        root.getChildren().addAll(canvas, playButton);
+        playButton.setOnAction(e -> {
+        	dealCards();
+        });
+        
+       // dealCard(gc);
         
         
             
-        root.getChildren().add(canvas);
+
         window.setScene(new Scene(root));
         gc.setFill(Color.GREEN);
         window.show();
@@ -89,11 +104,54 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	@Override
 	public void handle(ActionEvent event)
 	{
-		// this is what happens when buttons are clicked.
-		// if(event.getSource()==card1) {
-			// num of cards to give back + 1.
-		//}
+
 		return;
+	}
+	
+	/*
+	 * dealCards(): for creation sake only make this accommodate two players.
+	 */
+	public void dealCards()
+	{
+		int j = 1040;
+		int m = 10;
+
+		for(int i = 0; i < 5; i++)
+		{
+//			String cName = "clickCard" + i;
+//			Button cName = new Button();
+//			cName.setStyle("-fx-background-color: transparent;");
+//			cName.setMinHeight(200);
+//			cName.setMinWidth(150);
+//			cName.setLayoutX(m);
+//			cName.setLayoutY(630);
+//			root.getChildren().add(cName);
+			player.setCard(theDeck.get(i));
+			gc.setFill(Color.WHITE);
+			gc.fillRoundRect(m, 630, 150, 200, 5, 5);
+			gc.setFill(Color.BLACK);
+			gc.fillText((player.hand.get(i).getRank() + " " 
+					+ player.hand.get(i).getSuit()), (m + 10), 650);
+			m = m + 160;
+
+			//this.oponent.setCard(this.theDeck.get(0));
+		}
+		for(int i = 0; i < 5; i++)
+		{
+			theDeck.remove(0);
+		}
+		for(int i = 0; i < 5; i++)
+		{
+			
+			//player.setCard(theDeck.get(i));
+	        gc.drawImage(cardImage, j, 8, 150, 200);
+	        j = j - 155;
+			opponent.setCard(theDeck.get(i));
+		}
+		for(int i = 0; i < 5; i++)
+		{
+			theDeck.remove(0);
+		}
 	}
 	
 	public void drawBoard(GraphicsContext gc)
@@ -121,7 +179,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	public void dealCard(GraphicsContext gc)
 	{
 		// Computer Hand
-        gc.drawImage(cardImage, 1040, 8, 150, 200);
+
         gc.drawImage(cardImage, 885, 8, 150, 200);
         gc.drawImage(cardImage, 730, 8, 150, 200);
         gc.drawImage(cardImage, 575, 8, 150, 200);

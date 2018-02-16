@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,10 +28,13 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	Stage window;
     Image cardImage = new Image("cheetah-card.gif");
 	Poker game = new Poker();
+	Deck deck;
+	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
 						"-fx-border-insets: 10;\n" +
 						"-fx-border-width: 5;\n" +
-						"-fx-border-style: groove;\n";
+						"-fx-border-style: groove;\n" +
+						"-fx-background-color: #FFFFFF;";
     
     
 	
@@ -45,33 +50,38 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		// TODO Auto-generated method stub
         window.setTitle("Poker Fanatic!");
         // Creating a VBox with a play / giveBack button.
-        VBox leftMenu = new VBox(10);
-        Button playButton = new Button("Play!");
-        playButton.setMinHeight(150);
-        playButton.setMinWidth(100);
-        Button giveBackButton = new Button("Give Back");
-        giveBackButton.setMinHeight(150);
-        giveBackButton.setMinWidth(100);
-        leftMenu.getChildren().addAll(playButton, giveBackButton);
-        leftMenu.setStyle(vbox_style);
-        
-        BorderPane borderPane = new BorderPane();
-        borderPane.getChildren().add(leftMenu);
-        Scene scene = new Scene(borderPane, 1200, 900);
-        window.setScene(scene);
-        window.show();
-        
-//        Group root = new Group();
-//        Canvas canvas = new Canvas(1200, 900);
-//        GraphicsContext gc = canvas.getGraphicsContext2D();
+//        VBox leftMenu = new VBox(10);
+//        Button playButton = new Button("Play!");
+//        playButton.setMinHeight(150);
+//        playButton.setMinWidth(100);
+//        Button giveBackButton = new Button("Give Back");
+//        giveBackButton.setMinHeight(150);
+//        giveBackButton.setMinWidth(100);
+//        leftMenu.getChildren().addAll(playButton, giveBackButton);
+//        leftMenu.setStyle(vbox_style);
 //        
-//        drawBoard(gc);
-//        dealCard(gc);
+//        BorderPane borderPane = new BorderPane();
+//        borderPane.getChildren().add(leftMenu);
+//        borderPane.setStyle(borderpane_style);
+//        borderPane.setBackground(Region.);
+//        Scene scene = new Scene(borderPane, 1200, 900);
+//        window.setScene(scene);
+//        window.show();
 //        
-//            
-//        root.getChildren().add(canvas);
-//        window.setScene(new Scene(root));
-//        gc.setFill(Color.GREEN);
+        Group root = new Group();
+        Canvas canvas = new Canvas(1200, 900);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.GREEN);
+        gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+
+        //drawBoard(gc);
+        dealCard(gc);
+        
+        
+            
+        root.getChildren().add(canvas);
+        window.setScene(new Scene(root));
+        gc.setFill(Color.GREEN);
         window.show();
 		return;
 	}
@@ -88,8 +98,6 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	
 	public void drawBoard(GraphicsContext gc)
 	{
-        gc.setFill(Color.GREEN);
-        gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
 
 
         // Picture of Deck
@@ -119,7 +127,15 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         gc.drawImage(cardImage, 575, 8, 150, 200);
         gc.drawImage(cardImage, 420, 8, 150, 200);
         
-
+        
+        
+        gc.setFill(Color.WHITE);
+        gc.fillRoundRect(10, 630, 150, 200, 5, 5);
+        gc.fillRoundRect(170, 630, 150, 200, 5, 5);
+        gc.fillRoundRect(330, 630, 150, 200, 5, 5);
+        gc.fillRoundRect(490, 630, 150, 200, 5, 5);
+        gc.fillRoundRect(650, 630, 150, 200, 5, 5);
+       
 	}
 
 }

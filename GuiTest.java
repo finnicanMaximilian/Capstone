@@ -1,3 +1,4 @@
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -33,6 +34,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
     
     
 	Stage window;
+	Scene scene;
     Image cardImage = new Image("cheetah-card.gif");
 	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
@@ -88,14 +90,15 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         root.getChildren().addAll(canvas, playButton);
         playButton.setOnAction(e -> {
         	dealCards();
+        	createButtons();
         });
         
        // dealCard(gc);
         
         
             
-
-        window.setScene(new Scene(root));
+        scene = new Scene(root);
+        window.setScene(scene);
         gc.setFill(Color.GREEN);
         window.show();
 		return;
@@ -152,6 +155,62 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		{
 			theDeck.remove(0);
 		}
+	}
+	
+	private void createButtons()
+	{
+		int m = 10;
+		String button_style = "-fx-background-color: transparent;"
+				+ "-fx-hover-color: pink;";
+		Button b1 = new Button();
+		b1.setId("Card1");
+		b1.setMinHeight(200);
+		b1.setMinWidth(150);
+		b1.setLayoutX(m);
+		b1.setLayoutY(630);
+		//b1.setStyle(button_style);
+		root.getChildren().add(b1);
+		Button b2 = new Button();
+		b2.setId("Card2");
+		b2.setMinHeight(200);
+		b2.setMinWidth(150);
+		b2.setLayoutX(m + 160);
+		b2.setLayoutY(630);
+		b2.setStyle(button_style);
+		root.getChildren().add(b2);
+		Button b3 = new Button();
+		b3.setId("Card3");
+		b3.setMinHeight(200);
+		b3.setMinWidth(150);
+		b3.setLayoutX(m + 160 + 160);
+		b3.setLayoutY(630);
+		b3.setStyle(button_style);
+		root.getChildren().add(b3);
+		Button b4 = new Button();
+		b4.setId("Card4");
+		b4.setMinHeight(200);
+		b4.setMinWidth(150);
+		b4.setLayoutX(m + 160 + 160 + 160);
+		b4.setLayoutY(630);
+		b4.setStyle(button_style);
+		root.getChildren().add(b4);
+		Button b5 = new Button();
+		b5.setId("Card5");
+		b5.setMinHeight(200);
+		b5.setMinWidth(150);
+		b5.setLayoutX(m + 160 + 160 + 160 + 160);
+		b5.setLayoutY(630);
+		b5.setStyle(button_style);
+		root.getChildren().add(b5);
+		 URL url = this.getClass().getResource("Poker.css");
+		    if (url == null) {
+		        System.out.println("Resource not found. Aborting.");
+		        System.exit(-1);
+		    }
+		    String css = url.toExternalForm(); 
+		    scene.getStylesheets().add(css);
+		
+		return;
 	}
 	
 	public void drawBoard(GraphicsContext gc)

@@ -50,7 +50,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	Canvas canvas = new Canvas(1200, 900);
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 	ListView<String> listView = new ListView<>();
-
+	
 
 	
     public static void main(String[] args) 
@@ -68,11 +68,17 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
         Collections.shuffle(theDeck);
         
+        // giveBack button will start a loop with charts to be fed through initiateGiveBack from player.java
+        Button giveBack = new Button("Give Back Cards");
+        giveBack.setId("giveBack");
+        giveBack.setLayoutY(400);
+        giveBack.setMinHeight(40);
+        giveBack.setMinWidth(80);
         Button playButton = new Button("Play Poker!");
         playButton.setId("playButton");
         playButton.setMinWidth(40);
         playButton.setMinHeight(40);
-        root.getChildren().addAll(canvas, playButton);
+        root.getChildren().addAll(canvas, playButton, giveBack);
         playButton.setOnAction(e -> {
         	dealCards();
         	createButtons();
@@ -146,9 +152,9 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		}
 		// ListView customization
 		listView.setPadding(new Insets(10,10,10,10));
-		listView.setPrefSize(200, 150);
+		listView.setPrefSize(450, 150);
 		listView.setLayoutX(200);
-		listView.setLayoutY(100);
+		listView.setLayoutY(400);
 		//listView.setMinHeight(150);
 		//listView.setMinWidth(800);
 		root.getChildren().add(listView);
@@ -198,9 +204,6 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		b5.setLayoutY(630);
 		b5.setStyle(button_style);
 		root.getChildren().add(b5);
-
-
-		
 		return;
 	}
 	

@@ -76,6 +76,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         Collections.shuffle(theDeck);
         
         Button giveBack = new Button("Give Back Cards");
+        giveBack.setVisible(false);
         giveBack.setId("giveBack");
         giveBack.setLayoutY(400);
         giveBack.setMinHeight(40);
@@ -87,6 +88,8 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         	initiateGiveBack(1);
         	// Testing to see if the initiateGiveBack is changing the players cards in hand.
         	// for(int i = 0; i < 5; i++) System.out.println("Player Card " + i + ":" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
+        	announceWinner();
+        	giveBack.setVisible(false);
         });
         Button playButton = new Button("Play Poker!");
         playButton.setId("playButton");
@@ -95,6 +98,8 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 
         playButton.setOnAction(e -> {
         	dealCards();
+        	playButton.setVisible(false);
+        	giveBack.setVisible(true);
             // giveBack button will start a loop with charts to be fed through initiateGiveBack from player.java
 
 
@@ -136,6 +141,8 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	 */
 	public void dealCards()
 	{
+        // Picture of Deck
+        gc.drawImage(cardImage, 540, 350, 150, 200);
 		// j is used for spacing for Computer Card's X Coordinate
 		int j = 1040;
 		// m is used for spacing for Player Card's X Coordinate
@@ -156,6 +163,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		{
 			theDeck.remove(0);
 		}
+		// Drawing opponents hand.
 		for(int i = 0; i < 5; i++)
 		{
 	        gc.drawImage(cardImage, j, 8, 150, 200);
@@ -181,8 +189,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	{
 
 
-        // Picture of Deck
-        gc.drawImage(cardImage, 540, 350, 150, 200);
+
         
         // Making the title of the game.
         gc.setFill(Color.WHITE);
@@ -192,32 +199,6 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 
 
 	}
-	
-	
-	/*
-	 * In progress, trying to figure out a way to deal cards out.
-	 * 
-	 */
-	public void dealCard(GraphicsContext gc)
-	{
-		// Computer Hand
-
-        gc.drawImage(cardImage, 885, 8, 150, 200);
-        gc.drawImage(cardImage, 730, 8, 150, 200);
-        gc.drawImage(cardImage, 575, 8, 150, 200);
-        gc.drawImage(cardImage, 420, 8, 150, 200);
-        
-        
-        
-        gc.setFill(Color.WHITE);
-        gc.fillRoundRect(10, 630, 150, 200, 5, 5);
-        gc.fillRoundRect(170, 630, 150, 200, 5, 5);
-        gc.fillRoundRect(330, 630, 150, 200, 5, 5);
-        gc.fillRoundRect(490, 630, 150, 200, 5, 5);
-        gc.fillRoundRect(650, 630, 150, 200, 5, 5);
-       
-	}
-	
 	
 	/*
 	 * Works with GiveBack to get strings from the listview.
@@ -349,7 +330,58 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		}
 		root.getChildren().add(listView);
 		return;
+	}
+	
+	
+	private void announceWinner()
+	{
+		// Flip the computers hand.
+		int j = 1040;
 
+		for(int i = 0; i < 5; i++)
+		{
+			// Draw Over Computer Cards With It's Cards.
+			gc.setFill(Color.WHITE);
+			gc.fillRoundRect(j, 8, 150, 200, 8, 8);
+			gc.setFill(Color.BLACK);
+			gc.fillText((opponent.hand.get(i).getRank() + " " + opponent.hand.get(i).getSuit()), (j+10), 100);
+			j = j - 155;
+		}	
+		player.calcHand();
+		opponent.calcHand();
+		gc.fillText(("Total Player Points: " +player.winPoints), 600, 700);
+		gc.fillText(("Total Computer Points: " + opponent.winPoints), 200, 150);
+		
+		// Player Wins
+		if(player.winPoints > opponent.winPoints)
+		{
+			System.out.println("Player wins!");
+		}
+		// Opponent Wins
+		else if(opponent.winPoints > player.winPoints)
+		{
+			System.out.println("Computer wins!");
+		}
+		else if(opponent.winPoints == player.winPoints)
+		{
+			// Tie but opponent has highCard.
+			if(opponent.highCard > player.highCard)
+			{
+				System.out.println("Computer wins!");
+			}
+			// Tie but player has highCard.
+			else if(player.highCard > opponent.highCard)
+			{
+				System.out.println("Player wins!");
+			}
+			// Absolute tie event to the highCard.
+			else
+			{
+				System.out.println("dafaqqq?!?!!?");
+			}
+		}
+		
+		return;
 	}
 
 }

@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +27,7 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -59,6 +62,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	// storing a list of card names along with the number of cards
 	String listOfCards = "";
 	int numberOfCards = 0;
+	Text playerWin = new Text();
 	
 
 	
@@ -73,11 +77,27 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		giveBackText.setVisible(false);
 		window = primaryStage;
         window.setTitle("Poker Fanatic!");
+        Button playButton = new Button("Play Poker!");
+        Button showWin = new Button("See who Won!");
+        Button giveBack = new Button("Give Back Cards");
 
         gc.setFill(Color.GREEN);
         gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
         
-        Button giveBack = new Button("Give Back Cards");
+
+        showWin.setVisible(false);
+        showWin.setId("showWin");
+        showWin.setLayoutY(400);
+        showWin.setMinHeight(40);
+        showWin.setMinWidth(80);
+        showWin.setOnAction(e -> {
+        	showWin.setVisible(false);
+        	printWinner();
+        	playButton.setVisible(true);
+        	// how to reset the listView so that a brand new game could be played.
+        	this.listView = new ListView<>();
+        });
+
         giveBack.setVisible(false);
         giveBack.setId("giveBack");
         giveBack.setLayoutY(400);
@@ -93,14 +113,16 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	announceWinner();
         	giveBack.setVisible(false);
         	giveBackText.setVisible(false);
+        	showWin.setVisible(true);
         });
-        Button playButton = new Button("Play Poker!");
+
         playButton.setId("playButton");
         playButton.setMinWidth(40);
         playButton.setMinHeight(40);
         playButton.setLayoutY(350);
 
         playButton.setOnAction(e -> {
+        	playerWin.setVisible(false);
         	launchPoker();
             Collections.shuffle(theDeck);
         	dealCards();
@@ -108,7 +130,8 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	giveBack.setVisible(true);
         	giveBackText.setVisible(true);
         });
-        root.getChildren().addAll(canvas, playButton, giveBack, giveBackText);
+
+        root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin);
         
         
         // create scene with root.
@@ -200,10 +223,11 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	 */
 	private void buttonClicked()
 	{
-		ObservableList<String> movies;
-		movies = listView.getSelectionModel().getSelectedItems();
+		listOfCards = "";
+		ObservableList<String> cards;
+		cards = listView.getSelectionModel().getSelectedItems();
 		
-		for(String m: movies)
+		for(String m: cards)
 		{
 			listOfCards += m + "\n";
 			numberOfCards++;
@@ -348,35 +372,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		gc.fillText(("Total Computer Points: " + opponent.winPoints), 175, 150);
 		gc.fillText(("Highest Ranked Player Card: " + player.highCard), 600, 750);
 		gc.fillText(("Highest Ranked Computer Card: " + opponent.highCard), 175, 200);
-		
-		// Player Wins
-		if(player.winPoints > opponent.winPoints)
-		{
-			System.out.println("Player wins!");
-		}
-		// Opponent Wins
-		else if(opponent.winPoints > player.winPoints)
-		{
-			System.out.println("Computer wins!");
-		}
-		else if(opponent.winPoints == player.winPoints)
-		{
-			// Tie but opponent has highCard.
-			if(opponent.highCard > player.highCard)
-			{
-				System.out.println("Computer wins!");
-			}
-			// Tie but player has highCard.
-			else if(player.highCard > opponent.highCard)
-			{
-				System.out.println("Player wins!");
-			}
-			// Absolute tie event to the highCard.
-			else
-			{
-				System.out.println("dafaqqq?!?!!?");
-			}
-		}	
+			
 		return;
 	}
 	
@@ -387,6 +383,47 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
+	}
+	
+	public void printWinner()
+	{
+
+		playerWin.setLayoutX(500);
+		playerWin.setLayoutY(450);
+		playerWin.setVisible(false);
+
+		root.getChildren().add(playerWin);
+        gc.setFill(Color.GREEN);
+        gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+        gc.setFill(Color.BLACK);
+        root.getChildren().remove(listView);
+        // Player Won.
+        if(player.winPoints > opponent.winPoints)
+        {
+        	playerWin.setText("Player Won");
+        }
+        else if(opponent.winPoints > player.winPoints)
+        {
+        	playerWin.setText("Computer Won!");
+        }
+        else if(opponent.winPoints == player.winPoints)
+        {
+        	if(opponent.highCard > player.highCard)
+        	{
+        		playerWin.setText("Computer Won with High Card!");
+        	}
+        	else if(player.highCard > opponent.highCard)
+        	{
+        		playerWin.setText("Player Won with High Card!");
+        	}
+        	else
+        	{
+        		playerWin.setText("Tie Game!!");
+        	}
+        }
+     	playerWin.setVisible(true);
+        	
+        return;
 	}
 
 }

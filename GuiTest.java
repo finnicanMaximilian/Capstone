@@ -75,7 +75,6 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
         Collections.shuffle(theDeck);
         
-        // giveBack button will start a loop with charts to be fed through initiateGiveBack from player.java
         Button giveBack = new Button("Give Back Cards");
         giveBack.setId("giveBack");
         giveBack.setLayoutY(400);
@@ -87,17 +86,23 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         	initiateGiveBack(0);
         	initiateGiveBack(1);
         	// Testing to see if the initiateGiveBack is changing the players cards in hand.
-        	for(int i = 0; i < 5; i++) System.out.println("Player Card " + i + ":" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
+        	// for(int i = 0; i < 5; i++) System.out.println("Player Card " + i + ":" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
         });
         Button playButton = new Button("Play Poker!");
         playButton.setId("playButton");
         playButton.setMinWidth(40);
         playButton.setMinHeight(40);
-        root.getChildren().addAll(canvas, playButton, giveBack);
+
         playButton.setOnAction(e -> {
         	dealCards();
+            // giveBack button will start a loop with charts to be fed through initiateGiveBack from player.java
+
+
+
+
         	//createButtons();
         });
+        root.getChildren().addAll(canvas, playButton, giveBack);
         
         
         // create scene with root.
@@ -131,24 +136,20 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	 */
 	public void dealCards()
 	{
+		// j is used for spacing for Computer Card's X Coordinate
 		int j = 1040;
+		// m is used for spacing for Player Card's X Coordinate
 		int m = 10;
+		// aligns the view in horizontal
 		listView.setOrientation(Orientation.HORIZONTAL);
 		for(int i = 0; i < 5; i++)
 		{
 			player.setCard(theDeck.get(i));
-//			gc.setFill(Color.WHITE);
-//			gc.fillRoundRect(m, 630, 150, 200, 5, 5);
-//			gc.setFill(Color.BLACK);
-//			gc.fillText((player.hand.get(i).getRank() + " " 
-//					+ player.hand.get(i).getSuit()), (m + 10), 650);
 
 			// Adding name to cards to list view, this can later be used to give back
 			// String names of cards in order to feed into player.java's search hand method.
 			listView.getItems().add((player.hand.get(i).getRank() + " " 
-					+ player.hand.get(i).getSuit()));
-
-			
+					+ player.hand.get(i).getSuit()));	
 			m = m + 160;
 		}
 		for(int i = 0; i < 5; i++)
@@ -165,66 +166,15 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		{
 			theDeck.remove(0);
 		}
-		// ListView customization
+		// Multiple Cards can be selected
 		listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		listView.setPadding(new Insets(10,10,10,10));
-		listView.setPrefSize(450, 150);
+		listView.setPrefSize(550, 200);
 		listView.setLayoutX(10);
 		listView.setLayoutY(600);
 		//listView.setMinHeight(150);
 		//listView.setMinWidth(800);
 		root.getChildren().add(listView);
-	}
-	
-	
-	/*
-	 * createButtons, might not be needed..
-	 */
-	private void createButtons()
-	{
-		int m = 10;
-		String button_style = "-fx-background-color: transparent;";
-		Button b1 = new Button();
-		b1.setId("Card1");
-		b1.setMinHeight(200);
-		b1.setMinWidth(150);
-		b1.setLayoutX(m);
-		b1.setLayoutY(630);
-		//b1.setStyle(button_style);
-		root.getChildren().add(b1);
-		Button b2 = new Button();
-		b2.setId("Card2");
-		b2.setMinHeight(200);
-		b2.setMinWidth(150);
-		b2.setLayoutX(m + 160);
-		b2.setLayoutY(630);
-		b2.setStyle(button_style);
-		root.getChildren().add(b2);
-		Button b3 = new Button();
-		b3.setId("Card3");
-		b3.setMinHeight(200);
-		b3.setMinWidth(150);
-		b3.setLayoutX(m + 160 + 160);
-		b3.setLayoutY(630);
-		b3.setStyle(button_style);
-		root.getChildren().add(b3);
-		Button b4 = new Button();
-		b4.setId("Card4");
-		b4.setMinHeight(200);
-		b4.setMinWidth(150);
-		b4.setLayoutX(m + 160 + 160 + 160);
-		b4.setLayoutY(630);
-		b4.setStyle(button_style);
-		root.getChildren().add(b4);
-		Button b5 = new Button();
-		b5.setId("Card5");
-		b5.setMinHeight(200);
-		b5.setMinWidth(150);
-		b5.setLayoutX(m + 160 + 160 + 160 + 160);
-		b5.setLayoutY(630);
-		b5.setStyle(button_style);
-		root.getChildren().add(b5);
-		return;
 	}
 	
 	public void drawBoard(GraphicsContext gc)
@@ -233,7 +183,6 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 
         // Picture of Deck
         gc.drawImage(cardImage, 540, 350, 150, 200);
-        
         
         // Making the title of the game.
         gc.setFill(Color.WHITE);
@@ -269,10 +218,12 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
        
 	}
 	
+	
+	/*
+	 * Works with GiveBack to get strings from the listview.
+	 */
 	private void buttonClicked()
 	{
-
-
 		ObservableList<String> movies;
 		movies = listView.getSelectionModel().getSelectedItems();
 		
@@ -281,9 +232,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 			listOfCards += m + "\n";
 			numberOfCards++;
 		}
-		
 		//System.out.println(message);
-		
 		return;
 	}
 	
@@ -295,9 +244,13 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	 * to the player and removing them from the deck.
 	 * 0 == Player
 	 * 1 == Computer
+	 * 
+	 * initiateGiveBack takes in the names of the cards that the user selects to remove from his/her hand
+	 * then needs to re initialize those elements of the listView.
 	 */
 	public void initiateGiveBack(int person)
 	{
+		root.getChildren().remove(listView);
 		if(person == 0)
 		{
 			//System.out.println("How many cards would you like to give back?");
@@ -316,12 +269,21 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 					String suit = keyboard.next();
 					int cNum = player.searchHand(rank, suit);
 					player.giveBack(cNum);
+					// Seeing if the item gets removed from the list.
+					listView.getItems().remove(cNum);
+					
+					
+					
 				}
 
 				//System.out.println("\n\nGiving Back Cards....");
 				for(int i = 0; i < numOfCards; i++)
 				{
-					player.setCard(theDeck.get(i));
+					String rank = theDeck.get(i).getRank();
+					String suit = theDeck.get(i).getSuit();
+					Card newCard = new Card(suit, rank);
+					player.setCard(newCard);
+					listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -338,11 +300,17 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 					String suit = keyboard.next();
 					int cNum = player.searchHand(rank, suit);
 					player.giveBack(cNum);
+					// Seeing if the item gets removed from the list.
+					listView.getItems().remove(cNum);
 				}
 				System.out.println("\n\nGiving Back Cards....");
 				for(int i = 0; i < numOfCards; i++)
 				{
-					player.setCard(theDeck.get(i));
+					String rank = theDeck.get(i).getRank();
+					String suit = theDeck.get(i).getSuit();
+					Card newCard = new Card(suit, rank);
+					player.setCard(newCard);
+					listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -358,6 +326,8 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 				System.out.println("I'm Sorry but if you do not possess an Ace then you may not"
 						+ "give back that many cards please type the number again");
 			}
+
+
 		}
 		else if(person == 1)
 		{
@@ -377,7 +347,9 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		{
 			System.out.println("Wrong number entered, please enter 0 for player and 1 for opponent.");
 		}
+		root.getChildren().add(listView);
 		return;
+
 	}
 
 }

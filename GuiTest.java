@@ -1,8 +1,10 @@
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,6 +16,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -51,6 +54,10 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 	GraphicsContext gc = canvas.getGraphicsContext2D();
 	ListView<String> listView = new ListView<>();
 	
+	// storing a list of card names along with the number of cards
+	String listOfCards = "";
+	int numberOfCards = 0;
+	
 
 	
     public static void main(String[] args) 
@@ -74,6 +81,14 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         giveBack.setLayoutY(400);
         giveBack.setMinHeight(40);
         giveBack.setMinWidth(80);
+        giveBack.setOnAction(e -> 
+        {
+        	buttonClicked();
+        	initiateGiveBack(0);
+        	initiateGiveBack(1);
+        	// Testing to see if the initiateGiveBack is changing the players cards in hand.
+        	for(int i = 0; i < 5; i++) System.out.println("Player Card " + i + ":" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
+        });
         Button playButton = new Button("Play Poker!");
         playButton.setId("playButton");
         playButton.setMinWidth(40);
@@ -81,7 +96,7 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         root.getChildren().addAll(canvas, playButton, giveBack);
         playButton.setOnAction(e -> {
         	dealCards();
-        	createButtons();
+        	//createButtons();
         });
         
         
@@ -122,11 +137,11 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 		for(int i = 0; i < 5; i++)
 		{
 			player.setCard(theDeck.get(i));
-			gc.setFill(Color.WHITE);
-			gc.fillRoundRect(m, 630, 150, 200, 5, 5);
-			gc.setFill(Color.BLACK);
-			gc.fillText((player.hand.get(i).getRank() + " " 
-					+ player.hand.get(i).getSuit()), (m + 10), 650);
+//			gc.setFill(Color.WHITE);
+//			gc.fillRoundRect(m, 630, 150, 200, 5, 5);
+//			gc.setFill(Color.BLACK);
+//			gc.fillText((player.hand.get(i).getRank() + " " 
+//					+ player.hand.get(i).getSuit()), (m + 10), 650);
 
 			// Adding name to cards to list view, this can later be used to give back
 			// String names of cards in order to feed into player.java's search hand method.
@@ -151,15 +166,20 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
 			theDeck.remove(0);
 		}
 		// ListView customization
+		listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		listView.setPadding(new Insets(10,10,10,10));
 		listView.setPrefSize(450, 150);
-		listView.setLayoutX(200);
-		listView.setLayoutY(400);
+		listView.setLayoutX(10);
+		listView.setLayoutY(600);
 		//listView.setMinHeight(150);
 		//listView.setMinWidth(800);
 		root.getChildren().add(listView);
 	}
 	
+	
+	/*
+	 * createButtons, might not be needed..
+	 */
 	private void createButtons()
 	{
 		int m = 10;
@@ -247,6 +267,117 @@ public class GuiTest extends Application implements EventHandler<ActionEvent>
         gc.fillRoundRect(490, 630, 150, 200, 5, 5);
         gc.fillRoundRect(650, 630, 150, 200, 5, 5);
        
+	}
+	
+	private void buttonClicked()
+	{
+
+
+		ObservableList<String> movies;
+		movies = listView.getSelectionModel().getSelectedItems();
+		
+		for(String m: movies)
+		{
+			listOfCards += m + "\n";
+			numberOfCards++;
+		}
+		
+		//System.out.println(message);
+		
+		return;
+	}
+	
+	
+	
+	/*
+	 * inititateGiveBack: This method would initiate the Giving back phase, 
+	 * instructing the player on what to do, in return giving back the cards
+	 * to the player and removing them from the deck.
+	 * 0 == Player
+	 * 1 == Computer
+	 */
+	public void initiateGiveBack(int person)
+	{
+		if(person == 0)
+		{
+			//System.out.println("How many cards would you like to give back?");
+			Scanner keyboard = new Scanner(listOfCards);
+			int numOfCards = this.numberOfCards;
+			if(numOfCards == 4 && ((player.searchHand("Ace", "Clubs") != 5)
+					|| (player.searchHand("Ace", "Hearts") != 5)
+					|| (player.searchHand("Ace", "Spades") != 5)
+					|| (player.searchHand("Ace", "Diamonds") != 5)))
+			{
+
+				// Ace is present within the Persons hand
+				for(int i = 0; i < 4; i++)
+				{
+					String rank = keyboard.next();
+					String suit = keyboard.next();
+					int cNum = player.searchHand(rank, suit);
+					player.giveBack(cNum);
+				}
+
+				//System.out.println("\n\nGiving Back Cards....");
+				for(int i = 0; i < numOfCards; i++)
+				{
+					player.setCard(theDeck.get(i));
+				}
+				for(int i = 0; i < numOfCards; i++)
+				{
+					theDeck.remove(0);
+				}
+			}
+			else if(numOfCards < 4 && numOfCards != 0)
+			{
+//				System.out.println("Please type the Rank and Suit of the card you would like to give back\n"
+//						+ "			Then press ENTER after each card.");
+				for(int i = 0; i < numOfCards; i++)
+				{
+					String rank = keyboard.next();
+					String suit = keyboard.next();
+					int cNum = player.searchHand(rank, suit);
+					player.giveBack(cNum);
+				}
+				System.out.println("\n\nGiving Back Cards....");
+				for(int i = 0; i < numOfCards; i++)
+				{
+					player.setCard(theDeck.get(i));
+				}
+				for(int i = 0; i < numOfCards; i++)
+				{
+					theDeck.remove(0);
+				}
+			}
+			else if(numOfCards == 0)
+			{
+				System.out.println("You must be feeling lucky!");
+			}
+			else
+			{
+				System.out.println("I'm Sorry but if you do not possess an Ace then you may not"
+						+ "give back that many cards please type the number again");
+			}
+		}
+		else if(person == 1)
+		{
+			// opponent goes here.
+			int numOfCards = opponent.think(0);
+			for(int i = 0; i < numOfCards; i++)
+			{
+				opponent.setCard(theDeck.get(i));
+			}
+			for(int i = 0; i < numOfCards; i++)
+			{
+				theDeck.remove(0);
+			}
+
+		}
+		else
+		{
+			System.out.println("Wrong number entered, please enter 0 for player and 1 for opponent.");
+		}
+		return;
 	}
 
 }

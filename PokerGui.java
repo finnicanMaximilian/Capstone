@@ -95,7 +95,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	printWinner();
         	playButton.setVisible(true);
         	// how to reset the listView so that a brand new game could be played.
-        	this.listView = new ListView<>();
         });
 
         giveBack.setVisible(false);
@@ -383,6 +382,8 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
+		// Trying to re-instantiate a players hand.
+    	this.listView = new ListView<>();
 	}
 	
 	public void printWinner()
@@ -422,7 +423,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	}
         }
      	playerWin.setVisible(true);
-        	
         return;
 	}
 

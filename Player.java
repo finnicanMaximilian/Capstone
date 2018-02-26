@@ -341,19 +341,19 @@ public class Player
 			this.winPoints += 15;
 		straight(); 
 		if(this.straight == true)
-			this.winPoints += 20;
+			this.winPoints += 30;
 		flush(); 
 		if(this.flush == true)
-			this.winPoints += 25;
+			this.winPoints += 40;
 		fullHouse(); 
 		if(this.fullHouse == true)
-			this.winPoints += 30;
+			this.winPoints += 50;
 		fourOfKind(); 
 		if(this.fourOfKind == true)
-			this.winPoints += 35;
+			this.winPoints += 60;
 		straightFlush(); 
 		if(this.straightFlush == true)
-			this.winPoints += 40;
+			this.winPoints += 70;
 		royalFlush(); 
 		if(this.royalFlush == true)
 			this.winPoints += 100;

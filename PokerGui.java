@@ -63,7 +63,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	String listOfCards = "";
 	int numberOfCards = 0;
 	Text playerWin = new Text();
-	Text giveBackWarning = new Text(10,600,"You may only give back up to 4 cards only if you have an Ace, 3 elsewise");
+	Text giveBackWarning = new Text(10, 550,"You may only give back up to 4 cards only if you have an Ace, 3 elsewise");
 	ObservableList<String> cards;
 	int numOfGames = 0;
 	
@@ -76,6 +76,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
+		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
         this.window.setTitle("Poker Fanatic!");
@@ -118,18 +119,17 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         {
         	buttonClicked();
         	// Change to a boolean? only continue with button performance if turn has passed correctly. if false then
-        	// print a Warning in red decalring the issue for the user to read.
-        	while(!(initiateGiveBack(0)))
-        	{
-        		// if turn is not done then that means incorrect cards were selected.
-        		this.giveBackWarning.setFill(Color.RED);
-        		this.giveBackWarning.setVisible(true);
-        		initiateGiveBack(0);
-        	}
-
+        	// print a Warning in red declaring the issue for the user to read.
+//        	boolean turnDone;
+//        	turnDone = initiateGiveBack(0);
+//        	if(!(turnDone))
+//        	{
+//            	this.giveBackWarning.setFill(Color.RED);
+//        		this.giveBackWarning.setVisible(true);
+//        		turnDone = initiateGiveBack(0);
+        	//        	}
+        	initiateGiveBack(0);
         	initiateGiveBack(1);
-        	// Testing to see if the initiateGiveBack is changing the players cards in hand.
-        	// for(int i = 0; i < 5; i++) System.out.println("Player Card " + i + ":" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
         	announceWinner();
         	giveBack.setVisible(false);
         	giveBackText.setVisible(false);
@@ -157,7 +157,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         });
         this.canvas.maxHeight(900);
         this.canvas.maxWidth(1200);
-        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin);
+        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning);
         
         // create scene with root.
         this.scene = new Scene(root);
@@ -337,12 +337,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			{
 				turnDone = true;
 			}
-			else
-			{
-				// TODO Make this message Appear in GUI
-				keyboard.close();
-				return turnDone;
-			}
 			keyboard.close();
 		}
 		else if(person == 1)
@@ -359,11 +353,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			}
 			turnDone = true;
 		}
-		else
-		{
-			// Should never be execute because initiateGiveBack() is always fed an integer.
-			return turnDone;
-		}
+		
 		this.root.getChildren().add(this.listView);
 		return turnDone;
 	}

@@ -64,9 +64,9 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	int numberOfCards = 0;
 	Text playerWin = new Text();
 	ObservableList<String> cards;
+	int numOfGames = 0;
 	
 
-	
     public static void main(String[] args) 
     {
         launch(args);
@@ -122,6 +122,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         playButton.setLayoutY(350);
 
         playButton.setOnAction(e -> {
+        	root.getChildren().remove(playerWin);
         	this.playerWin.setVisible(false);
         	launchPoker();
             Collections.shuffle(theDeck);
@@ -172,6 +173,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		int m = 10;
 		// aligns the view in horizontal
 		this.listView.setOrientation(Orientation.HORIZONTAL);
+		
 		for(int i = 0; i < 5; i++)
 		{
 			this.player.setCard(theDeck.get(i));
@@ -209,10 +211,10 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	public void drawBoard(GraphicsContext gc)
 	{
         // Making the title of the game.
-		this.gc.setFill(Color.WHITE);
-		this.gc.fillRoundRect(15, 15, 350, 180, 5, 5);
-		this.gc.setFill(Color.BLACK);
-		this.gc.strokeText("Poker Fanatic", 140, 110);
+		gc.setFill(Color.WHITE);
+		gc.fillRoundRect(15, 15, 350, 180, 5, 5);
+		gc.setFill(Color.BLACK);
+		gc.strokeText("Poker Fanatic", 140, 110);
 	}
 	
 	/*
@@ -221,6 +223,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	private void buttonClicked()
 	{
 		this.listOfCards = "";
+		this.numberOfCards = 0;
 		this.cards = listView.getSelectionModel().getSelectedItems();
 		
 		for(String m: this.cards)
@@ -366,29 +369,37 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	public void launchPoker()
 	{
 		// Poker Variables
+		if(this.numOfGames > 0)
+		{
+			this.listView.setEditable(true);
+			this.listView.getItems().remove(0);
+			this.listView.getItems().remove(0);
+			this.listView.getItems().remove(0);
+			this.listView.getItems().remove(0);
+			this.listView.getItems().remove(0);
+		}
 		this.deck = new Deck();
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
+		this.numOfGames++;
 		// Trying to re-instantiate a players hand.
 		// the listView is populated before this method.. so when i create a new listView its removing the list
 		// before buttonClicked() can establish what is inside the hand.
-		for(int i = 0; i < 5; i++)	this.listView.getItems().remove(i);
+
 
 	}
 	
 	public void printWinner()
 	{
-
 		this.playerWin.setLayoutX(500);
 		this.playerWin.setLayoutY(450);
 		this.playerWin.setVisible(false);
-
 		this.root.getChildren().add(playerWin);
 		this.gc.setFill(Color.GREEN);
 		this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
-		this. gc.setFill(Color.BLACK);
-		this. root.getChildren().remove(listView);
+		this.gc.setFill(Color.BLACK);
+		this.root.getChildren().remove(listView);
         // Player Won.
         if(this.player.winPoints > this.opponent.winPoints)
         {

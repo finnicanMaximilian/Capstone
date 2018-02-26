@@ -75,38 +75,40 @@ public class Player
 	
 	/*
 	 * onePair() : sets the boolean onePair to true if there is a pair inside a players hand.
+	 * cardNum : returns the rank of the pair.
 	 * 
 	 */
-	public void onePair()
+	public int onePair()
 	{
+		int cardNum = 0; // new
 		Card card1;
 		Card tempCard;
 		card1 = this.hand.get(0);
 		for(int j = 1; j < 5; j++)
 		{
-			
 			for(int i = 1; i < 5; i++)
 			{
 				// next card
 				tempCard = this.hand.get(i);
 				if(tempCard.getRank().equals(card1.getRank()) && !(tempCard.getSuit().equals(card1.getSuit())))
 				{
+					cardNum = rankACard(tempCard.getRank());
 					this.onePair = true;
 				}
 			}
 			
 			card1 = this.hand.get(j);
 		}		
-		return;
+		return cardNum;
 	}
 	
 	
 	/*
 	 * twoPair() : sets the boolean twoPair to true if there is two pairs in a players hand.
 	 */
-	public void twoPair()
+	public int twoPair()
 	{
-		
+		int cardNum = 0;
 		Card card1;
 		Card tempCard;
 		for(int j = 0; j < this.hand.size(); j++)
@@ -129,6 +131,7 @@ public class Player
 							Card nextCard = this.hand.get(z);
 							if(nextCard.getRank().equals(card2.getRank()) && !(nextCard.getSuit().equals(card2.getSuit())))
 							{
+								cardNum = rankACard(tempCard.getRank());
 								this.twoPair = true;
 							}
 						}
@@ -138,14 +141,15 @@ public class Player
 				}
 			}
 		}		
-		return;
+		return cardNum;
 	}
 	
 	/*
 	 * threeOfKind() : determines is a player has a three of a kind inside their hand.
 	 */
-	public void threeOfKind()
+	public int threeOfKind()
 	{
+		int cardNum = 0;
 		for(int i = 0; i < this.hand.size(); i++)
 		{
 			Card fCard = this.hand.get(i);
@@ -162,20 +166,22 @@ public class Player
 							!(sCard.getSuit().equals(tCard.getSuit())) &&
 							!(fCard.getSuit().equals(tCard.getSuit())))
 					{
+						cardNum = rankACard(fCard.getRank());
 						this.threeOfKind = true;
 					}
 				}
 			}
 		}
-		return;
+		return cardNum;
 	}
 	
 	
 	/*
 	 * fourOfKind() : determines if the players hand contains four of a kind.
 	 */
-	public void fourOfKind()
+	public int fourOfKind()
 	{
+		int cardNum = 0;
 		for(int i = 0; i < this.hand.size(); i++)
 		{
 			Card oneCard = this.hand.get(i);
@@ -201,12 +207,14 @@ public class Player
 							!(twoCard.getSuit().equals(fourCard.getSuit())) &&
 							!(threeCard.getSuit().equals(fourCard.getSuit()))) 
 						{
+							cardNum = rankACard(oneCard.getRank());
 							this.fourOfKind = true;
 						}
 					}
 				}
 			}
 		}
+		return cardNum;
 	}
 	
 	/*

@@ -426,21 +426,113 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         }
         else if(this.opponent.winPoints == this.player.winPoints) // Needs to be delved into.
         {
-        	if(this.opponent.highCard > this.player.highCard)
+        	// isPairHigher, Checks to see if player wins by rank of hand combo.
+        	if(!(isPairHigher())) 
         	{
-        		this.playerWin.setText("Computer Won with High Card!");
-        	}
-        	else if(player.highCard > opponent.highCard)
-        	{
-        		this.playerWin.setText("Player Won with High Card!");
-        	}
-        	else
-        	{
-        		this.playerWin.setText("Tie Game!!");
+        		if(this.opponent.highCard > this.player.highCard)
+        		{
+        			this.playerWin.setText("Computer Won with High Card!");
+        		}
+        		else if(player.highCard > opponent.highCard)
+        		{
+        			this.playerWin.setText("Player Won with High Card!");
+        		}
+        		else
+        		{
+        			this.playerWin.setText("Tie Game!!");
+        		}
         	}
         }
         this.playerWin.setVisible(true);
         return;
+	}
+	
+	
+	/*
+	 * isPairHigher: This method with aid printWinner with running a check on each players hand
+	 * to see when win points are equal if ranks are higher in who ever's hand.
+	 */
+	private boolean isPairHigher()
+	{
+		boolean hadHigherRank = false;
+		// OnePair
+		if(player.onePair && opponent.onePair && !(player.fullHouse) && !(opponent.fullHouse))
+		{
+			if(player.onePair() > opponent.onePair())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Player Won with Higher Ranked Cards!");
+			}
+			else if(opponent.onePair() > player.onePair())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
+			}
+		}
+		// TwoPair
+		if(player.twoPair && opponent.twoPair)
+		{
+			if(player.twoPair() > opponent.twoPair())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Player Won with Higher Ranked Cards!");
+			}
+			else if(opponent.twoPair() > player.twoPair())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
+			}
+		}
+		// ThreeOfKind
+		if(player.threeOfKind && opponent.threeOfKind && !(player.fullHouse) && !(opponent.fullHouse))
+		{
+			if(player.threeOfKind() > opponent.threeOfKind())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Player Won with Higher Ranked Cards!");
+			}
+			else if(opponent.threeOfKind() > player.threeOfKind())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
+			}
+		}
+		// FourOfKind
+		if(player.fourOfKind && opponent.fourOfKind)
+		{
+			if(player.fourOfKind() > opponent.fourOfKind())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Player Won with Higher Ranked Cards!");
+			}
+			else if(opponent.fourOfKind() > player.fourOfKind())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
+			}
+		}
+		// fullHouse Checks the three of kind first, then onePair
+		if(player.fullHouse && opponent.fullHouse)
+		{
+			// Check three of kind first.
+			if(player.threeOfKind() > opponent.threeOfKind())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Player Won with Higher Ranked Cards!");
+			}
+			else if(opponent.threeOfKind() > player.threeOfKind())
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
+			}
+			
+		}
+		// flush This works with current code, winpoints are equal so high card is checked.
+		// Straight this works with current code, winpoints are equal so high card is checked.
+		// straightFlush this works with current code, winpoints are equal so high card is checked.
+		// royalFlush, this would result in tie because all cards are same just different suit which isnt
+		// looked at for who won.
+		return hadHigherRank;
 	}
 
 }

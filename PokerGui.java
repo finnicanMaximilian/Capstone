@@ -63,6 +63,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	String listOfCards = "";
 	int numberOfCards = 0;
 	Text playerWin = new Text();
+	Text giveBackWarning = new Text(10,600,"You may only give back up to 4 cards only if you have an Ace, 3 elsewise");
 	ObservableList<String> cards;
 	int numOfGames = 0;
 	
@@ -110,11 +111,22 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         
         /*
          * When "Give Back Cards" is pressed.
+         * need to make initiateGiveBack notify a user when they attempt to give back more than 3 cards with
+         * no Ace.. then they need to be given another chance to give back the cards they wanted to..
          */
         giveBack.setOnAction(e -> 
         {
         	buttonClicked();
-        	initiateGiveBack(0);
+        	// Change to a boolean? only continue with button performance if turn has passed correctly. if false then
+        	// print a Warning in red decalring the issue for the user to read.
+        	while(!(initiateGiveBack(0)))
+        	{
+        		// if turn is not done then that means incorrect cards were selected.
+        		this.giveBackWarning.setFill(Color.RED);
+        		this.giveBackWarning.setVisible(true);
+        		initiateGiveBack(0);
+        	}
+
         	initiateGiveBack(1);
         	// Testing to see if the initiateGiveBack is changing the players cards in hand.
         	// for(int i = 0; i < 5; i++) System.out.println("Player Card " + i + ":" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
@@ -143,9 +155,9 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	giveBack.setVisible(true);
         	this.giveBackText.setVisible(true);
         });
-
+        this.canvas.maxHeight(900);
+        this.canvas.maxWidth(1200);
         this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin);
-        
         
         // create scene with root.
         this.scene = new Scene(root);
@@ -259,8 +271,9 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	 * initiateGiveBack takes in the names of the cards that the user selects to remove from his/her hand
 	 * then needs to re initialize those elements of the listView.
 	 */
-	public void initiateGiveBack(int person)
+	public boolean initiateGiveBack(int person)
 	{
+		boolean turnDone = false;
 		this.root.getChildren().remove(listView);
 		if(person == 0)
 		{
@@ -293,6 +306,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 				{
 					this.theDeck.remove(0);
 				}
+				turnDone = true;
 			}
 			else if(numOfCards < 4 && numOfCards != 0)
 			{
@@ -317,16 +331,17 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 				{
 					this.theDeck.remove(0);
 				}
+				turnDone = true;
 			}
 			else if(numOfCards == 0)
 			{
-				return;
+				turnDone = true;
 			}
 			else
 			{
 				// TODO Make this message Appear in GUI
-				System.out.println("I'm Sorry but if you do not possess an Ace then you may not"
-						+ "give back that many cards please type the number again");
+				keyboard.close();
+				return turnDone;
 			}
 			keyboard.close();
 		}
@@ -342,14 +357,15 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			{
 				this.theDeck.remove(0);
 			}
-
+			turnDone = true;
 		}
 		else
 		{
-			System.out.println("Wrong number entered, please enter 0 for player and 1 for opponent.");
+			// Should never be execute because initiateGiveBack() is always fed an integer.
+			return turnDone;
 		}
 		this.root.getChildren().add(this.listView);
-		return;
+		return turnDone;
 	}
 	
 	
@@ -514,7 +530,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		// fullHouse Checks the three of kind first, then onePair
 		if(player.fullHouse && opponent.fullHouse)
 		{
-			// Check three of kind first.
+			// Check three of kind. No way to get past this unless i add "wild cards"
 			if(player.threeOfKind() > opponent.threeOfKind())
 			{
 				hadHigherRank = true;
@@ -525,7 +541,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 				hadHigherRank = true;
 				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
 			}
-			
 		}
 		// flush This works with current code, winpoints are equal so high card is checked.
 		// Straight this works with current code, winpoints are equal so high card is checked.

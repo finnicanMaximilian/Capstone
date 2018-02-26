@@ -91,6 +91,10 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         showWin.setLayoutY(400);
         showWin.setMinHeight(40);
         showWin.setMinWidth(80);
+        
+        /*
+         * When "Show who won!" is pressed.
+         */
         showWin.setOnAction(e -> {
         	showWin.setVisible(false);
         	printWinner();
@@ -103,6 +107,10 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         giveBack.setLayoutY(400);
         giveBack.setMinHeight(40);
         giveBack.setMinWidth(80);
+        
+        /*
+         * When "Give Back Cards" is pressed.
+         */
         giveBack.setOnAction(e -> 
         {
         	buttonClicked();
@@ -120,7 +128,11 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         playButton.setMinWidth(40);
         playButton.setMinHeight(40);
         playButton.setLayoutY(350);
-
+        
+        
+        /*
+         * When "Play Poker" is pressed.
+         */
         playButton.setOnAction(e -> {
         	root.getChildren().remove(playerWin);
         	this.playerWin.setVisible(false);
@@ -316,8 +328,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 				System.out.println("I'm Sorry but if you do not possess an Ace then you may not"
 						+ "give back that many cards please type the number again");
 			}
-
-
+			keyboard.close();
 		}
 		else if(person == 1)
 		{
@@ -366,7 +377,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		return;
 	}
 	
-	public void launchPoker()
+	private void launchPoker()
 	{
 		// Poker Variables
 		if(this.numOfGames > 0)
@@ -390,7 +401,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 
 	}
 	
-	public void printWinner()
+	private void printWinner()
 	{
 		this.playerWin.setLayoutX(500);
 		this.playerWin.setLayoutY(450);
@@ -400,16 +411,20 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
 		this.gc.setFill(Color.BLACK);
 		this.root.getChildren().remove(listView);
+		
+		/*
+		 * Theoretical Error!! Player needs to win if their pair's beat other pairs.
+		 */
         // Player Won.
-        if(this.player.winPoints > this.opponent.winPoints)
+        if(this.player.winPoints > this.opponent.winPoints) // Flat out wins because the winpoints is higher.
         {
         	this.playerWin.setText("Player Won");
         }
-        else if(this.opponent.winPoints > this.player.winPoints)
+        else if(this.opponent.winPoints > this.player.winPoints) // Flat out wins because the winpoints is higher.
         {
         	this.playerWin.setText("Computer Won!");
         }
-        else if(this.opponent.winPoints == this.player.winPoints)
+        else if(this.opponent.winPoints == this.player.winPoints) // Needs to be delved into.
         {
         	if(this.opponent.highCard > this.player.highCard)
         	{

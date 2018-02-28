@@ -131,12 +131,12 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         giveBack.setOnAction(e -> 
         {
         		// Testing for numOfCard never being less than 5.
-        	System.out.println("How far");
+        //	System.out.println("How far");
     		buttonClicked();
     		if(this.numberOfCards == 5)
     		{
     			this.giveBackWarning.setVisible(true);
-        		System.out.println("is this");
+        		//System.out.println("is this");
     		}
 
             if(this.numberOfCards < 5)
@@ -146,7 +146,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
             	initiateGiveBack(0);
             	flipCard.setVisible(true);
             }
-            System.out.println("going.");
+            //System.out.println("going.");
         });
         
 

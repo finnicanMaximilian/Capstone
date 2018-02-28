@@ -130,7 +130,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	//        	}
         	initiateGiveBack(0);
         	initiateGiveBack(1);
-        	announceWinner();
+        	flipCards();
         	giveBack.setVisible(false);
         	giveBackText.setVisible(false);
         	showWin.setVisible(true);
@@ -155,10 +155,9 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	giveBack.setVisible(true);
         	this.giveBackText.setVisible(true);
         });
-        this.canvas.maxHeight(900);
-        this.canvas.maxWidth(1200);
-        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning);
         
+        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning);
+        this.root.autoSizeChildrenProperty().setValue(true);
         // create scene with root.
         this.scene = new Scene(root);
         
@@ -274,11 +273,24 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	public boolean initiateGiveBack(int person)
 	{
 		boolean turnDone = false;
+		boolean tempTurn = true;
 		this.root.getChildren().remove(listView);
 		if(person == 0)
 		{
 			Scanner keyboard = new Scanner(this.listOfCards);
 			int numOfCards = this.numberOfCards;
+			
+			//Testing numOfCards
+			//System.out.println(numOfCards);
+			
+				if(numOfCards == 5)
+				{
+					// prompt user
+					this.giveBackWarning.setVisible(true);
+					buttonClicked();
+					tempTurn = false;
+				}
+			
 			if(numOfCards == 4 && ((this.player.searchHand("Ace", "Clubs") != 5)
 					|| (this.player.searchHand("Ace", "Hearts") != 5)
 					|| (this.player.searchHand("Ace", "Spades") != 5)
@@ -308,7 +320,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 				}
 				turnDone = true;
 			}
-			else if(numOfCards < 4 && numOfCards != 0)
+			if(numOfCards < 4 && numOfCards != 0)
 			{
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -337,6 +349,11 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			{
 				turnDone = true;
 			}
+			// TODO
+			else
+			{
+				//initiateGiveBack(0);
+			}
 			keyboard.close();
 		}
 		else if(person == 1)
@@ -358,8 +375,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		return turnDone;
 	}
 	
-	
-	private void announceWinner()
+	private void flipCards()
 	{
 		// Flip the computers hand.
 		int j = 1040;

@@ -63,7 +63,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	String listOfCards = "";
 	int numberOfCards = 0;
 	Text playerWin = new Text();
-	Text giveBackWarning = new Text(10, 550,"You may only give back up to 4 cards only if you have an Ace, 3 elsewise");
+	Text giveBackWarning = new Text(10, 550,"You may only give back up to 4 cards if you have an Ace, 3 elsewise");
 	ObservableList<String> cards;
 	int numOfGames = 0;
 	
@@ -82,10 +82,11 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
         this.window.setTitle("Poker Fanatic!");
-        Button flipCard = new Button();
+
         Button playButton = new Button("Play Poker!");
         Button showWin = new Button("See who Won!");
         Button giveBack = new Button("Give Back Cards");
+        Button flipCard = new Button("Flip Cards");
 
         this.gc.setFill(Color.GREEN);
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
@@ -96,12 +97,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         playButton.setLayoutY(350);
         
 
-        flipCard.setText("Flip Cards");
-        flipCard.setVisible(false);
-        flipCard.setId("flipCard");
-        flipCard.setLayoutY(450);
-        flipCard.setMinHeight(40);
-        flipCard.setMinWidth(80);
         
         
         
@@ -120,7 +115,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         });
         
         
-
+        
 
         giveBack.setVisible(false);
         giveBack.setId("giveBack");
@@ -133,39 +128,51 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
          * need to make initiateGiveBack notify a user when they attempt to give back more than 3 cards with
          * no Ace.. then they need to be given another chance to give back the cards they wanted to..
          */
-
         giveBack.setOnAction(e -> 
         {
         		// Testing for numOfCard never being less than 5.
-
+        	System.out.println("How far");
     		buttonClicked();
-    		while(this.numberOfCards > 5)
+    		if(this.numberOfCards == 5)
     		{
     			this.giveBackWarning.setVisible(true);
-    			buttonClicked();
-    			this.giveBackWarning.setVisible(false);
+        		System.out.println("is this");
     		}
+
             if(this.numberOfCards < 5)
             {
+    			buttonClicked();
+    			giveBack.setVisible(false);
+            	initiateGiveBack(0);
             	flipCard.setVisible(true);
             }
-            
-    		
+            System.out.println("going.");
         });
         
 
-
-
+        flipCard.setVisible(false);
+        //flipCard.setText();
+        flipCard.setId("flipCard");
+        flipCard.setLayoutY(400);
+        flipCard.setMinHeight(40);
+        flipCard.setMinWidth(80);
+        
+        /*
+         * Assuming, cards have been selected correctly on "give back"
+         * flipCard ACTION: initiateGiveBack for Player, Computer,
+         * Flip Computer final Cards, clean up messages.
+         * 
+         */
         flipCard.setOnAction(e -> {
-        	initiateGiveBack(0);
+        	//giveBack.setVisible(false);
         	initiateGiveBack(1);
         	flipCards();
         	giveBack.setVisible(false);
         	giveBackText.setVisible(false);
         	showWin.setVisible(true);
+			this.giveBackWarning.setVisible(false);
+			flipCard.setVisible(false);
         });
-        
-        
         
         
         
@@ -187,7 +194,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         });
 
 
-        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning);
+        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
         this.root.autoSizeChildrenProperty().setValue(true);
         // create scene with root.
         this.scene = new Scene(root);

@@ -13,12 +13,12 @@ Begin the game by clicking "Player Poker!" After that the board should display w
 
 ---
 
-# Running the Project (Skateboard)
+### Running the Project (Skateboard)
 To run the poker game download Card.java, Deck.java Player.java Poker.java, Opponent.java. All of these files will be required to run the game in "Console" When the files have been downloaded and placed within your own IDE run the "Poker.java" file to begin the poker game. When playing the game you will be prompted to enter in the amount of cards wanted to give back from your dealt hand, enter in the numbers 0-3, or 4 if you have an Ace in your hand, then you type the rank and suit then hit enter after each card you would like to give back. Once you give back all the cards you do not want the game will give you more cards from the deck then will calculate the winner.
 
 ---
 
-# Testing the Project (Skateboard)
+### Testing the Project (Skateboard)
 Three test classes are provided to test the pokers games base functionality. (testCard.java, testDeck.java, testPlayer.java)
 All of these test classes provde that the functions do what they are intended to do, if furthur bug inspection is wanted to be done each test case is built to be customized toward each particular function inside the classes, hopefully making it easier to find tricky bugs within the code. To run all these files download them form the repository place within personal IDE then run each file.(The corresponding class will be needed for testing, I.E. (Card.java, Deck.java, Player.java). as For Opponent.java Testing can be done within the Poker.java file by playing the game and analyizing the computers behavior, futhur test classes will be made if deemed neccisary for these classes.
 

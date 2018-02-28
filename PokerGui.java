@@ -76,16 +76,98 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
+		
+		
 		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
         this.window.setTitle("Poker Fanatic!");
+        Button flipCard = new Button();
         Button playButton = new Button("Play Poker!");
         Button showWin = new Button("See who Won!");
         Button giveBack = new Button("Give Back Cards");
 
         this.gc.setFill(Color.GREEN);
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+        
+        playButton.setId("playButton");
+        playButton.setMinWidth(40);
+        playButton.setMinHeight(40);
+        playButton.setLayoutY(350);
+        
+
+        flipCard.setText("Flip Cards");
+        flipCard.setVisible(false);
+        flipCard.setId("flipCard");
+        flipCard.setLayoutY(450);
+        flipCard.setMinHeight(40);
+        flipCard.setMinWidth(80);
+        
+        
+        
+        /*
+         * When "Play Poker" is pressed.
+         */
+        playButton.setOnAction(e -> {
+        	root.getChildren().remove(playerWin);
+        	this.playerWin.setVisible(false);
+        	launchPoker();
+            Collections.shuffle(theDeck);
+        	dealCards();
+        	playButton.setVisible(false);
+        	giveBack.setVisible(true);
+        	this.giveBackText.setVisible(true);
+        });
+        
+        
+
+
+        giveBack.setVisible(false);
+        giveBack.setId("giveBack");
+        giveBack.setLayoutY(400);
+        giveBack.setMinHeight(40);
+        giveBack.setMinWidth(80);
+        
+        /*
+         * When "Give Back Cards" is pressed.
+         * need to make initiateGiveBack notify a user when they attempt to give back more than 3 cards with
+         * no Ace.. then they need to be given another chance to give back the cards they wanted to..
+         */
+
+        giveBack.setOnAction(e -> 
+        {
+        		// Testing for numOfCard never being less than 5.
+
+    		buttonClicked();
+    		while(this.numberOfCards > 5)
+    		{
+    			this.giveBackWarning.setVisible(true);
+    			buttonClicked();
+    			this.giveBackWarning.setVisible(false);
+    		}
+            if(this.numberOfCards < 5)
+            {
+            	flipCard.setVisible(true);
+            }
+            
+    		
+        });
+        
+
+
+
+        flipCard.setOnAction(e -> {
+        	initiateGiveBack(0);
+        	initiateGiveBack(1);
+        	flipCards();
+        	giveBack.setVisible(false);
+        	giveBackText.setVisible(false);
+        	showWin.setVisible(true);
+        });
+        
+        
+        
+        
         
 
         showWin.setVisible(false);
@@ -104,58 +186,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	// how to reset the listView so that a brand new game could be played.
         });
 
-        giveBack.setVisible(false);
-        giveBack.setId("giveBack");
-        giveBack.setLayoutY(400);
-        giveBack.setMinHeight(40);
-        giveBack.setMinWidth(80);
-        
-        /*
-         * When "Give Back Cards" is pressed.
-         * need to make initiateGiveBack notify a user when they attempt to give back more than 3 cards with
-         * no Ace.. then they need to be given another chance to give back the cards they wanted to..
-         */
-        giveBack.setOnAction(e -> 
-        {
-        	buttonClicked();
-        	// Change to a boolean? only continue with button performance if turn has passed correctly. if false then
-        	// print a Warning in red declaring the issue for the user to read.
-//        	boolean turnDone;
-//        	turnDone = initiateGiveBack(0);
-//        	if(!(turnDone))
-//        	{
-//            	this.giveBackWarning.setFill(Color.RED);
-//        		this.giveBackWarning.setVisible(true);
-//        		turnDone = initiateGiveBack(0);
-        	//        	}
-        	initiateGiveBack(0);
-        	initiateGiveBack(1);
-        	flipCards();
-        	giveBack.setVisible(false);
-        	giveBackText.setVisible(false);
-        	showWin.setVisible(true);
-        });
 
-        playButton.setId("playButton");
-        playButton.setMinWidth(40);
-        playButton.setMinHeight(40);
-        playButton.setLayoutY(350);
-        
-        
-        /*
-         * When "Play Poker" is pressed.
-         */
-        playButton.setOnAction(e -> {
-        	root.getChildren().remove(playerWin);
-        	this.playerWin.setVisible(false);
-        	launchPoker();
-            Collections.shuffle(theDeck);
-        	dealCards();
-        	playButton.setVisible(false);
-        	giveBack.setVisible(true);
-        	this.giveBackText.setVisible(true);
-        });
-        
         this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning);
         this.root.autoSizeChildrenProperty().setValue(true);
         // create scene with root.

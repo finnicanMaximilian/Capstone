@@ -298,10 +298,11 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 			//System.out.println(theDeck.get(i).getRank()+theDeck.get(i).getSuit());
 			// Adding name to cards to list view, this can later be used to give back
 			// String names of cards in order to feed into player.java's search hand method.
-			this.listView.getItems().add((player.hand.get(i).getRank() + " " 
-					+ player.hand.get(i).getSuit()));	
+//			this.listView.getItems().add((player.hand.get(i).getRank() + " " 
+//					+ player.hand.get(i).getSuit()));	
 			m = m + 160;
 		}
+
 		// remove cards dealt to player
 		for(int i = 0; i < 5; i++)
 		{
@@ -442,25 +443,55 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		return cardImg;
 	}
 	
+	
+	/*
+	 * createCards: Card, and i. This function takes in the card in the players hand along with the index to which card this is in
+	 * the players hand. from there the card is passed through the findCard() method which finds the image associated with that card.
+	 * then depending on the index of the card, they are all placed on the playing table in correct order.
+	 */
 	public void createCards(Card card, int i)
 	{
 		Image cardImg = findCard(card);
 		ImageView img = new ImageView(cardImg);
-		img.maxHeight(200);
-		img.maxWidth(150);
+		img.setFitWidth(150);
+		//img.setSmooth(true);
+		img.setFitHeight(200);
+		//img.setCache(true);
 		
 		if(i == 0)
 		{
 			this.card1.setGraphic(img);
-			this.card1.setMaxHeight(200);
-			this.card1.setMaxWidth(150);
 			this.card1.setLayoutX(10);
 			this.card1.setLayoutY(600);
-
+			this.root.getChildren().add(card1);
 		}
-		this.root.getChildren().addAll(card1);
+		if(i == 1) {
+			this.card2.setGraphic(img);
+			this.card2.setLayoutX(170);
+			this.card2.setLayoutY(600);
+			this.root.getChildren().add(card2);
+		}
+		if(i == 2) {
+			this.card3.setGraphic(img);
+			this.card3.setLayoutX(320);
+			this.card3.setLayoutY(600);
+			this.root.getChildren().add(card3);
+		}
+		if(i == 3) {
+			this.card4.setGraphic(img);
+			this.card4.setLayoutX(470);
+			this.card4.setLayoutY(600);
+			this.root.getChildren().add(card4);
+		}
+		if(i == 4) {
+			this.card5.setGraphic(img);
+			this.card5.setLayoutX(620);
+			this.card5.setLayoutY(600);
+			this.root.getChildren().add(card5);
+		}
 		return;
 	}
+	
 	
 	public void drawBoard(GraphicsContext gc)
 	{

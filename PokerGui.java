@@ -46,7 +46,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	// GUI Variables
 	Stage window;
 	Scene scene;
-	Image cardImage = new Image("cheetah-card.gif");
+	Image cardImage = new Image("cardImgs/cheetah-card.gif");
 	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
 			"-fx-border-insets: 10;\n" +
@@ -131,22 +131,24 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         giveBack.setOnAction(e -> 
         {
         		// Testing for numOfCard never being less than 5.
-        //	System.out.println("How far");
+
     		buttonClicked();
-    		if(this.numberOfCards == 5)
+    		// Check for an incorrect hand, i.e. where number of cards is equal to 5, or when numOfCards equals 4 and the user does not have an ace.
+    		// So the !(not) enveloping the player searchHand calls reads as, if the player does not have any type of ace in their hand.
+    		if(this.numberOfCards == 5 || ((this.numberOfCards == 4 && !((this.player.searchHand("Ace", "Clubs") != 5)
+					|| (this.player.searchHand("Ace", "Hearts") != 5)
+					|| (this.player.searchHand("Ace", "Spades") != 5)
+					|| (this.player.searchHand("Ace", "Diamonds") != 5)))))
     		{
     			this.giveBackWarning.setVisible(true);
-        		//System.out.println("is this");
     		}
-
-            if(this.numberOfCards < 5)
+    		else
             {
     			buttonClicked();
     			giveBack.setVisible(false);
             	initiateGiveBack(0);
             	flipCard.setVisible(true);
             }
-            //System.out.println("going.");
         });
         
 

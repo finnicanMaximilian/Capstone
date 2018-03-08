@@ -45,7 +45,8 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 
 	// GUI Variables
 	Stage window;
-	Scene scene;
+	Scene titleScene;
+	Scene pokerScene;
 	Image cardImage = new Image("cardImgs/cheetah-card.gif");
 	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
@@ -54,8 +55,11 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			"-fx-border-style: groove;\n" +
 			"-fx-background-color: #FFFFFF;";
 	Group root = new Group();
-	Canvas canvas = new Canvas(1200, 900);
-	GraphicsContext gc = canvas.getGraphicsContext2D();
+	Group titleRoot = new Group();
+	Canvas pokerCanvas = new Canvas(1200, 900);
+	GraphicsContext gc = pokerCanvas.getGraphicsContext2D();
+	Canvas titleCanvas = new Canvas(1200, 900);
+	GraphicsContext titleGc = titleCanvas.getGraphicsContext2D();
 	ListView<String> listView = new ListView<>();
 	Text giveBackText = new Text(10, 575, "To Select Multiple Cards Hold CTRL and click the desired cards then press 'Give Back Cards'");
 	
@@ -82,11 +86,22 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
         this.window.setTitle("Poker Fanatic!");
-
-        Button playButton = new Button("Play Poker!");
+        
+        Button playGame = new Button("Play Game!");
+        Button playButton = new Button("Start Poker!");
         Button showWin = new Button("See who Won!");
         Button giveBack = new Button("Give Back Cards");
         Button flipCard = new Button("Flip Cards");
+        
+        // creating screen for title screen.
+        this.titleGc.setFill(Color.GREEN);
+        this.titleGc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+        
+        playGame.setVisible(true);
+        playGame.setOnAction(e -> {
+        	playGame.setVisible(false);
+        	this.window.setScene(pokerScene);
+        });
 
         this.gc.setFill(Color.GREEN);
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
@@ -94,12 +109,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         playButton.setId("playButton");
         playButton.setMinWidth(40);
         playButton.setMinHeight(40);
-        playButton.setLayoutY(350);
-        
-
-        
-        
-        
+        playButton.setLayoutY(350);  
         /*
          * When "Play Poker" is pressed.
          */
@@ -115,8 +125,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         });
         
         
-        
-
         giveBack.setVisible(false);
         giveBack.setId("giveBack");
         giveBack.setLayoutY(400);
@@ -130,8 +138,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
          */
         giveBack.setOnAction(e -> 
         {
-        		// Testing for numOfCard never being less than 5.
-
     		buttonClicked();
     		// Check for an incorrect hand, i.e. where number of cards is equal to 5, or when numOfCards equals 4 and the user does not have an ace.
     		// So the !(not) enveloping the player searchHand calls reads as, if the player does not have any type of ace in their hand.
@@ -176,9 +182,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			flipCard.setVisible(false);
         });
         
-        
-        
-
         showWin.setVisible(false);
         showWin.setId("showWin");
         showWin.setLayoutY(400);
@@ -195,11 +198,13 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	// how to reset the listView so that a brand new game could be played.
         });
 
-
-        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
+        // Title Scene
+        this.titleRoot.getChildren().addAll(titleCanvas, playGame);
+        this.titleScene = new Scene(titleRoot);
+        // Poker Scene
+        this.root.getChildren().addAll(pokerCanvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
         this.root.autoSizeChildrenProperty().setValue(true);
-        // create scene with root.
-        this.scene = new Scene(root);
+        this.pokerScene = new Scene(root);
         
 		// Adding the CSS sheet
 		URL url = this.getClass().getResource("Poker.css");
@@ -208,10 +213,10 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			System.exit(-1);
 		}
 		String css = url.toExternalForm(); 
-		this.scene.getStylesheets().add(css);
+		this.pokerScene.getStylesheets().add(css);
 		
 		// add scene to window.
-        this.window.setScene(this.scene);
+        this.window.setScene(this.titleScene);
         this.gc.setFill(Color.GREEN);
         this.window.show();
 		return;

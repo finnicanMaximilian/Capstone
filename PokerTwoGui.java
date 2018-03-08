@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -147,7 +148,10 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
         Button giveBack = new Button("Give Back Cards");
         Button flipCard = new Button("Flip Cards");
         
-
+        card1.setMaxHeight(200);
+        card1.setMaxWidth(150);
+        card1.setLayoutX(10);
+        card1.setLayoutY(600);
 
         this.gc.setFill(Color.GREEN);
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
@@ -183,23 +187,23 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
          */
         giveBack.setOnAction(e -> 
         {
-        		// Testing for numOfCard never being less than 5.
-        	System.out.println("How far");
     		buttonClicked();
-    		if(this.numberOfCards == 5)
+    		// Check for an incorrect hand, i.e. where number of cards is equal to 5, or when numOfCards equals 4 and the user does not have an ace.
+    		// So the !(not) enveloping the player searchHand calls reads as, if the player does not have any type of ace in their hand.
+    		if(this.numberOfCards == 5 || ((this.numberOfCards == 4 && !((this.player.searchHand("Ace", "Clubs") != 5)
+					|| (this.player.searchHand("Ace", "Hearts") != 5)
+					|| (this.player.searchHand("Ace", "Spades") != 5)
+					|| (this.player.searchHand("Ace", "Diamonds") != 5)))))
     		{
     			this.giveBackWarning.setVisible(true);
-        		System.out.println("is this");
     		}
-
-            if(this.numberOfCards < 5)
+    		else
             {
     			buttonClicked();
     			giveBack.setVisible(false);
             	initiateGiveBack(0);
             	flipCard.setVisible(true);
             }
-            System.out.println("going.");
         });
         
 
@@ -321,7 +325,7 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		this.listView.setPrefSize(550, 200);
 		this.listView.setLayoutX(10);
 		this.listView.setLayoutY(600);
-		this.root.getChildren().add(listView);
+		//this.root.getChildren().add(listView);
 	}
 	
 	public Image findCard(Card card)
@@ -355,51 +359,51 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 			break;
 			case "5Clubs": cardImg = this.fiveClubs; 
 			break;
-			case "FiveDiamonds": cardImg = this.fiveDiamonds; 
+			case "5Diamonds": cardImg = this.fiveDiamonds; 
 			break;
-			case "FiveHearts": cardImg = this.fiveHearts; 
+			case "5Hearts": cardImg = this.fiveHearts; 
 			break;
-			case "FiveSpades": cardImg = this.fiveSpades; 
+			case "5Spades": cardImg = this.fiveSpades; 
 			break;
-			case "SixClubs": cardImg = this.sixClubs; 
+			case "6Clubs": cardImg = this.sixClubs; 
 			break;
-			case "SixDiamonds": cardImg = this.sixDiamonds; 
+			case "6Diamonds": cardImg = this.sixDiamonds; 
 			break;
-			case "SixHearts": cardImg = this.sixHearts; 
+			case "6Hearts": cardImg = this.sixHearts; 
 			break;
-			case "SixSpades": cardImg = this.sixSpades; 
+			case "6Spades": cardImg = this.sixSpades; 
 			break;
-			case "SevenClubs": cardImg = this.sevenClubs; 
+			case "7Clubs": cardImg = this.sevenClubs; 
 			break;
-			case "SevenDiamonds": cardImg = this.sevenDiamonds; 
+			case "7Diamonds": cardImg = this.sevenDiamonds; 
 			break;
-			case "SevenHearts": cardImg = this.sevenHearts; 
+			case "7Hearts": cardImg = this.sevenHearts; 
 			break;
-			case "SevenSpade": cardImg = this.sevenSpades; 
+			case "7Spade": cardImg = this.sevenSpades; 
 			break;
-			case "EightClubs": cardImg = this.eightClubs; 
+			case "8Clubs": cardImg = this.eightClubs; 
 			break;
-			case "EightHearts": cardImg = this.eightHearts; 
+			case "8Hearts": cardImg = this.eightHearts; 
 			break;
-			case "EightSpades": cardImg = this.eightSpades; 
+			case "8Spades": cardImg = this.eightSpades; 
 			break;
-			case "EightDiamonds": cardImg = this.eightDiamonds; 
+			case "8Diamonds": cardImg = this.eightDiamonds; 
 			break;
-			case "NineClubs": cardImg = this.nineClubs; 
+			case "9Clubs": cardImg = this.nineClubs; 
 			break;
-			case "NineDiamonds": cardImg = this.nineDiamonds; 
+			case "9Diamonds": cardImg = this.nineDiamonds; 
 			break;
-			case "NineHearts": cardImg = this.nineHearts; 
+			case "9Hearts": cardImg = this.nineHearts; 
 			break;
-			case "NineSpades": cardImg = this.nineSpades; 
+			case "9Spades": cardImg = this.nineSpades; 
 			break;
-			case "TenClubs": cardImg = this.tenClubs; 
+			case "10Clubs": cardImg = this.tenClubs; 
 			break;
-			case "TenDiamonds": cardImg = this.tenDiamonds; 
+			case "10Diamonds": cardImg = this.tenDiamonds; 
 			break;
-			case "TenHearts": cardImg = this.tenHearts; 
+			case "10Hearts": cardImg = this.tenHearts; 
 			break;
-			case "TenSpades": cardImg = this.tenSpades; 
+			case "10Spades": cardImg = this.tenSpades; 
 			break;
 			case "JackClubs": cardImg = this.jackClubs; 
 			break;
@@ -441,11 +445,20 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 	public void createCards(Card card, int i)
 	{
 		Image cardImg = findCard(card);
+		ImageView img = new ImageView(cardImg);
+		img.maxHeight(200);
+		img.maxWidth(150);
 		
 		if(i == 0)
 		{
-			//this.card1.setGraphic();
+			this.card1.setGraphic(img);
+			this.card1.setMaxHeight(200);
+			this.card1.setMaxWidth(150);
+			this.card1.setLayoutX(10);
+			this.card1.setLayoutY(600);
+
 		}
+		this.root.getChildren().addAll(card1);
 		return;
 	}
 	

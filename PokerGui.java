@@ -87,10 +87,12 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
+		this.window.setMaxHeight(900);
+		this.window.setMaxWidth(1200);
         this.window.setTitle("Poker Fanatic!");
         
         Button playGame = new Button("Play Game!");
-        Button playButton = new Button("Start Poker!");
+        Button playButton = new Button("Deal Out Cards");
         Button showWin = new Button("See who Won!");
         Button giveBack = new Button("Give Back Cards");
         Button flipCard = new Button("Flip Cards");
@@ -101,8 +103,12 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         // create title Text.
         setUpTitleScene();
 
-        
+        playGame.setId("playGame");
         playGame.setVisible(true);
+        playGame.setLayoutX(550);
+        playGame.setLayoutY(500);
+        playGame.setMinWidth(40);
+        playGame.setMinHeight(40);
         playGame.setOnAction(e -> {
         	playGame.setVisible(false);
         	//this.pTitle.setVisible(false);
@@ -113,9 +119,10 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
         
         playButton.setId("playButton");
+        playButton.setLayoutX(540);
+        playButton.setLayoutY(500);
         playButton.setMinWidth(40);
         playButton.setMinHeight(40);
-        playButton.setLayoutY(350);  
         /*
          * When "Play Poker" is pressed.
          */
@@ -221,8 +228,6 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		}
 		String css = url.toExternalForm(); 
 		this.pokerScene.getStylesheets().add(css);
-		this.window.setMaxHeight(900);
-		this.window.setMaxWidth(1200);
 		this.titleScene.getStylesheets().add(css);
 		
 		// add scene to window.
@@ -238,15 +243,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	 */
 	private void setUpTitleScene()
 	{
-		this.pTitle.setFill(Color.BLACK);
-		this.pTitle.setVisible(true);
-		this.pTitle.setId("pTitle");
-		this.pTitle.setLayoutX(400);
-		this.pTitle.setLayoutY(400);
-		this.pTitle.setText("Poker Fanatic");
-
-		this.titleRoot.getChildren().add(pTitle);
-		
+		this.titleGc.drawImage(new Image("title.png"), 225, 300);
 		return;
 	}
 	

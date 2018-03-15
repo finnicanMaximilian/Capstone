@@ -83,6 +83,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{	
+		this.pTitle.setVisible(false);
 		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
@@ -204,7 +205,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         });
        
         // Title Scene
-        this.titleRoot.getChildren().addAll(titleCanvas, playGame, pTitle);
+        this.titleRoot.getChildren().addAll(titleCanvas, playGame);
         this.titleRoot.autoSizeChildrenProperty().setValue(true);
         this.titleScene = new Scene(titleRoot);
         // Poker Scene
@@ -220,6 +221,9 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 		}
 		String css = url.toExternalForm(); 
 		this.pokerScene.getStylesheets().add(css);
+		this.window.setMaxHeight(900);
+		this.window.setMaxWidth(1200);
+		this.titleScene.getStylesheets().add(css);
 		
 		// add scene to window.
         this.window.setScene(this.titleScene);
@@ -229,14 +233,19 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	}
 	
 	/*
-	 * setUpTitleScrene
+	 * setUpTitleScene: Trying to bundle all things that encapsulate decorating the title scene within this function to clear clutter from start()
+	 * 
 	 */
 	private void setUpTitleScene()
 	{
 		this.pTitle.setFill(Color.BLACK);
-		this.pTitle.setText("Poker Fanatic");
 		this.pTitle.setVisible(true);
 		this.pTitle.setId("pTitle");
+		this.pTitle.setLayoutX(400);
+		this.pTitle.setLayoutY(400);
+		this.pTitle.setText("Poker Fanatic");
+
+		this.titleRoot.getChildren().add(pTitle);
 		
 		return;
 	}

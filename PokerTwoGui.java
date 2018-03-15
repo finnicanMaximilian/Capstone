@@ -298,8 +298,6 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 			//System.out.println(theDeck.get(i).getRank()+theDeck.get(i).getSuit());
 			// Adding name to cards to list view, this can later be used to give back
 			// String names of cards in order to feed into player.java's search hand method.
-//			this.listView.getItems().add((player.hand.get(i).getRank() + " " 
-//					+ player.hand.get(i).getSuit()));	
 			m = m + 160;
 		}
 
@@ -320,13 +318,6 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		{
 			this.theDeck.remove(0);
 		}
-		// Multiple Cards can be selected
-		this.listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		this.listView.setPadding(new Insets(10,10,10,10));
-		this.listView.setPrefSize(550, 200);
-		this.listView.setLayoutX(10);
-		this.listView.setLayoutY(600);
-		//this.root.getChildren().add(listView);
 	}
 	
 	public Image findCard(Card card)
@@ -334,110 +325,110 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		Image cardImg = null;
 		String cardName = card.getRank() + card.getSuit();
 		switch(cardName) {
-			case "2Clubs": cardImg = this.twoClubs; 
-				break;
-			case "2Diamonds": cardImg = this.twoDiamonds; 
-			break;
-			case "2Hearts": cardImg = this.twoHearts; 
-			break;
-			case "2Spades": cardImg = this.twoSpades; 
-			break;
-			case "3Clubs": cardImg = this.threeClubs; 
-			break;
-			case "3Diamonds": cardImg = this.threeDiamonds; 
-			break;
-			case "3Hearts": cardImg = this.threeHearts; 
-			break;
-			case "3Spades": cardImg = this.threeSpades; 
-			break;
-			case "4Clubs": cardImg = this.fourClubs; 
-			break;
-			case "4Diamonds": cardImg = this.fourDiamonds; 
-			break;
-			case "4Hearts": cardImg = this.fourHearts; 
-			break;
-			case "4Spades": cardImg = this.fourSpades; 
-			break;
-			case "5Clubs": cardImg = this.fiveClubs; 
-			break;
-			case "5Diamonds": cardImg = this.fiveDiamonds; 
-			break;
-			case "5Hearts": cardImg = this.fiveHearts; 
-			break;
-			case "5Spades": cardImg = this.fiveSpades; 
-			break;
-			case "6Clubs": cardImg = this.sixClubs; 
-			break;
-			case "6Diamonds": cardImg = this.sixDiamonds; 
-			break;
-			case "6Hearts": cardImg = this.sixHearts; 
-			break;
-			case "6Spades": cardImg = this.sixSpades; 
-			break;
-			case "7Clubs": cardImg = this.sevenClubs; 
-			break;
-			case "7Diamonds": cardImg = this.sevenDiamonds; 
-			break;
-			case "7Hearts": cardImg = this.sevenHearts; 
-			break;
-			case "7Spade": cardImg = this.sevenSpades; 
-			break;
-			case "8Clubs": cardImg = this.eightClubs; 
-			break;
-			case "8Hearts": cardImg = this.eightHearts; 
-			break;
-			case "8Spades": cardImg = this.eightSpades; 
-			break;
-			case "8Diamonds": cardImg = this.eightDiamonds; 
-			break;
-			case "9Clubs": cardImg = this.nineClubs; 
-			break;
-			case "9Diamonds": cardImg = this.nineDiamonds; 
-			break;
-			case "9Hearts": cardImg = this.nineHearts; 
-			break;
-			case "9Spades": cardImg = this.nineSpades; 
-			break;
-			case "10Clubs": cardImg = this.tenClubs; 
-			break;
-			case "10Diamonds": cardImg = this.tenDiamonds; 
-			break;
-			case "10Hearts": cardImg = this.tenHearts; 
-			break;
-			case "10Spades": cardImg = this.tenSpades; 
-			break;
-			case "JackClubs": cardImg = this.jackClubs; 
-			break;
-			case "JackDiamonds": cardImg = this.jackDiamonds; 
-			break;
-			case "JackHearts": cardImg = this.jackHearts; 
-			break;
-			case "JackSapdes": cardImg = this.jackSpades; 
-			break;
-			case "QueenClubs": cardImg = this.queenClubs; 
-			break;
-			case "QueenDiamonds": cardImg = this.queenDiamonds; 
-			break;
-			case "QueenHearts": cardImg = this.queenHearts; 
-			break;
-			case "QueenSpades": cardImg = this.queenSpades; 
-			break;
-			case "KingClubs": cardImg = this.kingClubs; 
-			break;
-			case "KingDiamonds": cardImg = this.kingDiamonds; 
-			break;
-			case "KingHearts": cardImg = this.kingHearts; 
-			break;
-			case "KingSpades": cardImg = this.kingSpades; 
-			break;
-			case "AceClubs": cardImg = this.aceClubs; 
-			break;
-			case "AceDiamonds": cardImg = this.aceDiamonds; 
-			break;
-			case "AceHearts": cardImg = this.aceHearts; 
-			break;
-			case "AceSpades": cardImg = this.aceSpades; 
-			break;
+		case "2Clubs": cardImg = this.twoClubs; 
+		break;
+		case "2Diamonds": cardImg = this.twoDiamonds; 
+		break;
+		case "2Hearts": cardImg = this.twoHearts; 
+		break;
+		case "2Spades": cardImg = this.twoSpades; 
+		break;
+		case "3Clubs": cardImg = this.threeClubs; 
+		break;
+		case "3Diamonds": cardImg = this.threeDiamonds; 
+		break;
+		case "3Hearts": cardImg = this.threeHearts; 
+		break;
+		case "3Spades": cardImg = this.threeSpades; 
+		break;
+		case "4Clubs": cardImg = this.fourClubs; 
+		break;
+		case "4Diamonds": cardImg = this.fourDiamonds; 
+		break;
+		case "4Hearts": cardImg = this.fourHearts; 
+		break;
+		case "4Spades": cardImg = this.fourSpades; 
+		break;
+		case "5Clubs": cardImg = this.fiveClubs; 
+		break;
+		case "5Diamonds": cardImg = this.fiveDiamonds; 
+		break;
+		case "5Hearts": cardImg = this.fiveHearts; 
+		break;
+		case "5Spades": cardImg = this.fiveSpades; 
+		break;
+		case "6Clubs": cardImg = this.sixClubs; 
+		break;
+		case "6Diamonds": cardImg = this.sixDiamonds; 
+		break;
+		case "6Hearts": cardImg = this.sixHearts; 
+		break;
+		case "6Spades": cardImg = this.sixSpades; 
+		break;
+		case "7Clubs": cardImg = this.sevenClubs; 
+		break;
+		case "7Diamonds": cardImg = this.sevenDiamonds; 
+		break;
+		case "7Hearts": cardImg = this.sevenHearts; 
+		break;
+		case "7Spade": cardImg = this.sevenSpades; 
+		break;
+		case "8Clubs": cardImg = this.eightClubs; 
+		break;
+		case "8Hearts": cardImg = this.eightHearts; 
+		break;
+		case "8Spades": cardImg = this.eightSpades; 
+		break;
+		case "8Diamonds": cardImg = this.eightDiamonds; 
+		break;
+		case "9Clubs": cardImg = this.nineClubs; 
+		break;
+		case "9Diamonds": cardImg = this.nineDiamonds; 
+		break;
+		case "9Hearts": cardImg = this.nineHearts; 
+		break;
+		case "9Spades": cardImg = this.nineSpades; 
+		break;
+		case "10Clubs": cardImg = this.tenClubs; 
+		break;
+		case "10Diamonds": cardImg = this.tenDiamonds; 
+		break;
+		case "10Hearts": cardImg = this.tenHearts; 
+		break;
+		case "10Spades": cardImg = this.tenSpades; 
+		break;
+		case "JackClubs": cardImg = this.jackClubs; 
+		break;
+		case "JackDiamonds": cardImg = this.jackDiamonds; 
+		break;
+		case "JackHearts": cardImg = this.jackHearts; 
+		break;
+		case "JackSapdes": cardImg = this.jackSpades; 
+		break;
+		case "QueenClubs": cardImg = this.queenClubs; 
+		break;
+		case "QueenDiamonds": cardImg = this.queenDiamonds; 
+		break;
+		case "QueenHearts": cardImg = this.queenHearts; 
+		break;
+		case "QueenSpades": cardImg = this.queenSpades; 
+		break;
+		case "KingClubs": cardImg = this.kingClubs; 
+		break;
+		case "KingDiamonds": cardImg = this.kingDiamonds; 
+		break;
+		case "KingHearts": cardImg = this.kingHearts; 
+		break;
+		case "KingSpades": cardImg = this.kingSpades; 
+		break;
+		case "AceClubs": cardImg = this.aceClubs; 
+		break;
+		case "AceDiamonds": cardImg = this.aceDiamonds; 
+		break;
+		case "AceHearts": cardImg = this.aceHearts; 
+		break;
+		case "AceSpades": cardImg = this.aceSpades; 
+		break;
 		}
 		
 		return cardImg;
@@ -453,7 +444,7 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 	{
 		Image cardImg = findCard(card);
 		ImageView img = new ImageView(cardImg);
-		img.setFitWidth(150);
+		img.setFitWidth(130);
 		//img.setSmooth(true);
 		img.setFitHeight(200);
 		//img.setCache(true);
@@ -533,10 +524,8 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 	 * initiateGiveBack takes in the names of the cards that the user selects to remove from his/her hand
 	 * then needs to re initialize those elements of the listView.
 	 */
-	public boolean initiateGiveBack(int person)
+	public void initiateGiveBack(int person)
 	{
-		boolean turnDone = false;
-		boolean tempTurn = true;
 		this.root.getChildren().remove(listView);
 		if(person == 0)
 		{
@@ -551,7 +540,7 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 					// prompt user
 					this.giveBackWarning.setVisible(true);
 					buttonClicked();
-					tempTurn = false;
+
 				}
 			
 			if(numOfCards == 4 && ((this.player.searchHand("Ace", "Clubs") != 5)
@@ -581,7 +570,6 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 				{
 					this.theDeck.remove(0);
 				}
-				turnDone = true;
 			}
 			if(numOfCards < 4 && numOfCards != 0)
 			{
@@ -606,16 +594,7 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 				{
 					this.theDeck.remove(0);
 				}
-				turnDone = true;
-			}
-			else if(numOfCards == 0)
-			{
-				turnDone = true;
-			}
-			// TODO
-			else
-			{
-				//initiateGiveBack(0);
+
 			}
 			keyboard.close();
 		}
@@ -631,11 +610,11 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 			{
 				this.theDeck.remove(0);
 			}
-			turnDone = true;
+
 		}
 		
 		this.root.getChildren().add(this.listView);
-		return turnDone;
+		return;
 	}
 	
 	private void flipCards()

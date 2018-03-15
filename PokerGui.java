@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import javax.swing.GroupLayout.Alignment;
+
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
@@ -66,6 +68,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	// storing a list of card names along with the number of cards
 	String listOfCards = "";
 	int numberOfCards = 0;
+	Text pTitle = new Text();
 	Text playerWin = new Text();
 	Text giveBackWarning = new Text(10, 550,"You may only give back up to 4 cards if you have an Ace, 3 elsewise");
 	ObservableList<String> cards;
@@ -79,9 +82,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 
 	@Override
 	public void start(Stage primaryStage) throws Exception 
-	{
-		
-		
+	{	
 		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
@@ -96,10 +97,14 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         // creating screen for title screen.
         this.titleGc.setFill(Color.GREEN);
         this.titleGc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+        // create title Text.
+        setUpTitleScene();
+
         
         playGame.setVisible(true);
         playGame.setOnAction(e -> {
         	playGame.setVisible(false);
+        	//this.pTitle.setVisible(false);
         	this.window.setScene(pokerScene);
         });
 
@@ -140,7 +145,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         {
     		buttonClicked();
     		// Check for an incorrect hand, i.e. where number of cards is equal to 5, or when numOfCards equals 4 and the user does not have an ace.
-    		// So the !(not) enveloping the player searchHand calls reads as, if the player does not have any type of ace in their hand.
+    		// So the !(not) enveloping the player searchHand calls reads as, if the player does not have any type of ace in their hand but they selected 4 cards to return.
     		if(this.numberOfCards == 5 || ((this.numberOfCards == 4 && !((this.player.searchHand("Ace", "Clubs") != 5)
 					|| (this.player.searchHand("Ace", "Hearts") != 5)
 					|| (this.player.searchHand("Ace", "Spades") != 5)
@@ -197,9 +202,10 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         	playButton.setVisible(true);
         	// how to reset the listView so that a brand new game could be played.
         });
-
+       
         // Title Scene
-        this.titleRoot.getChildren().addAll(titleCanvas, playGame);
+        this.titleRoot.getChildren().addAll(titleCanvas, playGame, pTitle);
+        this.titleRoot.autoSizeChildrenProperty().setValue(true);
         this.titleScene = new Scene(titleRoot);
         // Poker Scene
         this.root.getChildren().addAll(pokerCanvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
@@ -219,6 +225,19 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
         this.window.setScene(this.titleScene);
         this.gc.setFill(Color.GREEN);
         this.window.show();
+		return;
+	}
+	
+	/*
+	 * setUpTitleScrene
+	 */
+	private void setUpTitleScene()
+	{
+		this.pTitle.setFill(Color.BLACK);
+		this.pTitle.setText("Poker Fanatic");
+		this.pTitle.setVisible(true);
+		this.pTitle.setId("pTitle");
+		
 		return;
 	}
 	
@@ -394,11 +413,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 			{
 				turnDone = true;
 			}
-			// TODO
-			else
-			{
-				//initiateGiveBack(0);
-			}
+			
 			keyboard.close();
 		}
 		else if(person == 1)

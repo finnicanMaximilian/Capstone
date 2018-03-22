@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import com.sun.glass.events.MouseEvent;
+
 import javafx.animation.PauseTransition;
 import javafx.animation.SequentialTransition;
 import javafx.application.Application;
@@ -36,7 +38,7 @@ import javafx.scene.layout.VBox;
  
 
 
-public class PokerTwoGui extends Application implements EventHandler<ActionEvent>
+public class PokerTwoGui extends Application
 {  
 	// Poker Variables
 	Deck deck;
@@ -73,6 +75,18 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
     Button card3 = new Button();
     Button card4 = new Button();
     Button card5 = new Button();
+    
+    boolean card1Clicked = false;
+    boolean card2Clicked = false;
+    boolean card3Clicked = false;
+    boolean card4Clicked = false;
+    boolean card5Clicked = false;
+    
+    String card1Name = "";
+    String card2Name = "";
+    String card3Name = "";
+    String card4Name = "";
+    String card5Name = "";
     
     Image twoClubs = new Image("cardImgs/2_of_clubs.png");
     Image tenClubs = new Image("cardImgs/10_of_clubs.png");
@@ -137,6 +151,54 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 	public void start(Stage primaryStage) throws Exception 
 	{
 		
+		final EventHandler<ActionEvent> myHandler = new EventHandler<ActionEvent>()
+		{
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				if(event.getSource() == card1) {
+					if(card1Clicked) {
+						card1Clicked = false;
+					} else {
+						card1Clicked = true;
+					}
+				}
+				else if(event.getSource() == card2) {
+					if(card2Clicked) {
+						card2Clicked = false;
+					} else {
+						card2Clicked = true;
+					}
+				}
+				else if(event.getSource() == card3) {
+					if(card3Clicked) {
+						card3Clicked = false;
+					} else {
+						card3Clicked = true;
+					}
+				}
+				else if(event.getSource() == card4) {
+					if(card4Clicked) {
+						card4Clicked = false;
+					} else {
+						card4Clicked = true;
+					}
+				}
+				else if(event.getSource() == card5) {
+					if(card5Clicked) {
+						card5Clicked = false;
+					} else {
+						card5Clicked = true;
+					}
+				}
+			}
+		};
+		
+		card1.setOnAction(myHandler);
+		card2.setOnAction(myHandler);
+		card3.setOnAction(myHandler);
+		card4.setOnAction(myHandler);
+		card5.setOnAction(myHandler);
 		
 		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
@@ -148,13 +210,9 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
         Button giveBack = new Button("Give Back Cards");
         Button flipCard = new Button("Flip Cards");
         
-        card1.setMaxHeight(200);
-        card1.setMaxWidth(150);
-        card1.setLayoutX(10);
-        card1.setLayoutY(600);
-
         this.gc.setFill(Color.GREEN);
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+        
         
         playButton.setId("playButton");
         playButton.setMinWidth(40);
@@ -208,7 +266,6 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
         
 
         flipCard.setVisible(false);
-        //flipCard.setText();
         flipCard.setId("flipCard");
         flipCard.setLayoutY(400);
         flipCard.setMinHeight(40);
@@ -269,9 +326,16 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		return;
 	}
 	
-	@Override
-	public void handle(ActionEvent event)
+	/*
+	 * 
+	 */
+	private void scanPHand()
 	{
+		card1Name = (player.hand.get(0).getRank() + " " + player.hand.get(0).getSuit());
+		card2Name = (player.hand.get(1).getRank() + " " + player.hand.get(1).getSuit());
+		card3Name = (player.hand.get(2).getRank() + " " + player.hand.get(2).getSuit());
+		card4Name = (player.hand.get(3).getRank() + " " + player.hand.get(3).getSuit());
+		card5Name = (player.hand.get(4).getRank() + " " + player.hand.get(4).getSuit());
 		return;
 	}
 	
@@ -287,17 +351,14 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		int j = 1040;
 		// m is used for spacing for Player Card's X Coordinate
 		int m = 10;
-		// aligns the view in horizontal
-		this.listView.setOrientation(Orientation.HORIZONTAL);
 		
 		// Set the Players hand.
 		for(int i = 0; i < 5; i++)
 		{
+			// assign to hand
 			this.player.setCard(theDeck.get(i));
+			// draw cards to canvas
 			createCards(theDeck.get(i), i);
-			//System.out.println(theDeck.get(i).getRank()+theDeck.get(i).getSuit());
-			// Adding name to cards to list view, this can later be used to give back
-			// String names of cards in order to feed into player.java's search hand method.
 			m = m + 160;
 		}
 
@@ -453,31 +514,31 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		{
 			this.card1.setGraphic(img);
 			this.card1.setLayoutX(10);
-			this.card1.setLayoutY(600);
+			this.card1.setLayoutY(650);
 			this.root.getChildren().add(card1);
 		}
 		if(i == 1) {
 			this.card2.setGraphic(img);
 			this.card2.setLayoutX(170);
-			this.card2.setLayoutY(600);
+			this.card2.setLayoutY(650);
 			this.root.getChildren().add(card2);
 		}
 		if(i == 2) {
 			this.card3.setGraphic(img);
 			this.card3.setLayoutX(320);
-			this.card3.setLayoutY(600);
+			this.card3.setLayoutY(650);
 			this.root.getChildren().add(card3);
 		}
 		if(i == 3) {
 			this.card4.setGraphic(img);
 			this.card4.setLayoutX(470);
-			this.card4.setLayoutY(600);
+			this.card4.setLayoutY(650);
 			this.root.getChildren().add(card4);
 		}
 		if(i == 4) {
 			this.card5.setGraphic(img);
 			this.card5.setLayoutX(620);
-			this.card5.setLayoutY(600);
+			this.card5.setLayoutY(650);
 			this.root.getChildren().add(card5);
 		}
 		return;
@@ -493,6 +554,42 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 		gc.strokeText("Poker Fanatic", 140, 110);
 	}
 	
+	/*
+	 * cardsClicked() : scans the players cards to see which booleans are true then created a list of clicked cards.
+	 */
+	private void cardsClicked()
+	{
+		this.numberOfCards = 0;
+		this.listOfCards = "";
+		String list = "";
+		if(card1Clicked)
+		{
+			numberOfCards++;
+			list += "Card1\n";
+		}
+		if(card2Clicked)
+		{
+			numberOfCards++;
+			list += "Card2\n";
+		}
+		if(card3Clicked)
+		{
+			numberOfCards++;
+			list += "Card3\n";
+		}
+		if(card4Clicked)
+		{
+			numberOfCards++;
+			list += "Card4\n";
+		}
+		if(card5Clicked)
+		{
+			numberOfCards++;
+			list += "Card5\n";
+		}
+		this.listOfCards = list;
+		return;
+	}
 	
 	/*
 	 * Works with GiveBack to get strings from the listview.
@@ -564,6 +661,7 @@ public class PokerTwoGui extends Application implements EventHandler<ActionEvent
 					String suit = theDeck.get(i).getSuit();
 					Card newCard = new Card(suit, rank);
 					this.player.setCard(newCard);
+					// player has new card in hand, this is where i would create the card.
 					this.listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)

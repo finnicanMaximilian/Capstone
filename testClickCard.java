@@ -33,7 +33,6 @@ public class testClickCard extends Application{
 	Boolean card4Clicked = false;
 	Boolean card5Clicked = false;
 	
-	
 	Stage window;
 	// Required to run program.
 	public static void main(String[] args)
@@ -133,23 +132,23 @@ public class testClickCard extends Application{
 		String listOfCards = "";
 		if(card1Clicked)
 		{
-			listOfCards += "Card1 ";
+			listOfCards += "Card1\n";
 		}
 		if(card2Clicked)
 		{
-			listOfCards += "Card 2";
+			listOfCards += "Card2\n";
 		}
 		if(card3Clicked)
 		{
-			listOfCards += "Card 3";
+			listOfCards += "Card3\n";
 		}
 		if(card4Clicked)
 		{
-			listOfCards += "Card 4";
+			listOfCards += "Card4\n";
 		}
 		if(card5Clicked)
 		{
-			listOfCards += "Card 5";
+			listOfCards += "Card5\n";
 		}
 		return listOfCards;
 	}

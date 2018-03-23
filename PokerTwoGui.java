@@ -245,7 +245,8 @@ public class PokerTwoGui extends Application
          */
         giveBack.setOnAction(e -> 
         {
-    		buttonClicked();
+        	scanPHand();
+    		cardsClicked();
     		// Check for an incorrect hand, i.e. where number of cards is equal to 5, or when numOfCards equals 4 and the user does not have an ace.
     		// So the !(not) enveloping the player searchHand calls reads as, if the player does not have any type of ace in their hand.
     		if(this.numberOfCards == 5 || ((this.numberOfCards == 4 && !((this.player.searchHand("Ace", "Clubs") != 5)
@@ -257,9 +258,14 @@ public class PokerTwoGui extends Application
     		}
     		else
             {
-    			buttonClicked();
+    			cardsClicked();
+    			System.out.println(this.listOfCards);
     			giveBack.setVisible(false);
             	initiateGiveBack(0);
+            	scanPHand();
+            	for(int i = 0; i < 5; i++) {
+            		createPCards(player.hand.get(i), i);
+            	}
             	flipCard.setVisible(true);
             }
         });
@@ -331,11 +337,11 @@ public class PokerTwoGui extends Application
 	 */
 	private void scanPHand()
 	{
-		card1Name = (player.hand.get(0).getRank() + " " + player.hand.get(0).getSuit());
-		card2Name = (player.hand.get(1).getRank() + " " + player.hand.get(1).getSuit());
-		card3Name = (player.hand.get(2).getRank() + " " + player.hand.get(2).getSuit());
-		card4Name = (player.hand.get(3).getRank() + " " + player.hand.get(3).getSuit());
-		card5Name = (player.hand.get(4).getRank() + " " + player.hand.get(4).getSuit());
+		this.card1Name = (player.hand.get(0).getRank() + " " + player.hand.get(0).getSuit());
+		this.card2Name = (player.hand.get(1).getRank() + " " + player.hand.get(1).getSuit());
+		this.card3Name = (player.hand.get(2).getRank() + " " + player.hand.get(2).getSuit());
+		this.card4Name = (player.hand.get(3).getRank() + " " + player.hand.get(3).getSuit());
+		this.card5Name = (player.hand.get(4).getRank() + " " + player.hand.get(4).getSuit());
 		return;
 	}
 	
@@ -357,8 +363,10 @@ public class PokerTwoGui extends Application
 		{
 			// assign to hand
 			this.player.setCard(theDeck.get(i));
+			// Testing : System.out.println("Cards being set to hand:" + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
+			
 			// draw cards to canvas
-			createCards(theDeck.get(i), i);
+			createPCards(theDeck.get(i), i);
 			m = m + 160;
 		}
 
@@ -501,8 +509,10 @@ public class PokerTwoGui extends Application
 	 * the players hand. from there the card is passed through the findCard() method which finds the image associated with that card.
 	 * then depending on the index of the card, they are all placed on the playing table in correct order.
 	 */
-	public void createCards(Card card, int i)
+	public void createPCards(Card card, int i)
 	{
+		//TODO
+		this.root.getChildren().removeAll();
 		Image cardImg = findCard(card);
 		ImageView img = new ImageView(cardImg);
 		img.setFitWidth(130);
@@ -556,38 +566,40 @@ public class PokerTwoGui extends Application
 	
 	/*
 	 * cardsClicked() : scans the players cards to see which booleans are true then created a list of clicked cards.
+	 * the list of cards needs to be rank + space + suit.
+	 * using scanPHand will collect the names of each card in a players hand then i can just add to the list the card names.
+	 * scan P Hand will be ran before cardsClicked in order to know whats in the players hand first.
 	 */
 	private void cardsClicked()
 	{
 		this.numberOfCards = 0;
 		this.listOfCards = "";
-		String list = "";
+		//String list = "";
 		if(card1Clicked)
 		{
 			numberOfCards++;
-			list += "Card1\n";
+			this.listOfCards += card1Name;
 		}
 		if(card2Clicked)
 		{
 			numberOfCards++;
-			list += "Card2\n";
+			this.listOfCards += card2Name + "\n";
 		}
 		if(card3Clicked)
 		{
 			numberOfCards++;
-			list += "Card3\n";
+			this.listOfCards += card3Name+ "\n";
 		}
 		if(card4Clicked)
 		{
 			numberOfCards++;
-			list += "Card4\n";
+			this.listOfCards += card4Name+ "\n";
 		}
 		if(card5Clicked)
 		{
 			numberOfCards++;
-			list += "Card5\n";
+			this.listOfCards += card5Name+ "\n";
 		}
-		this.listOfCards = list;
 		return;
 	}
 	
@@ -653,7 +665,6 @@ public class PokerTwoGui extends Application
 					String suit = keyboard.next();
 					int cNum = this.player.searchHand(rank, suit);
 					this.player.giveBack(cNum);
-					this.listView.getItems().remove(cNum);
 				}
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -661,7 +672,7 @@ public class PokerTwoGui extends Application
 					String suit = theDeck.get(i).getSuit();
 					Card newCard = new Card(suit, rank);
 					this.player.setCard(newCard);
-					// player has new card in hand, this is where i would create the card.
+					// player has new card in hand, this is where i would create the card.  
 					this.listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)
@@ -677,8 +688,6 @@ public class PokerTwoGui extends Application
 					String suit = keyboard.next();
 					int cNum = player.searchHand(rank, suit);
 					this.player.giveBack(cNum);
-					// Seeing if the item gets removed from the list.
-					this.listView.getItems().remove(cNum);
 				}
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -686,6 +695,7 @@ public class PokerTwoGui extends Application
 					String suit = this.theDeck.get(i).getSuit();
 					Card newCard = new Card(suit, rank);
 					this.player.setCard(newCard);
+					// player has new card in hand, this is where i would create the card.
 					this.listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)
@@ -717,6 +727,7 @@ public class PokerTwoGui extends Application
 	
 	private void flipCards()
 	{
+		// TODO Change flip cards to show the opponents hand as cards.
 		// Flip the computers hand.
 		int j = 1040;
 
@@ -742,20 +753,11 @@ public class PokerTwoGui extends Application
 	private void launchPoker()
 	{
 		// Poker Variables
-		if(this.numOfGames > 0)
-		{
-			this.listView.setEditable(true);
-			this.listView.getItems().remove(0);
-			this.listView.getItems().remove(0);
-			this.listView.getItems().remove(0);
-			this.listView.getItems().remove(0);
-			this.listView.getItems().remove(0);
-		}
 		this.deck = new Deck();
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
-		this.numOfGames++;
+		//this.numOfGames++;
 		// Trying to re-instantiate a players hand.
 		// the listView is populated before this method.. so when i create a new listView its removing the list
 		// before buttonClicked() can establish what is inside the hand.

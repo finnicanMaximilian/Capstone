@@ -20,7 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -59,7 +58,6 @@ public class PokerTwoGui extends Application
 	Group root = new Group();
 	Canvas canvas = new Canvas(1200, 900);
 	GraphicsContext gc = canvas.getGraphicsContext2D();
-	ListView<String> listView = new ListView<>();
 	Text giveBackText = new Text(10, 575, "To Select Multiple Cards Hold CTRL and click the desired cards then press 'Give Back Cards'");
 	
 	// storing a list of card names along with the number of cards
@@ -229,7 +227,7 @@ public class PokerTwoGui extends Application
         	dealCards();
         	playButton.setVisible(false);
         	giveBack.setVisible(true);
-        	this.giveBackText.setVisible(true);
+        	//this.giveBackText.setVisible(true);
         });
         
         giveBack.setVisible(false);
@@ -263,6 +261,7 @@ public class PokerTwoGui extends Application
     			giveBack.setVisible(false);
             	initiateGiveBack(0);
             	scanPHand();
+        		this.root.getChildren().removeAll(card1, card2, card3, card4, card5);
             	for(int i = 0; i < 5; i++) {
             		createPCards(player.hand.get(i), i);
             	}
@@ -290,7 +289,7 @@ public class PokerTwoGui extends Application
         	giveBack.setVisible(false);
         	giveBackText.setVisible(false);
         	showWin.setVisible(true);
-			this.giveBackWarning.setVisible(false);
+			//will not be needed due to the 	this.giveBackWarning.setVisible(false);
 			flipCard.setVisible(false);
         });
         
@@ -305,9 +304,9 @@ public class PokerTwoGui extends Application
          */
         showWin.setOnAction(e -> {
         	showWin.setVisible(false);
+        	this.root.getChildren().removeAll(card1, card2, card3, card4, card5);
         	printWinner();
         	playButton.setVisible(true);
-        	// how to reset the listView so that a brand new game could be played.
         });
 
 
@@ -440,7 +439,7 @@ public class PokerTwoGui extends Application
 		break;
 		case "7Hearts": cardImg = this.sevenHearts; 
 		break;
-		case "7Spade": cardImg = this.sevenSpades; 
+		case "7Spades": cardImg = this.sevenSpades; 
 		break;
 		case "8Clubs": cardImg = this.eightClubs; 
 		break;
@@ -512,7 +511,6 @@ public class PokerTwoGui extends Application
 	public void createPCards(Card card, int i)
 	{
 		//TODO
-		this.root.getChildren().removeAll();
 		Image cardImg = findCard(card);
 		ImageView img = new ImageView(cardImg);
 		img.setFitWidth(130);
@@ -520,8 +518,7 @@ public class PokerTwoGui extends Application
 		img.setFitHeight(200);
 		//img.setCache(true);
 		
-		if(i == 0)
-		{
+		if(i == 0) {
 			this.card1.setGraphic(img);
 			this.card1.setLayoutX(10);
 			this.card1.setLayoutY(650);
@@ -578,7 +575,7 @@ public class PokerTwoGui extends Application
 		if(card1Clicked)
 		{
 			numberOfCards++;
-			this.listOfCards += card1Name;
+			this.listOfCards += card1Name + "\n";
 		}
 		if(card2Clicked)
 		{
@@ -604,26 +601,6 @@ public class PokerTwoGui extends Application
 	}
 	
 	/*
-	 * Works with GiveBack to get strings from the listview.
-	 */
-	private void buttonClicked()
-	{
-		this.listOfCards = "";
-		this.numberOfCards = 0;
-		this.cards = listView.getSelectionModel().getSelectedItems();
-		
-		for(String m: this.cards)
-		{
-			this.listOfCards += m + "\n";
-			this.numberOfCards++;
-		}
-		//System.out.println(message);
-		return;
-	}
-	
-	
-	
-	/*
 	 * inititateGiveBack: This method would initiate the Giving back phase, 
 	 * instructing the player on what to do, in return giving back the cards
 	 * to the player and removing them from the deck.
@@ -631,11 +608,9 @@ public class PokerTwoGui extends Application
 	 * 1 == Computer
 	 * 
 	 * initiateGiveBack takes in the names of the cards that the user selects to remove from his/her hand
-	 * then needs to re initialize those elements of the listView.
 	 */
 	public void initiateGiveBack(int person)
 	{
-		this.root.getChildren().remove(listView);
 		if(person == 0)
 		{
 			Scanner keyboard = new Scanner(this.listOfCards);
@@ -643,15 +618,7 @@ public class PokerTwoGui extends Application
 			
 			//Testing numOfCards
 			//System.out.println(numOfCards);
-			
-				if(numOfCards == 5)
-				{
-					// prompt user
-					this.giveBackWarning.setVisible(true);
-					buttonClicked();
-
-				}
-			
+			//TODO TESTING CHECK FOR IF CARDCLICKED NEEDS TO BE CALLED AGAIN WHEN USER ENTERS 5 CARDS AS NUMOFCARDS
 			if(numOfCards == 4 && ((this.player.searchHand("Ace", "Clubs") != 5)
 					|| (this.player.searchHand("Ace", "Hearts") != 5)
 					|| (this.player.searchHand("Ace", "Spades") != 5)
@@ -672,8 +639,6 @@ public class PokerTwoGui extends Application
 					String suit = theDeck.get(i).getSuit();
 					Card newCard = new Card(suit, rank);
 					this.player.setCard(newCard);
-					// player has new card in hand, this is where i would create the card.  
-					this.listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -695,8 +660,6 @@ public class PokerTwoGui extends Application
 					String suit = this.theDeck.get(i).getSuit();
 					Card newCard = new Card(suit, rank);
 					this.player.setCard(newCard);
-					// player has new card in hand, this is where i would create the card.
-					this.listView.getItems().add(rank + " " + suit);
 				}
 				for(int i = 0; i < numOfCards; i++)
 				{
@@ -720,8 +683,6 @@ public class PokerTwoGui extends Application
 			}
 
 		}
-		
-		this.root.getChildren().add(this.listView);
 		return;
 	}
 	
@@ -730,7 +691,9 @@ public class PokerTwoGui extends Application
 		// TODO Change flip cards to show the opponents hand as cards.
 		// Flip the computers hand.
 		int j = 1040;
-
+		
+		
+		//TODO This will be replaced with a createOCards() to make the cards inside the opponents hand..
 		for(int i = 0; i < 5; i++)
 		{
 			// Draw Over Computer Cards With It's Cards.
@@ -742,9 +705,9 @@ public class PokerTwoGui extends Application
 		}	
 		this.player.calcHand();
 		this.opponent.calcHand();
-		this.gc.fillText(("Total Player Points: " +player.winPoints), 600, 700);
+		this.gc.fillText(("Total Player Points: " + player.winPoints), 600, 800);
 		this.gc.fillText(("Total Computer Points: " + opponent.winPoints), 175, 150);
-		this.gc.fillText(("Highest Ranked Player Card: " + player.highCard), 600, 750);
+		this.gc.fillText(("Highest Ranked Player Card: " + player.highCard), 600, 850);
 		this.gc.fillText(("Highest Ranked Computer Card: " + opponent.highCard), 175, 200);
 			
 		return;
@@ -757,12 +720,6 @@ public class PokerTwoGui extends Application
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
-		//this.numOfGames++;
-		// Trying to re-instantiate a players hand.
-		// the listView is populated before this method.. so when i create a new listView its removing the list
-		// before buttonClicked() can establish what is inside the hand.
-
-
 	}
 	
 	private void printWinner()
@@ -774,7 +731,6 @@ public class PokerTwoGui extends Application
 		this.gc.setFill(Color.GREEN);
 		this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
 		this.gc.setFill(Color.BLACK);
-		this.root.getChildren().remove(listView);
 		
 		/*
 		 * Theoretical Error!! Player needs to win if their pair's beat other pairs.

@@ -47,7 +47,8 @@ public class PokerTwoGui extends Application
 
 	// GUI Variables
 	Stage window;
-	Scene scene;
+	Scene titleScene;
+	Scene pokerScene;
 	Image cardImage = new Image("cardImgs/cheetah-card.gif");
 	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
@@ -56,8 +57,11 @@ public class PokerTwoGui extends Application
 			"-fx-border-style: groove;\n" +
 			"-fx-background-color: #FFFFFF;";
 	Group root = new Group();
-	Canvas canvas = new Canvas(1200, 900);
-	GraphicsContext gc = canvas.getGraphicsContext2D();
+	Group titleRoot = new Group();
+	Canvas pokerCanvas = new Canvas(1200, 900);
+	GraphicsContext gc = pokerCanvas.getGraphicsContext2D();
+	Canvas titleCanvas = new Canvas(1200, 900);
+	GraphicsContext titleGc = titleCanvas.getGraphicsContext2D();
 	Text giveBackText = new Text(10, 575, "To Select Multiple Cards Hold CTRL and click the desired cards then press 'Give Back Cards'");
 	
 	// storing a list of card names along with the number of cards
@@ -203,10 +207,31 @@ public class PokerTwoGui extends Application
 		this.window = primaryStage;
         this.window.setTitle("Poker Fanatic!");
 
+        Button playGame = new Button("Play Game!");
         Button playButton = new Button("Play Poker!");
         Button showWin = new Button("See who Won!");
         Button giveBack = new Button("Give Back Cards");
         Button flipCard = new Button("Flip Cards");
+        
+        // creating screen for title screen.
+        this.titleGc.setFill(Color.GREEN);
+        this.titleGc.fillRoundRect(0, 0, 1200, 900, 0, 0);
+        // create title Text.
+        setUpTitleScene();
+        
+
+        playGame.setId("playGame");
+        playGame.setVisible(true);
+        playGame.setLayoutX(550);
+        playGame.setLayoutY(500);
+        playGame.setMinWidth(40);
+        playGame.setMinHeight(40);
+        playGame.setOnAction(e -> {
+        	playGame.setVisible(false);
+        	//this.pTitle.setVisible(false);
+        	this.window.setScene(pokerScene);
+        });
+
         
         this.gc.setFill(Color.GREEN);
         this.gc.fillRoundRect(0, 0, 1200, 900, 0, 0);
@@ -310,10 +335,15 @@ public class PokerTwoGui extends Application
         });
 
 
-        this.root.getChildren().addAll(canvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
+        
+        // Title Scene
+        this.titleRoot.getChildren().addAll(titleCanvas, playGame);
+        this.titleRoot.autoSizeChildrenProperty().setValue(true);
+        this.titleScene = new Scene(titleRoot);
+        // Poker Scene
+        this.root.getChildren().addAll(pokerCanvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
         this.root.autoSizeChildrenProperty().setValue(true);
-        // create scene with root.
-        this.scene = new Scene(root);
+        this.pokerScene = new Scene(root);
         
 		// Adding the CSS sheet
 		URL url = this.getClass().getResource("Poker.css");
@@ -322,12 +352,19 @@ public class PokerTwoGui extends Application
 			System.exit(-1);
 		}
 		String css = url.toExternalForm(); 
-		this.scene.getStylesheets().add(css);
+		this.pokerScene.getStylesheets().add(css);
+		this.titleScene.getStylesheets().add(css);
 		
 		// add scene to window.
-        this.window.setScene(this.scene);
+        this.window.setScene(this.titleScene);
         this.gc.setFill(Color.GREEN);
         this.window.show();
+		return;
+	}
+	
+	private void setUpTitleScene()
+	{
+		this.titleGc.drawImage(new Image("title.png"), 225, 300);
 		return;
 	}
 	
@@ -672,6 +709,8 @@ public class PokerTwoGui extends Application
 		else if(person == 1)
 		{
 			// opponent goes here.
+			// Making the opponent smarter is done through here. 
+			// You can have a list of buttons like easy medium hard then check to see which one is clicked.
 			int numOfCards = opponent.think(0);
 			for(int i = 0; i < numOfCards; i++)
 			{
@@ -690,10 +729,40 @@ public class PokerTwoGui extends Application
 	 * createOHand() : This method will scan the opponents final hand then draw them to the canvas.
 	 * Maybe to tackle this problem i should create a third scene as the winning scene. this scnee could be altered in all types of ways possibly. 
 	 */
-	private void createOHand()
+	private void createOHand(Card card, int i)
 	{
+		this.gc.setFill(Color.GREEN);
+		
 		//TODO scan the opponent
-		return;
+		Image cardImg = findCard(card);
+		ImageView img = new ImageView(cardImg);
+
+		
+		if(i == 0) {
+			this.gc.fillRoundRect(1040, 8, 150, 200, 10, 10);
+			this.gc.drawImage(cardImg, 1040, 8, 150, 200);
+
+		}
+		if(i == 1) {
+			this.gc.fillRoundRect(885, 8, 150, 200, 10, 10);
+			this.gc.drawImage(cardImg, 885, 8, 150, 200);
+
+		}
+		if(i == 2) {
+			this.gc.fillRoundRect(730, 8, 150, 200, 10, 10);
+			this.gc.drawImage(cardImg, 730, 8, 150, 200);
+
+		}
+		if(i == 3) {
+			this.gc.fillRoundRect(575, 8, 150, 200, 10, 10);
+			this.gc.drawImage(cardImg, 575, 8, 150, 200);
+	
+		}
+		if(i == 4) {
+			this.gc.fillRoundRect(420, 8, 150, 200, 10, 10);
+			this.gc.drawImage(cardImg, 420, 8, 150, 200);
+
+		}
 	}
 	
 	private void flipCards()
@@ -706,21 +775,25 @@ public class PokerTwoGui extends Application
 		//TODO This will be replaced with a createOCards() to make the cards inside the opponents hand..
 		for(int i = 0; i < 5; i++)
 		{
-			//createOHand();
+			createOHand(this.opponent.hand.get(i), i);
+//			//createOHand();
+//			
+//			// Draw Over Computer Cards With It's Cards.
+//			this.gc.setFill(Color.GREEN);
+//			this.gc.fillRoundRect(j, 8, 150, 200, 8, 8);
+//			this.gc.setFill(Color.BLACK);
+//			this.gc.fillText((opponent.hand.get(i).getRank() + " " + opponent.hand.get(i).getSuit()), (j+10), 100);
+//			j = j - 155;
 			
-			// Draw Over Computer Cards With It's Cards.
-			this.gc.setFill(Color.WHITE);
-			this.gc.fillRoundRect(j, 8, 150, 200, 8, 8);
-			this.gc.setFill(Color.BLACK);
-			this.gc.fillText((opponent.hand.get(i).getRank() + " " + opponent.hand.get(i).getSuit()), (j+10), 100);
-			j = j - 155;
 		}	
 		this.player.calcHand();
 		this.opponent.calcHand();
+		this.gc.setFill(Color.WHITE);
 		this.gc.fillText(("Total Player Points: " + player.winPoints), 900, 700);
 		this.gc.fillText(("Total Computer Points: " + opponent.winPoints), 175, 150);
 		this.gc.fillText(("Highest Ranked Player Card: " + player.highCard), 900, 750);
 		this.gc.fillText(("Highest Ranked Computer Card: " + opponent.highCard), 175, 200);
+
 			
 		return;
 	}

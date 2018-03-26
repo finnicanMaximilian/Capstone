@@ -471,7 +471,7 @@ public class PokerTwoGui extends Application
 		break;
 		case "JackHearts": cardImg = this.jackHearts; 
 		break;
-		case "JackSapdes": cardImg = this.jackSpades; 
+		case "JackSpades": cardImg = this.jackSpades; 
 		break;
 		case "QueenClubs": cardImg = this.queenClubs; 
 		break;
@@ -686,6 +686,16 @@ public class PokerTwoGui extends Application
 		return;
 	}
 	
+	/*
+	 * createOHand() : This method will scan the opponents final hand then draw them to the canvas.
+	 * Maybe to tackle this problem i should create a third scene as the winning scene. this scnee could be altered in all types of ways possibly. 
+	 */
+	private void createOHand()
+	{
+		//TODO scan the opponent
+		return;
+	}
+	
 	private void flipCards()
 	{
 		// TODO Change flip cards to show the opponents hand as cards.
@@ -696,6 +706,8 @@ public class PokerTwoGui extends Application
 		//TODO This will be replaced with a createOCards() to make the cards inside the opponents hand..
 		for(int i = 0; i < 5; i++)
 		{
+			//createOHand();
+			
 			// Draw Over Computer Cards With It's Cards.
 			this.gc.setFill(Color.WHITE);
 			this.gc.fillRoundRect(j, 8, 150, 200, 8, 8);
@@ -705,9 +717,9 @@ public class PokerTwoGui extends Application
 		}	
 		this.player.calcHand();
 		this.opponent.calcHand();
-		this.gc.fillText(("Total Player Points: " + player.winPoints), 600, 800);
+		this.gc.fillText(("Total Player Points: " + player.winPoints), 900, 700);
 		this.gc.fillText(("Total Computer Points: " + opponent.winPoints), 175, 150);
-		this.gc.fillText(("Highest Ranked Player Card: " + player.highCard), 600, 850);
+		this.gc.fillText(("Highest Ranked Player Card: " + player.highCard), 900, 750);
 		this.gc.fillText(("Highest Ranked Computer Card: " + opponent.highCard), 175, 200);
 			
 		return;
@@ -720,6 +732,18 @@ public class PokerTwoGui extends Application
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
+		
+		this.card1Clicked = false;
+		this.card2Clicked = false;
+		this.card3Clicked = false;
+		this.card4Clicked = false;
+		this.card5Clicked = false;
+		    
+		this.card1Name = "";
+		this.card2Name = "";
+		this.card3Name = "";
+		this.card4Name = "";
+		this.card5Name = "";
 	}
 	
 	private void printWinner()

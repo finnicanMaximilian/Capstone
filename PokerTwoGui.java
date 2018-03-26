@@ -155,41 +155,58 @@ public class PokerTwoGui extends Application
 		
 		final EventHandler<ActionEvent> myHandler = new EventHandler<ActionEvent>()
 		{
+
 			@Override
 			public void handle(ActionEvent event) {
+				gc.setFill(Color.ORANGE);
 				// TODO Auto-generated method stub
 				if(event.getSource() == card1) {
 					if(card1Clicked) {
+						gc.setFill(Color.GREEN);
+						gc.fillRoundRect(5, 625, 156, 220, 8, 8);
 						card1Clicked = false;
 					} else {
+						gc.fillRoundRect(5, 625, 156, 220, 8, 8);
 						card1Clicked = true;
 					}
 				}
 				else if(event.getSource() == card2) {
 					if(card2Clicked) {
+						gc.setFill(Color.GREEN);
+						gc.fillRoundRect(165, 625, 156, 220, 8, 8);
 						card2Clicked = false;
 					} else {
+						gc.fillRoundRect(165, 625, 156, 220, 8, 8);
 						card2Clicked = true;
 					}
 				}
 				else if(event.getSource() == card3) {
 					if(card3Clicked) {
+						gc.setFill(Color.GREEN);
+						gc.fillRoundRect(325, 625, 156, 220, 8, 8);
 						card3Clicked = false;
 					} else {
+						gc.fillRoundRect(325, 625, 156, 220, 8, 8);
 						card3Clicked = true;
 					}
 				}
 				else if(event.getSource() == card4) {
 					if(card4Clicked) {
+						gc.setFill(Color.GREEN);
+						gc.fillRoundRect(485, 625, 156, 220, 8, 8);
 						card4Clicked = false;
 					} else {
+						gc.fillRoundRect(485, 625, 156, 220, 8, 8);
 						card4Clicked = true;
 					}
 				}
 				else if(event.getSource() == card5) {
 					if(card5Clicked) {
+						gc.setFill(Color.GREEN);
+						gc.fillRoundRect(645, 625, 156, 220, 8, 8);
 						card5Clicked = false;
 					} else {
+						gc.fillRoundRect(645, 625, 156, 220, 8, 8);
 						card5Clicked = true;
 					}
 				}
@@ -205,6 +222,8 @@ public class PokerTwoGui extends Application
 		this.giveBackWarning.setVisible(false);
 		this.giveBackText.setVisible(false);
 		this.window = primaryStage;
+		this.window.setMaxHeight(900);
+		this.window.setMaxWidth(1200);
         this.window.setTitle("Poker Fanatic!");
 
         Button playGame = new Button("Play Game!");
@@ -287,6 +306,7 @@ public class PokerTwoGui extends Application
             	initiateGiveBack(0);
             	scanPHand();
         		this.root.getChildren().removeAll(card1, card2, card3, card4, card5);
+        		cleanSelectedCards();
             	for(int i = 0; i < 5; i++) {
             		createPCards(player.hand.get(i), i);
             	}
@@ -362,6 +382,10 @@ public class PokerTwoGui extends Application
 		return;
 	}
 	
+	/*
+	 * setUpTitleScene() : This method adds the game image to the title scene
+	 * this method can also be used to customize the title scene in more detail.
+	 */
 	private void setUpTitleScene()
 	{
 		this.titleGc.drawImage(new Image("title.png"), 225, 300);
@@ -369,7 +393,22 @@ public class PokerTwoGui extends Application
 	}
 	
 	/*
-	 * 
+	 * cleanSelectedCards() : This method is called after giveBack has been clicked in order to clean up the "selected card"
+	 * look.
+	 */
+	private void cleanSelectedCards()
+	{
+		gc.setFill(Color.GREEN);
+		gc.fillRoundRect(5, 625, 156, 220, 8, 8);
+		gc.fillRoundRect(165, 625, 156, 220, 8, 8);
+		gc.fillRoundRect(325, 625, 156, 220, 8, 8);
+		gc.fillRoundRect(485, 625, 156, 220, 8, 8);
+		gc.fillRoundRect(645, 625, 156, 220, 8, 8);
+	}
+	
+	/*
+	 * scanPHand() : This method scans the players hand then attaches the name of each card to a global variable that is then used with
+	 * createPHand().
 	 */
 	private void scanPHand()
 	{
@@ -383,7 +422,7 @@ public class PokerTwoGui extends Application
 	
 	/*
 	 * dealCards(): for creation sake only make this accommodate two players.
-	 * This Initiatlly draws the cards.
+	 * This Inititally draws the cards.
 	 */
 	public void dealCards()
 	{
@@ -558,31 +597,31 @@ public class PokerTwoGui extends Application
 		if(i == 0) {
 			this.card1.setGraphic(img);
 			this.card1.setLayoutX(10);
-			this.card1.setLayoutY(650);
+			this.card1.setLayoutY(630);
 			this.root.getChildren().add(card1);
 		}
 		if(i == 1) {
 			this.card2.setGraphic(img);
 			this.card2.setLayoutX(170);
-			this.card2.setLayoutY(650);
+			this.card2.setLayoutY(630);
 			this.root.getChildren().add(card2);
 		}
 		if(i == 2) {
 			this.card3.setGraphic(img);
-			this.card3.setLayoutX(320);
-			this.card3.setLayoutY(650);
+			this.card3.setLayoutX(330);
+			this.card3.setLayoutY(630);
 			this.root.getChildren().add(card3);
 		}
 		if(i == 3) {
 			this.card4.setGraphic(img);
-			this.card4.setLayoutX(470);
-			this.card4.setLayoutY(650);
+			this.card4.setLayoutX(490);
+			this.card4.setLayoutY(630);
 			this.root.getChildren().add(card4);
 		}
 		if(i == 4) {
 			this.card5.setGraphic(img);
-			this.card5.setLayoutX(620);
-			this.card5.setLayoutY(650);
+			this.card5.setLayoutX(650);
+			this.card5.setLayoutY(630);
 			this.root.getChildren().add(card5);
 		}
 		return;

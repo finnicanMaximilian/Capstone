@@ -425,12 +425,49 @@ public class Opponent
 	 * 
 	 * To work, i may need to return the number of cards being returned so that the Poker.java 
 	 * can know the amount of cards to give back from the deck.
+	 * 
+	 * 
+	 * Easy:
+	 * 
+	 * 
+	 * Medium:
+	 * 
+	 * 
+	 * Hard: 
+	 * 
 	 */
 	public int think(int level)
 	{
 		calcHand();
 		int numOfCards = 0;
 		if(level == 0)
+		{
+			System.out.println("Error AI level of Inteligence was 0.");
+		}
+		/*
+		 * level 1: Easy Difficulty
+		 * Saves the highest card but removes 2 random cards.
+		 */
+		else if(level == 1)
+		{
+			int temp = 1;
+			int rankToLookFor = this.highCard;
+			for(int i = 4; i >= 0; i--)
+			{
+				if((rankACard(hand.get(i).getRank()) != rankToLookFor) && temp != 0)
+				{
+					giveBack(i);
+					temp--;
+				}
+			}
+			numOfCards = 1;
+		}
+		/*
+		 * level 2: Medium Difficulty
+		 * discards 3 cards randomly.
+		 * Saves a Pair if exisitant.
+		 */
+		else if(level == 2)
 		{
 			if(winPoints == 0)
 			{
@@ -452,6 +489,14 @@ public class Opponent
 				numOfCards = 3;
 			}
 
+		}
+		/*
+		 * level 3: Hard Difficulty
+		 * this strategy will try and be as difficult as possible.
+		 */
+		else if(level == 3)
+		{
+			
 		}
 		this.winPoints = 0; // reset win points so that it doesn't double calculated from Poker.java "AnnounceWinner"
 		return numOfCards;

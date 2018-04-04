@@ -841,7 +841,7 @@ public class PokerTwoGui extends Application
 			// opponent goes here.
 			// Making the opponent smarter is done through here. 
 			// You can have a list of buttons like easy medium hard then check to see which one is clicked.
-			int numOfCards = opponent.think(0);
+			int numOfCards = opponent.think(this.AILevel);
 			for(int i = 0; i < numOfCards; i++)
 			{
 				this.opponent.setCard(this.theDeck.get(i));

@@ -1,39 +1,32 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import com.sun.glass.events.MouseEvent;
+import com.sun.corba.se.impl.protocol.BootstrapServerRequestDispatcher;
 
-import javafx.animation.PauseTransition;
-import javafx.animation.SequentialTransition;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.RadialGradient;
-import javafx.scene.paint.Stop;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Border;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
  
 
 
@@ -49,7 +42,7 @@ public class PokerTwoGui extends Application
 	Stage window;
 	Scene titleScene;
 	Scene pokerScene;
-	Image cardImage = new Image("cardImgs/cheetah-card.gif");
+	Image cardImage = new Image("cheetah-card.gif");
 	String borderpane_style = "-fx-background-color: #FFFFFF;";
 	String  vbox_style = "-fx-border-color: black;\n" +
 			"-fx-border-insets: 10;\n" +
@@ -68,6 +61,7 @@ public class PokerTwoGui extends Application
 	String listOfCards = "";
 	int numberOfCards = 0;
 	Text playerWin = new Text();
+	Boolean pWin = false;
 	Text giveBackWarning = new Text(10, 550,"You may only give back up to 4 cards if you have an Ace, 3 elsewise");
 	ObservableList<String> cards;
 	int numOfGames = 0;
@@ -77,6 +71,10 @@ public class PokerTwoGui extends Application
     Button card3 = new Button();
     Button card4 = new Button();
     Button card5 = new Button();
+    
+	Button easyButton = new Button("Easy");
+	Button medButton = new Button("Medium");
+	Button hardButton = new Button("Hard");
     
     boolean card1Clicked = false;
     boolean card2Clicked = false;
@@ -90,59 +88,72 @@ public class PokerTwoGui extends Application
     String card4Name = "";
     String card5Name = "";
     
-    Image twoClubs = new Image("cardImgs/2_of_clubs.png");
-    Image tenClubs = new Image("cardImgs/10_of_clubs.png");
-    Image tenDiamonds = new Image("cardImgs/10_of_diamonds.png");
-    Image tenHearts = new Image("cardImgs/10_of_hearts.png");
-    Image tenSpades = new Image("cardImgs/10_of_spades.png");
-    Image twoDiamonds = new Image("cardImgs/2_of_diamonds.png");
-    Image twoHearts = new Image("cardImgs/2_of_hearts.png");
-    Image twoSpades = new Image("cardImgs/2_of_spades.png");
-    Image threeClubs = new Image("cardImgs/3_of_clubs.png");
-    Image threeDiamonds = new Image("cardImgs/3_of_diamonds.png");
-    Image threeHearts = new Image("cardImgs/3_of_hearts.png");
-    Image threeSpades = new Image("cardImgs/3_of_spades.png");
-    Image fourClubs = new Image("cardImgs/4_of_clubs.png");
-    Image fourDiamonds = new Image("cardImgs/4_of_diamonds.png");
-    Image fourHearts = new Image("cardImgs/4_of_hearts.png");
-    Image fourSpades = new Image("cardImgs/4_of_spades.png");
-    Image fiveClubs = new Image("cardImgs/5_of_clubs.png");
-    Image fiveDiamonds = new Image("cardImgs/5_of_diamonds.png");
-    Image fiveHearts = new Image("cardImgs/5_of_hearts.png");
-    Image fiveSpades = new Image("cardImgs/5_of_spades.png");
-    Image sixClubs = new Image("cardImgs/6_of_clubs.png");
-    Image sixDiamonds = new Image("cardImgs/6_of_diamonds.png");
-    Image sixHearts = new Image("cardImgs/6_of_hearts.png");
-    Image sixSpades = new Image("cardImgs/6_of_spades.png");
-    Image sevenClubs = new Image("cardImgs/7_of_clubs.png");
-    Image sevenDiamonds = new Image("cardImgs/7_of_diamonds.png");
-    Image sevenHearts = new Image("cardImgs/7_of_hearts.png");
-    Image sevenSpades = new Image("cardImgs/7_of_spades.png");
-    Image eightClubs = new Image("cardImgs/8_of_clubs.png");
-    Image eightDiamonds = new Image("cardImgs/8_of_diamonds.png");
-    Image eightHearts = new Image("cardImgs/8_of_hearts.png");
-    Image eightSpades = new Image("cardImgs/8_of_spades.png");
-    Image nineClubs = new Image("cardImgs/9_of_clubs.png");
-    Image nineDiamonds = new Image("cardImgs/9_of_diamonds.png");
-    Image nineHearts = new Image("cardImgs/9_of_hearts.png");
-    Image nineSpades = new Image("cardImgs/9_of_spades.png");
-    Image aceClubs = new Image("cardImgs/ace_of_clubs.png");
-    Image aceDiamonds = new Image("cardImgs/ace_of_diamonds.png");
-    Image aceHearts = new Image("cardImgs/ace_of_hearts.png");
-    Image aceSpades = new Image("cardImgs/ace_of_spades.png");
-    Image jackClubs = new Image("cardImgs/jack_of_clubs.png");
-    Image jackDiamonds = new Image("cardImgs/jack_of_diamonds.png");
-    Image jackHearts = new Image("cardImgs/jack_of_hearts.png");
-    Image jackSpades = new Image("cardImgs/jack_of_spades.png");
-    Image queenClubs = new Image("cardImgs/queen_of_clubs.png");
-    Image queenDiamonds = new Image("cardImgs/queen_of_diamonds.png");
-    Image queenHearts = new Image("cardImgs/queen_of_hearts.png");
-    Image queenSpades = new Image("cardImgs/queen_of_spades.png");
-    Image kingClubs = new Image("cardImgs/king_of_clubs.png");
-    Image kingDiamonds = new Image("cardImgs/king_of_diamonds.png");
-    Image kingHearts = new Image("cardImgs/king_of_hearts.png");
-    Image kingSpades = new Image("cardImgs/king_of_spades.png");
+    Image twoClubs = new Image("2_of_clubs.png");
+    Image tenClubs = new Image("10_of_clubs.png");
+    Image tenDiamonds = new Image("10_of_diamonds.png");
+    Image tenHearts = new Image("10_of_hearts.png");
+    Image tenSpades = new Image("10_of_spades.png");
+    Image twoDiamonds = new Image("2_of_diamonds.png");
+    Image twoHearts = new Image("2_of_hearts.png");
+    Image twoSpades = new Image("2_of_spades.png");
+    Image threeClubs = new Image("3_of_clubs.png");
+    Image threeDiamonds = new Image("3_of_diamonds.png");
+    Image threeHearts = new Image("3_of_hearts.png");
+    Image threeSpades = new Image("3_of_spades.png");
+    Image fourClubs = new Image("4_of_clubs.png");
+    Image fourDiamonds = new Image("4_of_diamonds.png");
+    Image fourHearts = new Image("4_of_hearts.png");
+    Image fourSpades = new Image("4_of_spades.png");
+    Image fiveClubs = new Image("5_of_clubs.png");
+    Image fiveDiamonds = new Image("5_of_diamonds.png");
+    Image fiveHearts = new Image("5_of_hearts.png");
+    Image fiveSpades = new Image("5_of_spades.png");
+    Image sixClubs = new Image("6_of_clubs.png");
+    Image sixDiamonds = new Image("6_of_diamonds.png");
+    Image sixHearts = new Image("6_of_hearts.png");
+    Image sixSpades = new Image("6_of_spades.png");
+    Image sevenClubs = new Image("7_of_clubs.png");
+    Image sevenDiamonds = new Image("7_of_diamonds.png");
+    Image sevenHearts = new Image("7_of_hearts.png");
+    Image sevenSpades = new Image("7_of_spades.png");
+    Image eightClubs = new Image("8_of_clubs.png");
+    Image eightDiamonds = new Image("8_of_diamonds.png");
+    Image eightHearts = new Image("8_of_hearts.png");
+    Image eightSpades = new Image("8_of_spades.png");
+    Image nineClubs = new Image("9_of_clubs.png");
+    Image nineDiamonds = new Image("9_of_diamonds.png");
+    Image nineHearts = new Image("9_of_hearts.png");
+    Image nineSpades = new Image("9_of_spades.png");
+    Image aceClubs = new Image("ace_of_clubs.png");
+    Image aceDiamonds = new Image("ace_of_diamonds.png");
+    Image aceHearts = new Image("ace_of_hearts.png");
+    Image aceSpades = new Image("ace_of_spades.png");
+    Image jackClubs = new Image("jack_of_clubs.png");
+    Image jackDiamonds = new Image("jack_of_diamonds.png");
+    Image jackHearts = new Image("jack_of_hearts.png");
+    Image jackSpades = new Image("jack_of_spades.png");
+    Image queenClubs = new Image("queen_of_clubs.png");
+    Image queenDiamonds = new Image("queen_of_diamonds.png");
+    Image queenHearts = new Image("queen_of_hearts.png");
+    Image queenSpades = new Image("queen_of_spades.png");
+    Image kingClubs = new Image("king_of_clubs.png");
+    Image kingDiamonds = new Image("king_of_diamonds.png");
+    Image kingHearts = new Image("king_of_hearts.png");
+    Image kingSpades = new Image("king_of_spades.png");
     
+    // Saving user information
+    File file = new File("test.txt");
+    Text AIWarningText = new Text("You much choose a difficultly level");
+    int AILevel = 0;
+    
+    // Game Sounds
+    String goodSound = "src/crowdCheer.mp3";
+    Media cCSound = new Media(new File(goodSound).toURI().toString());
+    MediaPlayer goodMediaPlayer = new MediaPlayer(cCSound);
+    
+    String badSound = "src/crowdBoo.mp3";
+    Media cBSound = new Media(new File(badSound).toURI().toString());
+    MediaPlayer badMediaPlayer = new MediaPlayer(cBSound);
     
     public static void main(String[] args) 
     {
@@ -153,6 +164,16 @@ public class PokerTwoGui extends Application
 	public void start(Stage primaryStage) throws Exception 
 	{
 		
+		// testing saving information
+		writeToSaveFile();
+		
+
+        Button playGame = new Button("Play Game!");
+        Button playButton = new Button("Deal Out Cards");
+        Button showWin = new Button("See who Won!");
+        Button giveBack = new Button("Give Back Cards");
+        Button flipCard = new Button("Flip Cards");
+		
 		final EventHandler<ActionEvent> myHandler = new EventHandler<ActionEvent>()
 		{
 
@@ -162,52 +183,73 @@ public class PokerTwoGui extends Application
 				// TODO Auto-generated method stub
 				if(event.getSource() == card1) {
 					if(card1Clicked) {
-						gc.setFill(Color.GREEN);
-						gc.fillRoundRect(5, 625, 156, 220, 8, 8);
-						card1Clicked = false;
+						if(giveBack.isVisible())
+						{
+							gc.setFill(Color.GREEN);
+							gc.fillRoundRect(5, 625, 156, 220, 8, 8);
+							card1Clicked = false;
+						}
 					} else {
+						if(giveBack.isVisible()) {
 						gc.fillRoundRect(5, 625, 156, 220, 8, 8);
 						card1Clicked = true;
+						}
 					}
 				}
 				else if(event.getSource() == card2) {
 					if(card2Clicked) {
+						if(giveBack.isVisible()) {
 						gc.setFill(Color.GREEN);
 						gc.fillRoundRect(165, 625, 156, 220, 8, 8);
 						card2Clicked = false;
+						}
 					} else {
+						if(giveBack.isVisible()) {
 						gc.fillRoundRect(165, 625, 156, 220, 8, 8);
 						card2Clicked = true;
+						}
 					}
 				}
 				else if(event.getSource() == card3) {
 					if(card3Clicked) {
+						if(giveBack.isVisible()) {
 						gc.setFill(Color.GREEN);
 						gc.fillRoundRect(325, 625, 156, 220, 8, 8);
 						card3Clicked = false;
+						}
 					} else {
+						if(giveBack.isVisible()) {
 						gc.fillRoundRect(325, 625, 156, 220, 8, 8);
 						card3Clicked = true;
+						}
 					}
 				}
 				else if(event.getSource() == card4) {
 					if(card4Clicked) {
+						if(giveBack.isVisible()) {
 						gc.setFill(Color.GREEN);
 						gc.fillRoundRect(485, 625, 156, 220, 8, 8);
 						card4Clicked = false;
+						}
 					} else {
+						if(giveBack.isVisible()) {
 						gc.fillRoundRect(485, 625, 156, 220, 8, 8);
 						card4Clicked = true;
+						}
 					}
 				}
 				else if(event.getSource() == card5) {
 					if(card5Clicked) {
+						if(giveBack.isVisible()) {
 						gc.setFill(Color.GREEN);
 						gc.fillRoundRect(645, 625, 156, 220, 8, 8);
 						card5Clicked = false;
+						}
 					} else {
+						if(giveBack.isVisible()) {
 						gc.fillRoundRect(645, 625, 156, 220, 8, 8);
 						card5Clicked = true;
+						}
 					}
 				}
 			}
@@ -225,20 +267,17 @@ public class PokerTwoGui extends Application
 		this.window.setMaxHeight(900);
 		this.window.setMaxWidth(1200);
         this.window.setTitle("Poker Fanatic!");
+        this.AIWarningText.setVisible(false);
 
-        Button playGame = new Button("Play Game!");
-        Button playButton = new Button("Play Poker!");
-        Button showWin = new Button("See who Won!");
-        Button giveBack = new Button("Give Back Cards");
-        Button flipCard = new Button("Flip Cards");
         
         // creating screen for title screen.
         this.titleGc.setFill(Color.GREEN);
         this.titleGc.fillRoundRect(0, 0, 1200, 900, 0, 0);
         // create title Text.
         setUpTitleScene();
-        
-
+        this.AIWarningText.setFill(Color.BLACK);
+        this.AIWarningText.setLayoutX(500);
+        this.AIWarningText.setLayoutY(425);
         playGame.setId("playGame");
         playGame.setVisible(true);
         playGame.setLayoutX(550);
@@ -246,9 +285,14 @@ public class PokerTwoGui extends Application
         playGame.setMinWidth(40);
         playGame.setMinHeight(40);
         playGame.setOnAction(e -> {
+        	if(this.AILevel == 0) {
+        		this.AIWarningText.setVisible(true);
+        	}
+        	else {
         	playGame.setVisible(false);
         	//this.pTitle.setVisible(false);
         	this.window.setScene(pokerScene);
+        	}
         });
 
         
@@ -264,6 +308,8 @@ public class PokerTwoGui extends Application
          * When "Play Poker" is pressed.
          */
         playButton.setOnAction(e -> {
+        	badMediaPlayer.stop();
+        	goodMediaPlayer.stop();
         	root.getChildren().remove(playerWin);
         	this.playerWin.setVisible(false);
         	launchPoker();
@@ -301,7 +347,8 @@ public class PokerTwoGui extends Application
     		else
             {
     			cardsClicked();
-    			System.out.println(this.listOfCards);
+            	this.giveBackWarning.setVisible(false);
+    			//System.out.println(this.listOfCards);
     			giveBack.setVisible(false);
             	initiateGiveBack(0);
             	scanPHand();
@@ -332,7 +379,8 @@ public class PokerTwoGui extends Application
         	initiateGiveBack(1);
         	flipCards();
         	giveBack.setVisible(false);
-        	giveBackText.setVisible(false);
+        	this.giveBackText.setVisible(false);
+
         	showWin.setVisible(true);
 			//will not be needed due to the 	this.giveBackWarning.setVisible(false);
 			flipCard.setVisible(false);
@@ -351,18 +399,26 @@ public class PokerTwoGui extends Application
         	showWin.setVisible(false);
         	this.root.getChildren().removeAll(card1, card2, card3, card4, card5);
         	printWinner();
+        	if(pWin) {
+        		goodMediaPlayer.play();
+        		//goodMediaPlayer.stop();
+        	}
+        	else {
+        		badMediaPlayer.play();
+        		//badMediaPlayer.stop();
+        	}
         	playButton.setVisible(true);
         });
 
 
         
         // Title Scene
-        this.titleRoot.getChildren().addAll(titleCanvas, playGame);
-        this.titleRoot.autoSizeChildrenProperty().setValue(true);
+        this.titleRoot.getChildren().addAll(titleCanvas, playGame, easyButton, medButton, hardButton, AIWarningText);
+        //this.titleRoot.autoSizeChildrenProperty().setValue(true);
         this.titleScene = new Scene(titleRoot);
         // Poker Scene
         this.root.getChildren().addAll(pokerCanvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
-        this.root.autoSizeChildrenProperty().setValue(true);
+        //this.root.autoSizeChildrenProperty().setValue(true);
         this.pokerScene = new Scene(root);
         
 		// Adding the CSS sheet
@@ -382,6 +438,15 @@ public class PokerTwoGui extends Application
 		return;
 	}
 	
+	public void writeToSaveFile() throws IOException 
+	{
+		// write data
+		BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		writer.write("Hello Maxx");
+		writer.close();
+		
+	}
+	
 	/*
 	 * setUpTitleScene() : This method adds the game image to the title scene
 	 * this method can also be used to customize the title scene in more detail.
@@ -389,6 +454,32 @@ public class PokerTwoGui extends Application
 	private void setUpTitleScene()
 	{
 		this.titleGc.drawImage(new Image("title.png"), 225, 300);
+		easyButton.setId("easyButton");
+		easyButton.setLayoutX(505);
+		easyButton.setLayoutY(600);
+		easyButton.setMinHeight(40);
+		easyButton.setMinWidth(40);
+		easyButton.setOnAction(e -> {
+			this.AILevel = 1;
+		});
+		
+		medButton.setId("medButton");
+		medButton.setLayoutX(560);
+		medButton.setLayoutY(600);
+		medButton.setMinHeight(40);
+		medButton.setMinWidth(40);
+		medButton.setOnAction(e -> {
+			this.AILevel = 2;
+		});
+		
+		hardButton.setId("hardButton");
+		hardButton.setLayoutX(640);
+		hardButton.setLayoutY(600);
+		hardButton.setMinHeight(40);
+		hardButton.setMinWidth(40);
+		hardButton.setOnAction(e -> {
+			this.AILevel = 3;
+		});
 		return;
 	}
 	
@@ -774,7 +865,6 @@ public class PokerTwoGui extends Application
 		
 		//TODO scan the opponent
 		Image cardImg = findCard(card);
-		ImageView img = new ImageView(cardImg);
 
 		
 		if(i == 0) {
@@ -844,6 +934,8 @@ public class PokerTwoGui extends Application
 		this.theDeck = deck.getDeck();
 		this.player = new Player();
 		this.opponent = new Opponent();
+		this.pWin = false;
+
 		
 		this.card1Clicked = false;
 		this.card2Clicked = false;
@@ -874,6 +966,7 @@ public class PokerTwoGui extends Application
         // Player Won.
         if(this.player.winPoints > this.opponent.winPoints) // Flat out wins because the winpoints is higher.
         {
+        	this.pWin = true;
         	this.playerWin.setText("Player Won");
         }
         else if(this.opponent.winPoints > this.player.winPoints) // Flat out wins because the winpoints is higher.
@@ -891,6 +984,7 @@ public class PokerTwoGui extends Application
         		}
         		else if(player.highCard > opponent.highCard)
         		{
+        			this.pWin = true;
         			this.playerWin.setText("Player Won with High Card!");
         		}
         		else
@@ -917,6 +1011,7 @@ public class PokerTwoGui extends Application
 			if(player.onePair() > opponent.onePair())
 			{
 				hadHigherRank = true;
+				this.pWin = true;
 				this.playerWin.setText("Player Won with Higher Ranked Cards!");
 			}
 			else if(opponent.onePair() > player.onePair())
@@ -931,6 +1026,7 @@ public class PokerTwoGui extends Application
 			if(player.twoPair() > opponent.twoPair())
 			{
 				hadHigherRank = true;
+				this.pWin = true;
 				this.playerWin.setText("Player Won with Higher Ranked Cards!");
 			}
 			else if(opponent.twoPair() > player.twoPair())
@@ -945,6 +1041,7 @@ public class PokerTwoGui extends Application
 			if(player.threeOfKind() > opponent.threeOfKind())
 			{
 				hadHigherRank = true;
+				this.pWin = true;
 				this.playerWin.setText("Player Won with Higher Ranked Cards!");
 			}
 			else if(opponent.threeOfKind() > player.threeOfKind())
@@ -959,6 +1056,7 @@ public class PokerTwoGui extends Application
 			if(player.fourOfKind() > opponent.fourOfKind())
 			{
 				hadHigherRank = true;
+				this.pWin = true;
 				this.playerWin.setText("Player Won with Higher Ranked Cards!");
 			}
 			else if(opponent.fourOfKind() > player.fourOfKind())
@@ -974,6 +1072,7 @@ public class PokerTwoGui extends Application
 			if(player.threeOfKind() > opponent.threeOfKind())
 			{
 				hadHigherRank = true;
+				this.pWin = true;
 				this.playerWin.setText("Player Won with Higher Ranked Cards!");
 			}
 			else if(opponent.threeOfKind() > player.threeOfKind())

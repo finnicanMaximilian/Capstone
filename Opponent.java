@@ -109,9 +109,10 @@ public class Opponent
 	/*
 	 * twoPair() : sets the boolean twoPair to true if there is two pairs in a players hand.
 	 */
-	public int twoPair()
+	public int[] twoPair()
 	{
-		int cardNum = 0;
+		int[] cardNums = {0,0};
+
 		Card card1;
 		Card tempCard;
 		for(int j = 0; j < this.hand.size(); j++)
@@ -126,6 +127,7 @@ public class Opponent
 					// add in the next search of a pair.
 					this.hand.remove(searchHand(card1.getRank(), card1.getSuit()));
 					this.hand.remove(searchHand(tempCard.getRank(), tempCard.getSuit()));
+					cardNums[0] = rankACard(tempCard.getRank());
 					for(int y = 0; y < this.hand.size(); y++)
 					{
 						Card card2 = this.hand.get(y);
@@ -134,7 +136,7 @@ public class Opponent
 							Card nextCard = this.hand.get(z);
 							if(nextCard.getRank().equals(card2.getRank()) && !(nextCard.getSuit().equals(card2.getSuit())))
 							{
-								cardNum = rankACard(tempCard.getRank());
+								cardNums[1] = rankACard(tempCard.getRank());
 								this.twoPair = true;
 							}
 						}
@@ -144,7 +146,7 @@ public class Opponent
 				}
 			}
 		}		
-		return cardNum;
+		return cardNums;
 	}
 	
 	/*
@@ -496,7 +498,93 @@ public class Opponent
 		 */
 		else if(level == 3)
 		{
+			int temp = 0;
+			int rankToLookFor = 0;
+			/*
+			 *  case of 0 winpoints Nothing
+			 *  find highCard if Ace, discard 4, if not discard 3.
+			 */
+			if(winPoints == 0)
+			{
+				if(highCard == 14)
+				{
+					rankToLookFor = 14;
+					/*
+					 * iterate through whole hand.
+					 */
+					for(int i = 4; i >= 0; i--)
+					{
+						if((rankACard(hand.get(i).getRank()) != rankToLookFor))
+						{
+							giveBack(i);
+						}
+					}
+					numOfCards = 4;
+				}
+				else
+				{
+					temp = 3;
+					rankToLookFor = highCard;
+					for(int i = 4; i >= 0; i--)
+					{
+						if((rankACard(hand.get(i).getRank()) != rankToLookFor) && temp != 0)
+						{
+							giveBack(i);
+							temp--;
+						}
+					}
+				}
+			}
 			
+			/*
+			 *  case of 5 winPoints onePair
+			 *  Copied level 2 handle of onePair, finds the pair keeps it and returns everything else.
+			 */
+			if(winPoints == 5) // onePair is present
+			{
+				rankToLookFor = onePair(); // These are the ranks that you have two of. remove all cards w/o that rank.
+				for(int i = 4; i >= 0; i--)
+				{
+					if(rankACard(hand.get(i).getRank()) != rankToLookFor)
+					{
+						giveBack(i);
+					}
+				}
+				numOfCards = 3;
+			}
+			/*
+			 *  case of 10 winpoints twoPair
+			 *  for twoPair I need to find out if that last card in the opponents hand is its highCard.
+			 */
+			if(winPoints == 10)
+			{
+				int[] cardNums = twoPair();
+				rankToLookFor = cardNums[0];
+				int alsoRankToLookFor = cardNums[1];
+				/*
+				 * This case checks if our highCard is the card remaining, thus leaving the computer with nothing left to do.
+				 */
+				if(highCard != rankToLookFor && highCard != alsoRankToLookFor)
+				{
+					numOfCards = 0;
+				}
+				else
+				{
+					for(int i = 4; i >= 0; i--)
+					{
+						if((rankACard(hand.get(i).getRank()) != rankToLookFor) 
+								&& (rankACard(hand.get(i).getRank()) != alsoRankToLookFor))
+						{
+							giveBack(i);
+						}
+					}
+					numOfCards = 1;
+				}
+				
+				
+			}
+			// case of 15 winpoints threeOfKind
+			// case of 60 winpoints fourOfKind
 		}
 		this.winPoints = 0; // reset win points so that it doesn't double calculated from Poker.java "AnnounceWinner"
 		return numOfCards;

@@ -1023,13 +1023,26 @@ public class PokerTwoGui extends Application
 		// TwoPair
 		if(player.twoPair && opponent.twoPair)
 		{
-			if(player.twoPair() > opponent.twoPair())
+			int[] pCardNums = player.twoPair();
+			int[] oCardNums = opponent.twoPair();
+			if(pCardNums[0] > oCardNums[0])
 			{
 				hadHigherRank = true;
 				this.pWin = true;
 				this.playerWin.setText("Player Won with Higher Ranked Cards!");
 			}
-			else if(opponent.twoPair() > player.twoPair())
+			else if(oCardNums[0] > pCardNums[0])
+			{
+				hadHigherRank = true;
+				this.playerWin.setText("Computer Won with Higher Ranked Cards!");
+			}
+			else if(pCardNums[1] > oCardNums[1])
+			{
+				hadHigherRank = true;
+				this.pWin = true;
+				this.playerWin.setText("Player Won with Higher Ranked Cards!");
+			}
+			else if(oCardNums[1] > pCardNums[1])
 			{
 				hadHigherRank = true;
 				this.playerWin.setText("Computer Won with Higher Ranked Cards!");

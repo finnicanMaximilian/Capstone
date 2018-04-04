@@ -103,12 +103,14 @@ public class Player
 	}
 	
 	
+
 	/*
 	 * twoPair() : sets the boolean twoPair to true if there is two pairs in a players hand.
 	 */
-	public int twoPair()
+	public int[] twoPair()
 	{
-		int cardNum = 0;
+		int[] cardNums = {0,0};
+
 		Card card1;
 		Card tempCard;
 		for(int j = 0; j < this.hand.size(); j++)
@@ -123,6 +125,7 @@ public class Player
 					// add in the next search of a pair.
 					this.hand.remove(searchHand(card1.getRank(), card1.getSuit()));
 					this.hand.remove(searchHand(tempCard.getRank(), tempCard.getSuit()));
+					cardNums[0] = rankACard(tempCard.getRank());
 					for(int y = 0; y < this.hand.size(); y++)
 					{
 						Card card2 = this.hand.get(y);
@@ -131,7 +134,7 @@ public class Player
 							Card nextCard = this.hand.get(z);
 							if(nextCard.getRank().equals(card2.getRank()) && !(nextCard.getSuit().equals(card2.getSuit())))
 							{
-								cardNum = rankACard(tempCard.getRank());
+								cardNums[1] = rankACard(tempCard.getRank());
 								this.twoPair = true;
 							}
 						}
@@ -141,7 +144,7 @@ public class Player
 				}
 			}
 		}		
-		return cardNum;
+		return cardNums;
 	}
 	
 	/*
@@ -332,31 +335,31 @@ public class Player
 		highCard(); 
 		onePair(); 
 		if(this.onePair == true)
-			this.winPoints += 5;
+			this.winPoints = 5;
 		twoPair(); 
 		if(this.twoPair == true)
-			this.winPoints += 10;
+			this.winPoints = 10;
 		threeOfKind(); 
 		if(this.threeOfKind == true)
-			this.winPoints += 15;
+			this.winPoints = 15;
 		straight(); 
 		if(this.straight == true)
-			this.winPoints += 30;
+			this.winPoints = 30;
 		flush(); 
 		if(this.flush == true)
-			this.winPoints += 40;
+			this.winPoints = 40;
 		fullHouse(); 
 		if(this.fullHouse == true)
-			this.winPoints += 50;
+			this.winPoints = 50;
 		fourOfKind(); 
 		if(this.fourOfKind == true)
-			this.winPoints += 60;
+			this.winPoints = 60;
 		straightFlush(); 
 		if(this.straightFlush == true)
-			this.winPoints += 70;
+			this.winPoints = 70;
 		royalFlush(); 
 		if(this.royalFlush == true)
-			this.winPoints += 100;
+			this.winPoints = 100;
 		return;
 	}
 	

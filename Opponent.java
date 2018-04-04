@@ -93,13 +93,12 @@ public class Opponent
 			{
 				// next card
 				tempCard = this.hand.get(i);
-				if(tempCard.getRank().equals(card1.getRank()) && !(tempCard.getSuit().equals(card1.getSuit())))
+				if(tempCard.getRank().equals(card1.getRank()) && !(tempCard.getSuit().equals(card1.getSuit())) && !(tempCard.equals(card1)))
 				{
 					cardNum = rankACard(tempCard.getRank());
 					this.onePair = true;
 				}
 			}
-			
 			card1 = this.hand.get(j);
 		}		
 		return cardNum;
@@ -337,31 +336,31 @@ public class Opponent
 		highCard(); 
 		onePair(); 
 		if(this.onePair == true)
-			this.winPoints += 5;
+			this.winPoints = 5;
 		twoPair(); 
 		if(this.twoPair == true)
-			this.winPoints += 10;
+			this.winPoints = 10;
 		threeOfKind(); 
 		if(this.threeOfKind == true)
-			this.winPoints += 15;
+			this.winPoints = 15;
 		straight(); 
 		if(this.straight == true)
-			this.winPoints += 30;
+			this.winPoints = 30;
 		flush(); 
 		if(this.flush == true)
-			this.winPoints += 40;
+			this.winPoints = 40;
 		fullHouse(); 
 		if(this.fullHouse == true)
-			this.winPoints += 50;
+			this.winPoints = 50;
 		fourOfKind(); 
 		if(this.fourOfKind == true)
-			this.winPoints += 60;
+			this.winPoints = 60;
 		straightFlush(); 
 		if(this.straightFlush == true)
-			this.winPoints += 70;
+			this.winPoints = 70;
 		royalFlush(); 
 		if(this.royalFlush == true)
-			this.winPoints += 100;
+			this.winPoints = 100;
 		return;
 	}
 	
@@ -452,17 +451,21 @@ public class Opponent
 		 */
 		else if(level == 1)
 		{
-			int temp = 1;
-			int rankToLookFor = this.highCard;
-			for(int i = 4; i >= 0; i--)
-			{
-				if((rankACard(hand.get(i).getRank()) != rankToLookFor) && temp != 0)
-				{
-					giveBack(i);
-					temp--;
-				}
-			}
-			numOfCards = 1;
+			//TODO Weird bug where onePairs were showing up randomly.
+//			int temp = 1;
+//			int rankToLookFor = this.highCard;
+//			for(int i = 4; i >= 0; i--)
+//			{
+//				if((rankACard(hand.get(i).getRank()) != rankToLookFor) && temp != 0)
+//				{
+//					giveBack(i);
+//					temp--;
+//				}
+//			}
+//			numOfCards = 1;
+//			this.winPoints = 0;
+			numOfCards = 0;
+			this.winPoints = 0;
 		}
 		/*
 		 * level 2: Medium Difficulty
@@ -490,7 +493,7 @@ public class Opponent
 				}
 				numOfCards = 3;
 			}
-
+			this.winPoints = 0;
 		}
 		/*
 		 * level 3: Hard Difficulty
@@ -506,6 +509,7 @@ public class Opponent
 			 */
 			if(winPoints == 0)
 			{
+				//System.out.println("Nothing");
 				if(highCard == 14)
 				{
 					rankToLookFor = 14;
@@ -533,6 +537,7 @@ public class Opponent
 							temp--;
 						}
 					}
+					numOfCards = 3;
 				}
 			}
 			
@@ -542,6 +547,7 @@ public class Opponent
 			 */
 			if(winPoints == 5) // onePair is present
 			{
+				//System.out.println("onePair");
 				rankToLookFor = onePair(); // These are the ranks that you have two of. remove all cards w/o that rank.
 				for(int i = 4; i >= 0; i--)
 				{
@@ -551,6 +557,7 @@ public class Opponent
 					}
 				}
 				numOfCards = 3;
+	
 			}
 			/*
 			 *  case of 10 winpoints twoPair
@@ -558,6 +565,7 @@ public class Opponent
 			 */
 			if(winPoints == 10)
 			{
+				//System.out.println("twoPair");
 				int[] cardNums = twoPair();
 				rankToLookFor = cardNums[0];
 				int alsoRankToLookFor = cardNums[1];
@@ -578,15 +586,72 @@ public class Opponent
 							giveBack(i);
 						}
 					}
+				}
+				numOfCards = 1;
+		
+			}
+			/*
+			 *  case of 15 winpoints threeOfKind
+			 *  In this case i need to check the remaining two cards, see if either of them are the opponents hardCard
+			 *  if not, return those two cards or just one. never will i return zero, or it would be a fullHouse.
+			 */
+			if(winPoints == 15)
+			{
+				//System.out.println("threePair");
+				rankToLookFor = threeOfKind();
+				if(highCard == rankToLookFor)
+				{
+					// if the threeOfKind is highest card return other two cards.
+					for(int i = 4; i >= 0; i--)
+					{
+						if(rankACard(hand.get(i).getRank()) != rankToLookFor)
+						{
+							giveBack(i);
+						}
+					}
+					numOfCards = 2;
+				}
+				else
+				{
+					// check if the card you are removing is A) within the threeOfKind B) the highCard
+					for(int i = 4; i >= 0; i--)
+					{
+						if((rankACard(hand.get(i).getRank()) != rankToLookFor)
+							&& (rankACard(hand.get(i).getRank()) != highCard))
+						{
+							giveBack(i);
+						}
+					}
+					// numOfCards will always equal one because if the highCard is not the pair itself its one of these two.
 					numOfCards = 1;
 				}
-				
-				
+
 			}
-			// case of 15 winpoints threeOfKind
 			// case of 60 winpoints fourOfKind
+			if(winPoints == 60)
+			{
+				//System.out.println("fourPair");
+				// check if highCard isnt the pair if it isnt dont do anything if it is, remove the other card.
+				rankToLookFor = fourOfKind();
+				if(highCard == rankToLookFor)
+				{
+					for(int i = 4; i >= 0; i--)
+					{
+						if(rankACard(hand.get(i).getRank()) != rankToLookFor)
+						{
+							giveBack(i);
+						}
+					}
+					numOfCards = 1;
+				}
+				else
+				{
+					numOfCards = 0;
+				}
+			}
+			this.winPoints = 0; // reset win points so that it doesn't double calculated from Poker.java "AnnounceWinner"
 		}
-		this.winPoints = 0; // reset win points so that it doesn't double calculated from Poker.java "AnnounceWinner"
+
 		return numOfCards;
 	}
 }

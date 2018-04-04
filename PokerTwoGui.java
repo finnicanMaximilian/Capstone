@@ -56,7 +56,7 @@ public class PokerTwoGui extends Application
 	Canvas titleCanvas = new Canvas(1200, 900);
 	GraphicsContext titleGc = titleCanvas.getGraphicsContext2D();
 	Text giveBackText = new Text(10, 575, "To Select Multiple Cards Hold CTRL and click the desired cards then press 'Give Back Cards'");
-	
+	Image pokerMap = new Image("pokerMenu.png");
 	// storing a list of card names along with the number of cards
 	String listOfCards = "";
 	int numberOfCards = 0;
@@ -279,7 +279,7 @@ public class PokerTwoGui extends Application
         this.AIWarningText.setLayoutX(500);
         this.AIWarningText.setLayoutY(425);
         playGame.setId("playGame");
-        playGame.setVisible(true);
+        playGame.setVisible(false);
         playGame.setLayoutX(550);
         playGame.setLayoutY(500);
         playGame.setMinWidth(40);
@@ -456,29 +456,32 @@ public class PokerTwoGui extends Application
 		this.titleGc.drawImage(new Image("title.png"), 225, 300);
 		easyButton.setId("easyButton");
 		easyButton.setLayoutX(505);
-		easyButton.setLayoutY(600);
+		easyButton.setLayoutY(500);
 		easyButton.setMinHeight(40);
 		easyButton.setMinWidth(40);
 		easyButton.setOnAction(e -> {
 			this.AILevel = 1;
+		   	this.window.setScene(pokerScene);
 		});
 		
 		medButton.setId("medButton");
 		medButton.setLayoutX(560);
-		medButton.setLayoutY(600);
+		medButton.setLayoutY(500);
 		medButton.setMinHeight(40);
 		medButton.setMinWidth(40);
 		medButton.setOnAction(e -> {
 			this.AILevel = 2;
+		   	this.window.setScene(pokerScene);
 		});
 		
 		hardButton.setId("hardButton");
 		hardButton.setLayoutX(640);
-		hardButton.setLayoutY(600);
+		hardButton.setLayoutY(500);
 		hardButton.setMinHeight(40);
 		hardButton.setMinWidth(40);
 		hardButton.setOnAction(e -> {
 			this.AILevel = 3;
+		   	this.window.setScene(pokerScene);
 		});
 		return;
 	}
@@ -517,6 +520,7 @@ public class PokerTwoGui extends Application
 	 */
 	public void dealCards()
 	{
+		drawPokerChart();
         // Picture of Deck
         this.gc.drawImage(cardImage, 540, 350, 150, 200);
 		// j is used for spacing for Computer Card's X Coordinate
@@ -553,6 +557,18 @@ public class PokerTwoGui extends Application
 		{
 			this.theDeck.remove(0);
 		}
+	}
+	
+	
+	private void drawPokerChart()
+	{
+		this.gc.drawImage(pokerMap, 20, 10);
+	}
+	
+	private void clearPokerChart()
+	{
+		this.gc.setFill(Color.GREEN);
+		this.gc.fillRect(20, 10, 389, 284);
 	}
 	
 	public Image findCard(Card card)
@@ -896,7 +912,7 @@ public class PokerTwoGui extends Application
 	
 	private void flipCards()
 	{
-		// TODO Change flip cards to show the opponents hand as cards.
+		clearPokerChart();
 		// Flip the computers hand.
 		int j = 1040;
 		
@@ -905,15 +921,6 @@ public class PokerTwoGui extends Application
 		for(int i = 0; i < 5; i++)
 		{
 			createOHand(this.opponent.hand.get(i), i);
-//			//createOHand();
-//			
-//			// Draw Over Computer Cards With It's Cards.
-//			this.gc.setFill(Color.GREEN);
-//			this.gc.fillRoundRect(j, 8, 150, 200, 8, 8);
-//			this.gc.setFill(Color.BLACK);
-//			this.gc.fillText((opponent.hand.get(i).getRank() + " " + opponent.hand.get(i).getSuit()), (j+10), 100);
-//			j = j - 155;
-			
 		}	
 		this.player.calcHand();
 		this.opponent.calcHand();

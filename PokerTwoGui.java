@@ -155,6 +155,10 @@ public class PokerTwoGui extends Application
     Media cBSound = new Media(new File(badSound).toURI().toString());
     MediaPlayer badMediaPlayer = new MediaPlayer(cBSound);
     
+    String buttonClick = "src/tinyButtonClick.mp3";
+    Media bCSound = new Media(new File(buttonClick).toURI().toString());
+    MediaPlayer buttonClickPlayer = new MediaPlayer(bCSound);
+    
     public static void main(String[] args) 
     {
         launch(args);
@@ -308,6 +312,8 @@ public class PokerTwoGui extends Application
          * When "Play Poker" is pressed.
          */
         playButton.setOnAction(e -> {
+        	buttonClickPlayer.stop();
+        	buttonClickPlayer.play();
         	badMediaPlayer.stop();
         	goodMediaPlayer.stop();
         	root.getChildren().remove(playerWin);
@@ -333,6 +339,8 @@ public class PokerTwoGui extends Application
          */
         giveBack.setOnAction(e -> 
         {
+        	buttonClickPlayer.stop();
+        	buttonClickPlayer.play();
         	scanPHand();
     		cardsClicked();
     		// Check for an incorrect hand, i.e. where number of cards is equal to 5, or when numOfCards equals 4 and the user does not have an ace.
@@ -375,6 +383,8 @@ public class PokerTwoGui extends Application
          * 
          */
         flipCard.setOnAction(e -> {
+        	buttonClickPlayer.stop();
+        	buttonClickPlayer.play();
         	//giveBack.setVisible(false);
         	initiateGiveBack(1);
         	flipCards();
@@ -396,6 +406,8 @@ public class PokerTwoGui extends Application
          * When "Show who won!" is pressed.
          */
         showWin.setOnAction(e -> {
+        	buttonClickPlayer.stop();
+        	buttonClickPlayer.play();
         	showWin.setVisible(false);
         	this.root.getChildren().removeAll(card1, card2, card3, card4, card5);
         	printWinner();
@@ -460,6 +472,8 @@ public class PokerTwoGui extends Application
 		easyButton.setMinHeight(40);
 		easyButton.setMinWidth(40);
 		easyButton.setOnAction(e -> {
+			buttonClickPlayer.stop();
+			buttonClickPlayer.play();
 			this.AILevel = 1;
 		   	this.window.setScene(pokerScene);
 		});
@@ -470,6 +484,8 @@ public class PokerTwoGui extends Application
 		medButton.setMinHeight(40);
 		medButton.setMinWidth(40);
 		medButton.setOnAction(e -> {
+			buttonClickPlayer.stop();
+			buttonClickPlayer.play();
 			this.AILevel = 2;
 		   	this.window.setScene(pokerScene);
 		});
@@ -480,6 +496,8 @@ public class PokerTwoGui extends Application
 		hardButton.setMinHeight(40);
 		hardButton.setMinWidth(40);
 		hardButton.setOnAction(e -> {
+			buttonClickPlayer.stop();
+			buttonClickPlayer.play();
 			this.AILevel = 3;
 		   	this.window.setScene(pokerScene);
 		});

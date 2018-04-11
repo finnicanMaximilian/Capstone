@@ -1,3 +1,4 @@
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -342,6 +343,7 @@ public class PokerGui extends Application implements EventHandler<ActionEvent>
 	 */
 	public boolean initiateGiveBack(int person)
 	{
+		System.out.println(listOfCards);
 		boolean turnDone = false;
 		boolean tempTurn = true;
 		this.root.getChildren().remove(listView);

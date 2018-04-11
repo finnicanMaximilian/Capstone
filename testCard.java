@@ -1,4 +1,5 @@
 
+
 public class testCard {
 	static Card card = new Card("Clubs", "2");
 	

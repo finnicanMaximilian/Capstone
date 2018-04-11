@@ -1,4 +1,164 @@
-
 #Card1 {
 	-fx-background-color: transparent;
+}
+
+#Card2 {
+	-fx-background-color: transparent;
+}
+#Card3 {
+	-fx-background-color: transparent;
+}
+#Card4 {
+	-fx-background-color: transparent;
+}
+#Card5 {
+	-fx-background-color: transparent;
+}
+
+#pTitle{
+	-fx-text-color: black;
+	-fx-text-alignment: center;
+	-fx-font-size: 30px;
+}
+	
+#playButton {
+	-fx-background-color: linear-gradient(#f0ff35, #a9ff00),
+		radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#playButton:pressed {
+		-fx-background-color: linear-gradient(#a9ff00, #f0ff35),
+		radial-gradient(center 50% -40%, radius 200%, #80c800 45%, #b8ee36 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#giveBack {
+		-fx-background-color: linear-gradient(#f0ff35, #a9ff00),
+		radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#giveBack:pressed {
+		-fx-background-color: linear-gradient(#a9ff00, #f0ff35),
+		radial-gradient(center 50% -40%, radius 200%, #80c800 45%, #b8ee36 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#flipCard {
+		-fx-background-color: linear-gradient(#f0ff35, #a9ff00),
+		radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#flipCard:pressed {
+		-fx-background-color: linear-gradient(#a9ff00, #f0ff35),
+		radial-gradient(center 50% -40%, radius 200%, #80c800 45%, #b8ee36 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#showWin {
+		-fx-background-color: linear-gradient(#f0ff35, #a9ff00),
+		radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#showWin:pressed{
+		-fx-background-color: linear-gradient(#a9ff00, #f0ff35),
+		radial-gradient(center 50% -40%, radius 200%, #80c800 45%, #b8ee36 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#easyButton {
+	-fx-background-color: linear-gradient(#00ff00, #a9ff00),
+		radial-gradient(center 50% -40%, radius 200%, #00ff00 45%, #80c800 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#easyButton:pressed {
+	-fx-background-color: linear-gradient(#a9ff00, #00ff00),
+		radial-gradient(center 50% -40%, radius 200%, #a9ff00 45%, #00ff00 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#medButton {
+		-fx-background-color: linear-gradient(#ffff00, #ff9900),
+		radial-gradient(center 50% -40%, radius 200%, #ffff00 45%, #ff9900 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#medButton:pressed {
+	-fx-background-color: linear-gradient(#ff9900, #ffff00), radial-gradient(center 50% -40%, radius 200%, #ff9900 45%, #ffff00 50%);
+	-fx-background-radius: 6, 5;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#hardButton {
+		-fx-background-color: linear-gradient(#ff0000, #cc3300),
+		radial-gradient(center 50% -40%, radius 200%, #ff0000 45%, #cc3300 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#hardButton:pressed {
+		-fx-background-color: linear-gradient(#cc3300, #ff0000),
+		radial-gradient(center 50% -40%, radius 200%, #cc3300 45%, #ff0000 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#backButton {
+	-fx-background-color: linear-gradient(#00ff00, #a9ff00),
+		radial-gradient(center 50% -40%, radius 200%, #00ff00 45%, #80c800 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
+}
+
+#backButton:pressed {
+	-fx-background-color: linear-gradient(#a9ff00, #00ff00),
+		radial-gradient(center 50% -40%, radius 200%, #a9ff00 45%, #00ff00 50%);
+	-fx-background-radius: 6, 5;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 5, 0.0, 0, 1);
+	-fx-text-fill: #395306;
 }

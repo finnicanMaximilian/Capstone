@@ -68,6 +68,7 @@ public class PokerTwoGui extends Application
     Button card4 = new Button();
     Button card5 = new Button();
     
+    Button backButton = new Button("Back to Main Menu");
 	Button easyButton = new Button("Easy");
 	Button medButton = new Button("Medium");
 	Button hardButton = new Button("Hard");
@@ -137,6 +138,8 @@ public class PokerTwoGui extends Application
     Image kingHearts = new Image("king_of_hearts.png");
     Image kingSpades = new Image("king_of_spades.png");
     
+    Image pokerRule = new Image("pokerRules.png");
+    
     // Saving user information
     File file = new File("test.txt");
     Text AIWarningText = new Text("You much choose a difficultly level");
@@ -167,7 +170,7 @@ public class PokerTwoGui extends Application
 		// testing saving information
 		writeToSaveFile();
 		
-
+		
         Button playGame = new Button("Play Game!");
         Button playButton = new Button("Deal Out Cards");
         Button showWin = new Button("See who Won!");
@@ -278,6 +281,8 @@ public class PokerTwoGui extends Application
         this.AIWarningText.setFill(Color.BLACK);
         this.AIWarningText.setLayoutX(500);
         this.AIWarningText.setLayoutY(425);
+        
+        // Old Code
         playGame.setId("playGame");
         playGame.setVisible(false);
         playGame.setLayoutX(550);
@@ -292,6 +297,7 @@ public class PokerTwoGui extends Application
         	playGame.setVisible(false);
         	//this.pTitle.setVisible(false);
         	this.window.setScene(pokerScene);
+
         	}
         });
 
@@ -308,6 +314,8 @@ public class PokerTwoGui extends Application
          * When "Play Poker" is pressed.
          */
         playButton.setOnAction(e -> {
+        	// color over pokerRules
+        	
         	buttonClickPlayer.stop();
         	buttonClickPlayer.play();
         	badMediaPlayer.stop();
@@ -372,6 +380,8 @@ public class PokerTwoGui extends Application
         flipCard.setMinHeight(40);
         flipCard.setMinWidth(80);
         
+ 
+        
         /*
          * Assuming, cards have been selected correctly on "give back"
          * flipCard ACTION: initiateGiveBack for Player, Computer,
@@ -408,6 +418,7 @@ public class PokerTwoGui extends Application
          * When "Show who won!" is pressed.
          */
         showWin.setOnAction(e -> {
+        	backButton.setVisible(true);
         	buttonClickPlayer.stop();
         	buttonClickPlayer.play();
         	showWin.setVisible(false);
@@ -425,14 +436,12 @@ public class PokerTwoGui extends Application
         	playButton.setVisible(true);
         });
 
-
-        
         // Title Scene
         this.titleRoot.getChildren().addAll(titleCanvas, playGame, easyButton, medButton, hardButton, AIWarningText);
         //this.titleRoot.autoSizeChildrenProperty().setValue(true);
         this.titleScene = new Scene(titleRoot);
         // Poker Scene
-        this.root.getChildren().addAll(pokerCanvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard);
+        this.root.getChildren().addAll(pokerCanvas, playButton, giveBack, giveBackText, showWin, giveBackWarning, flipCard, backButton);
         //this.root.autoSizeChildrenProperty().setValue(true);
         this.pokerScene = new Scene(root);
         
@@ -445,6 +454,21 @@ public class PokerTwoGui extends Application
 		String css = url.toExternalForm(); 
 		this.pokerScene.getStylesheets().add(css);
 		this.titleScene.getStylesheets().add(css);
+		
+
+        // back button config
+        backButton.setId("backButton");
+        backButton.setLayoutX(1000);
+        backButton.setLayoutY(700);
+        backButton.setMinHeight(40);
+        backButton.setMinWidth(40);
+        backButton.setOnAction(e->{
+        	buttonClickPlayer.stop();
+        	buttonClickPlayer.play();
+        	this.playerWin.setVisible(false);
+        	this.window.setScene(titleScene);
+        });
+        
 		
 		// add scene to window.
         this.window.setScene(this.titleScene);
@@ -479,6 +503,7 @@ public class PokerTwoGui extends Application
 			buttonClickPlayer.play();
 			this.AILevel = 1;
 		   	this.window.setScene(pokerScene);
+        	this.gc.drawImage(pokerRule, 150, 70);
 		});
 		
 		medButton.setId("medButton");
@@ -491,6 +516,7 @@ public class PokerTwoGui extends Application
 			buttonClickPlayer.play();
 			this.AILevel = 2;
 		   	this.window.setScene(pokerScene);
+        	this.gc.drawImage(pokerRule, 150, 70);
 		});
 		
 		hardButton.setId("hardButton");
@@ -503,6 +529,7 @@ public class PokerTwoGui extends Application
 			buttonClickPlayer.play();
 			this.AILevel = 3;
 		   	this.window.setScene(pokerScene);
+        	this.gc.drawImage(pokerRule, 150, 70);
 		});
 		return;
 	}
@@ -959,7 +986,13 @@ public class PokerTwoGui extends Application
 		this.player = new Player();
 		this.opponent = new Opponent();
 		this.pWin = false;
+		
+		// Color over Poker Rules
+		this.gc.setFill(Color.GREEN);
+		this.gc.fillRect(150, 70, 865, 569);
 
+		// Take away back button.
+		backButton.setVisible(false);
 		
 		this.card1Clicked = false;
 		this.card2Clicked = false;

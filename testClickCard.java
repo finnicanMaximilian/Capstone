@@ -1,3 +1,4 @@
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -5,8 +6,10 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
@@ -45,6 +48,11 @@ public class testClickCard extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		window = primaryStage;
+		Canvas layout = new Canvas(1200, 900);
+		GraphicsContext gc = layout.getGraphicsContext2D();
+		gc.setFill(Color.GREEN);
+		gc.fillRect(0,0,1200,900);
+		Group root = new Group();
 		window.setTitle("Card Sand Box");
 		card1 = new Button();
 		card2 = new Button();
@@ -61,11 +69,15 @@ public class testClickCard extends Application{
 				{
 					@Override
 					public void handle(ActionEvent event) {
+						gc.setFill(Color.ORANGE);
 						// TODO Auto-generated method stub
 						if(event.getSource() == card1) {
 							if(card1Clicked) {
+								gc.setFill(Color.GREEN);
+								gc.fillRect(10, 800, 150, 200);
 								card1Clicked = false;
 							} else {
+								gc.fillRect(10, 800, 150, 200);
 								card1Clicked = true;
 							}
 						}
@@ -112,8 +124,7 @@ public class testClickCard extends Application{
 
 		});
 		
-		Canvas layout = new Canvas(1200, 900);
-		Group root = new Group();
+
 		root.getChildren().addAll(layout, card1, card2, card3, card4, card5, giveBack);
 		
 

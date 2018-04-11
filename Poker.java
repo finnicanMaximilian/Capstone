@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -16,12 +17,10 @@ public class Poker
 		dealCards();
 		printPHand();
 		printOHand();
-		// give back stage
 		initiateGiveBack(0);
 		initiateGiveBack(1);
 		printPHand();
 		printOHand();
-		
 		announceWinner();
 
 		return;

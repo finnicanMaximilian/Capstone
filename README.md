@@ -7,6 +7,16 @@ A Program to engage in poker! This app allows a user to play poker aginst a Comp
 
 ---
 
+## Running the Project (Bicycle)
+To run the current version of Poker Fanatic! Please download and compile >> javac PokerTwoGui.java then run that particular file to run the most current version of the GUI. You will also need the helper files to be included with that file, (Card.java, Player.java, Opponent.java, Deck.java, Poker.css, Cheetah-card.gif.
+
+---
+
+## Testing the Project (Bicycle)
+Most of the testing done has been covered within the scooter, although i did build a sandbox program called testClickCard.java in order to make a demo version of buttons to have different functionalitys for the newest addition of the project. this helped me tremendously.
+
+---
+
 ## Running the Project (Scooter)
 To run the current version of Poker Fanatic! Please download and compile >> javac PokerGui.java Then run the PokerGui file in your favorite IDE. This version is operated with the mouse and the CTRL button.
 Begin the game by clicking "Player Poker!" After that the board should display with your hand delt to you. Next if you would like to give back any cards simply click the cards you would like to give back, if you wish to give back multiple cards hold the CTRL button down and select each card with your mouse once you have the cards selected click "Give Back Cards". Your new cards will be dealt, then once you are ready to see your opponents hand press "flip Cards" a score will be shown on each players side, but to really see who won press the "Show me who Won!" button to see the final results. If you didn't like that game feel free to press "Player Poker!" again and test your luck against my think method!

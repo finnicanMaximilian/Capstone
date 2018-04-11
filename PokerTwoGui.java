@@ -1,14 +1,11 @@
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-
-import com.sun.corba.se.impl.protocol.BootstrapServerRequestDispatcher;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -21,7 +18,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -390,7 +386,13 @@ public class PokerTwoGui extends Application
         	flipCards();
         	giveBack.setVisible(false);
         	this.giveBackText.setVisible(false);
-
+        	
+        	/*
+        	 * Player and Opponent Hand Testing.
+        	 */
+          	//for(int i = 0; i < 5; i++) System.out.println("Player Card: " + i + " " + player.hand.get(i).getRank() + " " + player.hand.get(i).getSuit());
+        	//for(int i = 0; i < 5; i++) System.out.println("Opponent Card: " + i + " " + opponent.hand.get(i).getRank() + " " + opponent.hand.get(i).getSuit());
+        	
         	showWin.setVisible(true);
 			//will not be needed due to the 	this.giveBackWarning.setVisible(false);
 			flipCard.setVisible(false);
@@ -419,6 +421,7 @@ public class PokerTwoGui extends Application
         		badMediaPlayer.play();
         		//badMediaPlayer.stop();
         	}
+  
         	playButton.setVisible(true);
         });
 
@@ -931,11 +934,7 @@ public class PokerTwoGui extends Application
 	private void flipCards()
 	{
 		clearPokerChart();
-		// Flip the computers hand.
-		int j = 1040;
 		
-		
-		//TODO This will be replaced with a createOCards() to make the cards inside the opponents hand..
 		for(int i = 0; i < 5; i++)
 		{
 			createOHand(this.opponent.hand.get(i), i);

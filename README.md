@@ -5,7 +5,7 @@ A Program to engage in poker! This app allows a user to play poker aginst a Comp
 
 **Authors:** Maximilian Finnican
 
-**Sources:** Actual Card Art: http://byronknoll.blogspot.com/2011/03/vector-playing-cards.html <br> Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/ <br> Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (paint) <br> Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
+**Sources:** Actual Card Art: http://byronknoll.blogspot.com/2011/03/vector-playing-cards.html <br> Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/ <br> Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (paint) <br>&lt; Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
 
 ---
 

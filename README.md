@@ -5,10 +5,7 @@ A Program to engage in poker! This app allows a user to play poker aginst a Comp
 
 **Authors:** Maximilian Finnican
 
-**Sources:** Actual Card Art: http://byronknoll.blogspot.com/2011/03/vector-playing-cards.html
-	     Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
-	     Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (paint)
-	     Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
+**Sources:** Actual Card Art: http://byronknoll.blogspot.com/2011/03/vector-playing-cards.html <br> Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/ <br> Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (paint) <br> Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
 
 ---
 
@@ -17,7 +14,7 @@ To run the final version of Poker Fanatic! Please download all the required file
 
 ---
 
-### Testing the Final Project (Luxury Car)
+## Testing the Final Project (Luxury Car)
 No Classes have been made to test the final product because it mostly came down to making sure you hear the sounds and see the images. as for the more intelegent AI, I tested that with repitions of games to see the amount of points generated on average and saw good sized jumps from lower to higher levels of intelegence.
 
 ---

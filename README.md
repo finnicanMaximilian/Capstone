@@ -1,5 +1,5 @@
 # Poker Fanatic
-A Program to engage in poker! This app allows a user to play poker aginst a Computer.
+A Program to engage in poker! This app allows a user to learn how to play poker aginst a Computer with different levels of difficulties.
 
 *Created for CS 4800 - Capstone, [Final Propsal] (https://asulearn.appstate.edu/mod/assign/view.php?id=2244792)*
 

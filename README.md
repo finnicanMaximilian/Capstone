@@ -5,19 +5,34 @@ A Program to engage in poker! This app allows a user to play poker aginst a Comp
 
 **Authors:** Maximilian Finnican
 
+**Sources:** Actual Card Art: http://byronknoll.blogspot.com/2011/03/vector-playing-cards.html
+	     Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
+	     Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (paint)
+	     Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
+
 ---
 
-## Running the Project (Bicycle)
+## Running the Final Project (Luxury Car)
+To run the final version of Poker Fanatic! Please download all the required files: All .png .mp3 .css files, in addition to Card.java Deck.java Player.java Opponent.java and PokerTwoGui.java Once Downloaded place within your favorite IDE software or a folder that can combine all the files. Once you have done so the Main Method to call is found within PokerTwoGui.java. So to run the whole project just run PokerTwoGui.java.
+
+---
+
+### Testing the Final Project (Luxury Car)
+No Classes have been made to test the final product because it mostly came down to making sure you hear the sounds and see the images. as for the more intelegent AI, I tested that with repitions of games to see the amount of points generated on average and saw good sized jumps from lower to higher levels of intelegence.
+
+---
+
+### Running the Project (Bicycle)
 To run the current version of Poker Fanatic! Please download and compile >> javac PokerTwoGui.java then run that particular file to run the most current version of the GUI. You will also need the helper files to be included with that file, (Card.java, Player.java, Opponent.java, Deck.java, Poker.css, Cheetah-card.gif.
 
 ---
 
-## Testing the Project (Bicycle)
+### Testing the Project (Bicycle)
 Most of the testing done has been covered within the scooter, although i did build a sandbox program called testClickCard.java in order to make a demo version of buttons to have different functionalitys for the newest addition of the project. this helped me tremendously.
 
 ---
 
-## Running the Project (Scooter)
+### Running the Project (Scooter)
 To run the current version of Poker Fanatic! Please download and compile >> javac PokerGui.java Then run the PokerGui file in your favorite IDE. This version is operated with the mouse and the CTRL button.
 Begin the game by clicking "Player Poker!" After that the board should display with your hand delt to you. Next if you would like to give back any cards simply click the cards you would like to give back, if you wish to give back multiple cards hold the CTRL button down and select each card with your mouse once you have the cards selected click "Give Back Cards". Your new cards will be dealt, then once you are ready to see your opponents hand press "flip Cards" a score will be shown on each players side, but to really see who won press the "Show me who Won!" button to see the final results. If you didn't like that game feel free to press "Player Poker!" again and test your luck against my think method!
 

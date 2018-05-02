@@ -105,10 +105,13 @@ Because I needed to keep track of what combination of cards a player or opponent
 <p align="left" name="results">
 &emsp;My Results were successful in creating a poker app that could help a user learn how to play five card pokers. When a user fails or succeeds against my computer a sound is played either a crowd cheering or a crowd booing for added entertainment [#]. People claim to like the feel of Poker Fanatic as well as the speed it runs. Problems I ran into was mostly my fault by forgetting to make sure if a user had a pair, but their pair was a higher ranked pair then that person would win the poker match. I overcame this obstacle and even added in notes on the winning screen to let a player know if they lost or won with higher ranked cards. The buttons clicking through the game are very addictive they make a little noise when clicked and everything loads very fast. When you are facing the opponent and you select easy mode there are distinct differences when compared to medium and hard mode. To test this, I ran a simulation of 25 games each: 
 </p>
+
 <img src="compScoreRate.png" alt="Figure 5">
+
 <p align="left">
 &emsp;From my results you can see easy mode is has the lowest scores, medium increases a bit, and hard gets “bust” just under 30% of the time where as easy mode gets a “bust” almost 50% of the time. The fact that its so random to get these combination of cards makes it difficult to create an AI that always gets a good set of cards. I was able to have card images that acted as buttons to perform all the functionalities that I needed them to do [#]. Here is a table of features I had intended to do and a summary of them.
 </p>
+
 |Feature|Implemented|Not Implemented|
 |---|---|---|
 |Adjustable Opponent| X | |

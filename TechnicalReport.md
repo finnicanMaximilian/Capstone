@@ -38,9 +38,10 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 <p align="left" name="pou">
 &emsp;When people are learning how to play poker the most basic thing to understand is the actual rules of the game. Because there are many combinations of cards inside the game, people tend to not know them all. You need to inform the user that all the cards have different “values”. When looking at an “Ace” vs a “2” in rank they are very different because of the value associated with the card’s rank. An Ace can be counted as 1 or 14, in the case of five card poker draw, PF has Ace programmed as 14 always, although the 2 is always counted as 2. To win in poker the user must know about the effect of having higher ranked cards, meaning if the player has an ace and the opponent has a 2 the player would win, and the opponent would lose. There are also many combinations of cards, flushes, straights, three of kind, pair, royal flush, and etc. All these combinations deal with the cards in the user hand and if they have same suit, are consecutive in ranks, or a combination of both. The ranking of these combinations are based off the rarity of the combination. When poker was created these rarities were decided, creating a ranked order causing other card combinations to be greater than others. The user needs a list of those hand combinations in a ranked order. Once the user knows how to play and what to look for it only takes practice and my goal will have been satistfied.
 </p>
-<p style="clear:both;">
+
+<p style="clear:both;"> </p>
 <img src="pokerMenu.png" alt="Figure 1" width="250" height="250" style="float:left;"> 
-<p style="clear: both;">
+<p style="clear: both;"> </p>
 <img src="pokerRules.png" alt="Figure 2" width="250" height="250" style="float:right;">
 Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 

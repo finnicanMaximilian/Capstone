@@ -8,8 +8,11 @@
 &emsp;	The product that has been developed now has a list of features: Adjustable Opponent (easy, medium, hard), A graphic containing instructions on how to play poker, a graphic containing a ranked list of poker hand combinations, results post due to the points earned by the player and opponent, clickable cards with a nice highlight to see cards clicked, and fun sounds that help navigate and determine results of game. Users can launch the game, choosing the level of difficulty of the computer, deal out cards, make educated decision on cards to give back, and then see their results on the next page. If the user is satisfied with the level of difficulty they can continue to play if not there is an option to go back to the main page in order to change the computers difficulty.<br>
 Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 </p>
+
 ---
+
 # Table of Contents
+
 1. [Abstract](#abstract)
 2. [Introduction and Project Overview](#introProOv)
 	1. [Problem, Objectives, Users](#pou)
@@ -23,6 +26,7 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 5. [Conclusion](#conclusion)
 6. [References](#ref)
 <br>
+
 ---
 
 

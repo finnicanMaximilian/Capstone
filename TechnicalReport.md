@@ -68,6 +68,7 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 
 ## Summary of Features
 <a name="features">
+
 | Features|
 |----------|
 |Adjustable Opponent|

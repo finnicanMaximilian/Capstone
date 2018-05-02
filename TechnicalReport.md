@@ -67,6 +67,7 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 </p>
 
 ## Summary of Features
+<a name="features">
 | Features|
 |----------|
 |Adjustable Opponent|
@@ -81,6 +82,7 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 
 # Design, Development, and Testing
 <br>
+
 ## Design
 <a name="design">
 <p align="left" name="ddt">

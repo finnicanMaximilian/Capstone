@@ -152,8 +152,9 @@ Because I needed to keep track of what combination of cards a player or opponent
 </p>
 
 <a name="ref">
+
 # References
-[1] Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
-[2] Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
-[3] Card Art: http://byonknoll.blogspot.com/2011/03/vector-playing-cards.html
-[4] Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (Paint)
+<strong>[1]</strong> Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/ <br>
+<strong>[2]</strong> Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html <br>
+<strong>[3]</strong> Card Art: http://byonknoll.blogspot.com/2011/03/vector-playing-cards.html <br>
+<strong>[4]</strong> Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (Paint) <br>

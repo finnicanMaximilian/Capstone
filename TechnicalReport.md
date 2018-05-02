@@ -41,15 +41,17 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 
 <p style="clear:both;"> </p>
 <img src="pokerMenu.png" alt="Figure 1" width="250" height="250" style="float:left;"> 
-<p style="clear: both;"> </p>
+<strong>Fig 1</strong> <p style="clear: both;"> </p>
 <img src="pokerRules.png" alt="Figure 2" width="250" height="250" style="float:right;">
-Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
+<strong>Fig 2</strong>
 
 ## Objectives
 <p align="left">
 &emsp;Poker Fanatic is meant to teach someone how to become good at poker. What I wanted to have available for the user is easy ways to start the game, adjustable versions of the game so the user can start at their level of expertise, and feedback to show them what they got based off the combination of cards in their hand. I wanted an intuitive design so that is why when you run the game you immediately know what to do, to solve this the user is prompted with three buttons reading “easy”, “medium”, and “hard” which are also colored green yellow and red for visual ques. When clicked the rules of poker are displayed and a button that says, “deal out cards”. Hopefully by this point the user understands the basics of the game and continues to deal out the cards. Now the user has a bunch of cards and is not sure what to do, so a map of poker hand rankings is displayed to help aid the user’s decisions with what cards to give away. Once you have given back your cards points will be evaluated for your final hand and printed after you flip the opponents hand.  This was implemented to help see the rank of their hand on the ranking list. 
 </p>
 <img src="points.png" alt="Figure 3" style="float:right;">
+<strong>Fig 3</strong>
+
 ## Users
 <p align="left">
 &emsp;Users of Poker Fanatic would be younger kids, or young adults. This is because most of the elder generations have played poker before and usually prefer using standard cards rather than a computer program.
@@ -91,7 +93,7 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 </p>
 
 <img src="PokerFanatic.png" alt="Figure 4" style="float:right;">
-<p style="text-align: center;"><strong>Fig. 4.</strong></p>
+<p align="center"><strong>Fig. 4.</strong></p>
 
 Because I needed to keep track of what combination of cards a player or opponent had I created global variable Booleans for the player and opponent class to keep track of what they have in their hands. At the end of the game a method is called to run all the methods to test for those combinations then a certain amount of winPoints are awarded depending on the players hand. Designing the Gui was tricky but I was able to make the cards into buttons, that way I could use built in javafx functions to handle the events of a mouse click, which also allowed me to color selected cards giving a “highlighted” feel. When I designed the buttons, I tried to have a detailed caption on the button so that the user would know what is happening when they clicked the button. For better looks and feels I added sounds to the clicks of buttons and css styling that shows the button press in when they are clicked.
 
@@ -109,13 +111,14 @@ Because I needed to keep track of what combination of cards a player or opponent
 
 # Results
 <p align="left" name="results">
-&emsp;My Results were successful in creating a poker app that could help a user learn how to play five card pokers. When a user fails or succeeds against my computer a sound is played either a crowd cheering or a crowd booing for added entertainment [#]. People claim to like the feel of Poker Fanatic as well as the speed it runs. Problems I ran into was mostly my fault by forgetting to make sure if a user had a pair, but their pair was a higher ranked pair then that person would win the poker match. I overcame this obstacle and even added in notes on the winning screen to let a player know if they lost or won with higher ranked cards. The buttons clicking through the game are very addictive they make a little noise when clicked and everything loads very fast. When you are facing the opponent and you select easy mode there are distinct differences when compared to medium and hard mode. To test this, I ran a simulation of 25 games each: 
+&emsp;My Results were successful in creating a poker app that could help a user learn how to play five card pokers. When a user fails or succeeds against my computer a sound is played either a crowd cheering or a crowd booing for added entertainment [2]. People claim to like the feel of Poker Fanatic as well as the speed it runs. Problems I ran into was mostly my fault by forgetting to make sure if a user had a pair, but their pair was a higher ranked pair then that person would win the poker match. I overcame this obstacle and even added in notes on the winning screen to let a player know if they lost or won with higher ranked cards. The buttons clicking through the game are very addictive they make a little noise when clicked and everything loads very fast. When you are facing the opponent and you select easy mode there are distinct differences when compared to medium and hard mode. To test this, I ran a simulation of 25 games each: 
 </p>
 
 <img src="compScoreRate.png" alt="Figure 5">
+<strong> Fig 5 </strong>
 
 <p align="left">
-&emsp;From my results you can see easy mode is has the lowest scores, medium increases a bit, and hard gets “bust” just under 30% of the time where as easy mode gets a “bust” almost 50% of the time. The fact that its so random to get these combination of cards makes it difficult to create an AI that always gets a good set of cards. I was able to have card images that acted as buttons to perform all the functionalities that I needed them to do [#]. Here is a table of features I had intended to do and a summary of them.
+&emsp;From my results you can see easy mode is has the lowest scores, medium increases a bit, and hard gets “bust” just under 30% of the time where as easy mode gets a “bust” almost 50% of the time. The fact that its so random to get these combination of cards makes it difficult to create an AI that always gets a good set of cards. I was able to have card images that acted as buttons to perform all the functionalities that I needed them to do [3]. Here is a table of features I had intended to do and a summary of them.
 </p>
 
 |Feature|Implemented|Not Implemented|
@@ -134,12 +137,24 @@ Because I needed to keep track of what combination of cards a player or opponent
 <br>
 &emsp;Now I will demonstrate the visuals of Poker Fanatic when run and give a couple of pictures depicting the user experience when using the program. First photo shows the title screen, next shows poker rules map, next is highlighted cards, next is win points being displayed, and the last photo is the win screen showing who won the match. 
 <img src="titleScreen.png" alt="Figure 6">
+<strong> Fig 6 </strong>
 <img src="pokerRulez.png" alt="Figure 7">
+<strong> Fig 7 </strong>
 <img src="highLightCards.png" alt="Figure 8">
+<strong> Fig 8 </strong>
 <img src="winPoints.png" alt="Figure 9">
+<strong> Fig 9 </strong>
 <img src="winScreen.png" alt="Figure 10">
+<strong> Fig 10 </strong>
 
 # Conclusion and Future Work
 <p align="left" name="conclusion">
 &emsp;The challenge was to create a program that could help teach people how to play poker. I took on the mindset that the users were young so that it was readable to all skill levels. In the end the product is intuitive and helps the user progress from easier challenges to harder ones. Lessons that I have learned throughout this project is to plan, writing down programs and features helped me visualize its implementation thus leading to a lot of time saved writing code. In the early developments of the project I wasn’t as organized when compared to the end of the projects lifecycle. Clustering random code into organized methods also helps a lot with reading code. I could see future work including adding a betting system, I defiantly left room for this by adding phases in the button clicks. I would also like to include a high score list, so a user could know he/her highest card combination and keep track of how much money they were able to make betting. Adding animation would have made the game a lot more fun as well, from having the cards actually dealt out to the player and opponent to giving back cards and simulating that with animations. If I were to develop this a different way I would have tried to use scene builder with javaFx, this is a tool that helps build apps.
 </p>
+
+<a name="ref">
+# References
+[1] Button Css Styling: http://fxexperience.com/2011/12/styling-fx-buttons-with-css/
+[2] Button / Crowd Cheering and Booing Sounds: http://soundbible.com/tags-button.html
+[3] Card Art: http://byonknoll.blogspot.com/2011/03/vector-playing-cards.html
+[4] Poker Title, Game Help Image, Poker Hand Ranking Image: Maximilian Finnican. (Paint)

@@ -125,3 +125,10 @@ Because I needed to keep track of what combination of cards a player or opponent
 |Cutomizable winning graphics| | X |
 |Animation of Cards| | X |
 
+<br>
+&emsp;Now I will demonstrate the visuals of Poker Fanatic when run and give a couple of pictures depicting the user experience when using the program. First photo shows the title screen, next shows poker rules map, next is highlighted cards, next is win points being displayed, and the last photo is the win screen showing who won the match. 
+<img src="titleScreen.png" alt="Figure 6">
+<img src="pokerRulez.png" alt="Figure 7">
+<img src="highLightCards.png" alt="Figure 8">
+<img src="winPoints.png" alt="Figure 9">
+<img src="winScreen.png" alt="Figure 10">

@@ -39,18 +39,17 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 &emsp;When people are learning how to play poker the most basic thing to understand is the actual rules of the game. Because there are many combinations of cards inside the game, people tend to not know them all. You need to inform the user that all the cards have different “values”. When looking at an “Ace” vs a “2” in rank they are very different because of the value associated with the card’s rank. An Ace can be counted as 1 or 14, in the case of five card poker draw, PF has Ace programmed as 14 always, although the 2 is always counted as 2. To win in poker the user must know about the effect of having higher ranked cards, meaning if the player has an ace and the opponent has a 2 the player would win, and the opponent would lose. There are also many combinations of cards, flushes, straights, three of kind, pair, royal flush, and etc. All these combinations deal with the cards in the user hand and if they have same suit, are consecutive in ranks, or a combination of both. The ranking of these combinations are based off the rarity of the combination. When poker was created these rarities were decided, creating a ranked order causing other card combinations to be greater than others. The user needs a list of those hand combinations in a ranked order. Once the user knows how to play and what to look for it only takes practice and my goal will have been satistfied.
 </p>
 
-<p style="clear:both;"> </p>
-<img src="pokerMenu.png" alt="Figure 1" width="250" height="250" style="float:left;"> 
-<strong>Fig 1</strong> <p style="clear: both;"> </p>
-<img src="pokerRules.png" alt="Figure 2" width="250" height="250" style="float:right;">
-<strong>Fig 2</strong>
+<img src="pokerMenu.png" alt="Figure 1" align="center"> 
+<p align="center"><strong>Fig 1</strong></p>
+<img src="pokerRules.png" alt="Figure 2" align="center">
+<p align="center"><strong>Fig 2</strong></p>
 
 ## Objectives
 <p align="left">
 &emsp;Poker Fanatic is meant to teach someone how to become good at poker. What I wanted to have available for the user is easy ways to start the game, adjustable versions of the game so the user can start at their level of expertise, and feedback to show them what they got based off the combination of cards in their hand. I wanted an intuitive design so that is why when you run the game you immediately know what to do, to solve this the user is prompted with three buttons reading “easy”, “medium”, and “hard” which are also colored green yellow and red for visual ques. When clicked the rules of poker are displayed and a button that says, “deal out cards”. Hopefully by this point the user understands the basics of the game and continues to deal out the cards. Now the user has a bunch of cards and is not sure what to do, so a map of poker hand rankings is displayed to help aid the user’s decisions with what cards to give away. Once you have given back your cards points will be evaluated for your final hand and printed after you flip the opponents hand.  This was implemented to help see the rank of their hand on the ranking list. 
 </p>
-<img src="points.png" alt="Figure 3" style="float:right;">
-<strong>Fig 3</strong>
+<img src="points.png" alt="Figure 3" align="center">
+<p align="center"><strong>Fig 3</strong></p>
 
 ## Users
 <p align="left">
@@ -92,7 +91,7 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 &emsp;How I designed Poker Fanatic was with the mentality of “starting from scratch”. As practice to become a better programmer I began just to code what all was needed to create a card game in the real world. First being the cards, then a deck, then a player to play with the deck of cards. At first the game was running from command line but eventually I used javaFx’s application software to write a decent GUI for the game. Here is a UML diagram of Poker Fanatic. 
 </p>
 
-<img src="PokerFanatic.png" alt="Figure 4" style="float:right;">
+<img src="PokerFanatic.png" alt="Figure 4" align="center">
 <p align="center"><strong>Fig. 4.</strong></p>
 
 Because I needed to keep track of what combination of cards a player or opponent had I created global variable Booleans for the player and opponent class to keep track of what they have in their hands. At the end of the game a method is called to run all the methods to test for those combinations then a certain amount of winPoints are awarded depending on the players hand. Designing the Gui was tricky but I was able to make the cards into buttons, that way I could use built in javafx functions to handle the events of a mouse click, which also allowed me to color selected cards giving a “highlighted” feel. When I designed the buttons, I tried to have a detailed caption on the button so that the user would know what is happening when they clicked the button. For better looks and feels I added sounds to the clicks of buttons and css styling that shows the button press in when they are clicked.
@@ -114,8 +113,8 @@ Because I needed to keep track of what combination of cards a player or opponent
 &emsp;My Results were successful in creating a poker app that could help a user learn how to play five card pokers. When a user fails or succeeds against my computer a sound is played either a crowd cheering or a crowd booing for added entertainment [2]. People claim to like the feel of Poker Fanatic as well as the speed it runs. Problems I ran into was mostly my fault by forgetting to make sure if a user had a pair, but their pair was a higher ranked pair then that person would win the poker match. I overcame this obstacle and even added in notes on the winning screen to let a player know if they lost or won with higher ranked cards. The buttons clicking through the game are very addictive they make a little noise when clicked and everything loads very fast. When you are facing the opponent and you select easy mode there are distinct differences when compared to medium and hard mode. To test this, I ran a simulation of 25 games each: 
 </p>
 
-<img src="compScoreRate.png" alt="Figure 5">
-<strong> Fig 5 </strong>
+<img src="compScoreRate.png" alt="Figure 5" align="center">
+<p align="center"><strong> Fig 5 </strong></p>
 
 <p align="left">
 &emsp;From my results you can see easy mode is has the lowest scores, medium increases a bit, and hard gets “bust” just under 30% of the time where as easy mode gets a “bust” almost 50% of the time. The fact that its so random to get these combination of cards makes it difficult to create an AI that always gets a good set of cards. I was able to have card images that acted as buttons to perform all the functionalities that I needed them to do [3]. Here is a table of features I had intended to do and a summary of them.
@@ -136,16 +135,16 @@ Because I needed to keep track of what combination of cards a player or opponent
 
 <br>
 &emsp;Now I will demonstrate the visuals of Poker Fanatic when run and give a couple of pictures depicting the user experience when using the program. First photo shows the title screen, next shows poker rules map, next is highlighted cards, next is win points being displayed, and the last photo is the win screen showing who won the match. 
-<img src="titleScreen.png" alt="Figure 6">
-<strong> Fig 6 </strong>
-<img src="pokerRulez.png" alt="Figure 7">
-<strong> Fig 7 </strong>
-<img src="highLightCards.png" alt="Figure 8">
-<strong> Fig 8 </strong>
-<img src="winPoints.png" alt="Figure 9">
-<strong> Fig 9 </strong>
-<img src="winScreen.png" alt="Figure 10">
-<strong> Fig 10 </strong>
+<img src="titleScreen.png" alt="Figure 6" align="center">
+<p align="center"><strong> Fig 6 </strong></p>
+<img src="pokerRulez.png" alt="Figure 7" align="center">
+<p align="center"><strong> Fig 7 </strong></p>
+<img src="highLightCards.png" alt="Figure 8" align="center">
+<p align="center"><strong> Fig 8 </strong></p>
+<img src="winPoints.png" alt="Figure 9" align="center">
+<p align="center"><strong> Fig 9 </strong></p>
+<img src="winScreen.png" alt="Figure 10" align="center">
+<p align="center"><strong> Fig 10 </strong></p>
 
 # Conclusion and Future Work
 <p align="left" name="conclusion">

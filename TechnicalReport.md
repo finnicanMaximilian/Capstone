@@ -89,7 +89,7 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 <p align="left" name="ddt">
 &emsp;How I designed Poker Fanatic was with the mentality of “starting from scratch”. As practice to become a better programmer I began just to code what all was needed to create a card game in the real world. First being the cards, then a deck, then a player to play with the deck of cards. At first the game was running from command line but eventually I used javaFx’s application software to write a decent GUI for the game. Here is a UML diagram of Poker Fanatic. 
 </p>
-<Figure>
+<figure>
 <img src="PokerFanatic.png" alt="Figure 4" style="float:right;" align="center">
 <figcaption><center><strong>Fig. 4.</strong></center></figcaption> <br>
 </figure>

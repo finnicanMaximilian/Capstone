@@ -89,7 +89,10 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 <p align="left" name="ddt">
 &emsp;How I designed Poker Fanatic was with the mentality of “starting from scratch”. As practice to become a better programmer I began just to code what all was needed to create a card game in the real world. First being the cards, then a deck, then a player to play with the deck of cards. At first the game was running from command line but eventually I used javaFx’s application software to write a decent GUI for the game. Here is a UML diagram of Poker Fanatic. 
 </p>
+<Figure>
 <img src="PokerFanatic.png" alt="Figure 4" style="float:right;">
+<figcaption>Fig. 4.</figcaption>
+</figure>
 Because I needed to keep track of what combination of cards a player or opponent had I created global variable Booleans for the player and opponent class to keep track of what they have in their hands. At the end of the game a method is called to run all the methods to test for those combinations then a certain amount of winPoints are awarded depending on the players hand. Designing the Gui was tricky but I was able to make the cards into buttons, that way I could use built in javafx functions to handle the events of a mouse click, which also allowed me to color selected cards giving a “highlighted” feel. When I designed the buttons, I tried to have a detailed caption on the button so that the user would know what is happening when they clicked the button. For better looks and feels I added sounds to the clicks of buttons and css styling that shows the button press in when they are clicked.
 
 

@@ -45,3 +45,37 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games.
 <img src="pokerRules.png" alt="Figure 2" width="250" height="250" style="float:right;">
 Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 
+## Objectives
+<p align="left">
+&emsp;Poker Fanatic is meant to teach someone how to become good at poker. What I wanted to have available for the user is easy ways to start the game, adjustable versions of the game so the user can start at their level of expertise, and feedback to show them what they got based off the combination of cards in their hand. I wanted an intuitive design so that is why when you run the game you immediately know what to do, to solve this the user is prompted with three buttons reading “easy”, “medium”, and “hard” which are also colored green yellow and red for visual ques. When clicked the rules of poker are displayed and a button that says, “deal out cards”. Hopefully by this point the user understands the basics of the game and continues to deal out the cards. Now the user has a bunch of cards and is not sure what to do, so a map of poker hand rankings is displayed to help aid the user’s decisions with what cards to give away. Once you have given back your cards points will be evaluated for your final hand and printed after you flip the opponents hand.  This was implemented to help see the rank of their hand on the ranking list. 
+</p>
+<img src="points.png" alt="Figure 3" style="float:right;">
+## Users
+<p align="left">
+&emsp;Users of Poker Fanatic would be younger kids, or young adults. This is because most of the elder generations have played poker before and usually prefer using standard cards rather than a computer program.
+</p>
+
+
+## Relevant background information
+<p align="left" name="backgroundInfo">
+&emsp;Other types of poker apps exist out on the market but not many are focused in on teaching the user how to play the game. Most other versions have gambling aspects with real currencies, multiplayer, and customizable avatars. This adds more fun to the game for the user, but these games are not as educational as poker fanatic.
+</p>
+
+## Problem Scope
+<p align="left">
+&emsp; My problem scope is will the user be able to start up the application and make educated decisions about his/her moves when prompted to give back cards.
+</p>
+
+## Summary of Features
+| Features|
+|----------|
+|Adjustable Opponent|
+|Adjustable backgrounds and colors|
+|Poker hand ranking chart|
+|Sounds and Music|
+|Card Images|
+|Clickable cards to give back|
+|Show points earned for poker hand|
+|Customizable winning graphics|
+|Animation of Cards|
+

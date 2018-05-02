@@ -132,3 +132,8 @@ Because I needed to keep track of what combination of cards a player or opponent
 <img src="highLightCards.png" alt="Figure 8">
 <img src="winPoints.png" alt="Figure 9">
 <img src="winScreen.png" alt="Figure 10">
+
+# Conclusion and Future Work
+<p align="left" name="conclusion">
+&emsp;The challenge was to create a program that could help teach people how to play poker. I took on the mindset that the users were young so that it was readable to all skill levels. In the end the product is intuitive and helps the user progress from easier challenges to harder ones. Lessons that I have learned throughout this project is to plan, writing down programs and features helped me visualize its implementation thus leading to a lot of time saved writing code. In the early developments of the project I wasn’t as organized when compared to the end of the projects lifecycle. Clustering random code into organized methods also helps a lot with reading code. I could see future work including adding a betting system, I defiantly left room for this by adding phases in the button clicks. I would also like to include a high score list, so a user could know he/her highest card combination and keep track of how much money they were able to make betting. Adding animation would have made the game a lot more fun as well, from having the cards actually dealt out to the player and opponent to giving back cards and simulating that with animations. If I were to develop this a different way I would have tried to use scene builder with javaFx, this is a tool that helps build apps.
+</p>

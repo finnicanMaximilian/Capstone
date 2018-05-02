@@ -79,3 +79,46 @@ Figure one &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Figure two
 |Customizable winning graphics|
 |Animation of Cards|
 
+# Design, Development, and Testing
+<br>
+## Design
+<a name="design">
+<p align="left" name="ddt">
+&emsp;How I designed Poker Fanatic was with the mentality of “starting from scratch”. As practice to become a better programmer I began just to code what all was needed to create a card game in the real world. First being the cards, then a deck, then a player to play with the deck of cards. At first the game was running from command line but eventually I used javaFx’s application software to write a decent GUI for the game. Here is a UML diagram of Poker Fanatic. 
+</p>
+<img src="PokerFanatic.png" alt="Figure 4" style="float:right;">
+Because I needed to keep track of what combination of cards a player or opponent had I created global variable Booleans for the player and opponent class to keep track of what they have in their hands. At the end of the game a method is called to run all the methods to test for those combinations then a certain amount of winPoints are awarded depending on the players hand. Designing the Gui was tricky but I was able to make the cards into buttons, that way I could use built in javafx functions to handle the events of a mouse click, which also allowed me to color selected cards giving a “highlighted” feel. When I designed the buttons, I tried to have a detailed caption on the button so that the user would know what is happening when they clicked the button. For better looks and feels I added sounds to the clicks of buttons and css styling that shows the button press in when they are clicked.
+
+
+## Development
+<p align="left" name="dev">
+&emsp;Early stages of development include many stages, the first was to have the deck working properly. My first questions I asked myself for testing was: did the deck assemble correctly, when shuffled is it truly randomized, when cards are taken out there are no duplicates, when cards are taken out the size of the deck goes down. So, to test this I created a player class with an array list as the hand and began to write code to make all this possible. Once I was able to correctly give players cards that is when I decided to keep track of what was in the players hand. I created Booleans to keep track of different card combinations, then a master method called calcHand to enact all the methods that checked for the different hand types. Once I had this working properly I was able to create an opponent to play against, because calcHand was made and win points were given to each player it made deciding who won the match easy to code. Then ultimately once the game worked perfectly in command line I implemented all of it in a Gui. Designing and programming the interface dealt with cosmetic changes to the screen, therefore the methods created were all to aid that process to make it as organized as possible. The start(Stage) method is inherited from the Application class from the JavaFx packages. This allows the user to begin programming to an Application that is pre-generated from the java library. To begin coding to the application one must “set the scene with a stage”, the stage can be thought of as the application window or the box with the minimize, expand, and close options, and the scene can be thought of as what you see inside the window. To create poker fanatic I created two scenes, one for a title of the game and to adjust the AI settings, and the other to play the game of poker in. this helps with an easy transition for the user to choose his/her difficulty and to play the game.
+</p>
+
+## Testing
+<p align="left" name="test">
+&emsp;To Test Poker Fanatic, I created multiple test classes that tested the global variables and methods of each class outside of the Gui. This way if there were any bugs inside the game’s engine I could easily debug it by running the test classes. Test classes were made for the Card class, Deck class, Player class, and Opponent class. When you run the test classes it will print to command line all the methods that its testing along with a description of the test plus the result. As far as testing the Gui I was unable to use any de bugger for JavaFx, although I made visual checks when running the program to make sure everything was appearing as intended. One problem I ran into for testing was the findCard(Card) method which helps find the correct image for the card that is being shown on the poker stage, because I hand wrote all the names of the image files some had some misspellings, to ensure I found all faulty spellings I played 100’s of games with the card names of the opponent and player printed to the console so I could find any mis-matches. I also created a test class to have a sandbox program from finding out which buttons were clicked by the user called testClickedCard.
+</p>
+
+
+# Results
+<p align="left" name="results">
+&emsp;My Results were successful in creating a poker app that could help a user learn how to play five card pokers. When a user fails or succeeds against my computer a sound is played either a crowd cheering or a crowd booing for added entertainment [#]. People claim to like the feel of Poker Fanatic as well as the speed it runs. Problems I ran into was mostly my fault by forgetting to make sure if a user had a pair, but their pair was a higher ranked pair then that person would win the poker match. I overcame this obstacle and even added in notes on the winning screen to let a player know if they lost or won with higher ranked cards. The buttons clicking through the game are very addictive they make a little noise when clicked and everything loads very fast. When you are facing the opponent and you select easy mode there are distinct differences when compared to medium and hard mode. To test this, I ran a simulation of 25 games each: 
+</p>
+<img src="compScoreRate.png" alt="Figure 5">
+<p align="left">
+&emsp;From my results you can see easy mode is has the lowest scores, medium increases a bit, and hard gets “bust” just under 30% of the time where as easy mode gets a “bust” almost 50% of the time. The fact that its so random to get these combination of cards makes it difficult to create an AI that always gets a good set of cards. I was able to have card images that acted as buttons to perform all the functionalities that I needed them to do [#]. Here is a table of features I had intended to do and a summary of them.
+</p>
+|Feature|Implemented|Not Implemented|
+|---|---|---|
+|Adjustable Opponent| X | |
+|Poker Rules Map| X | |
+|Adjustable Backgrounds and Colors| | X |
+|Poker Hand Ranking Chart| X | |
+|Sounds and Music| X | X |
+|Card Images| X | |
+|Clickable Cards to give back| X | |
+|Show points earned for poker hand| X | |
+|Cutomizable winning graphics| | X |
+|Animation of Cards| | X |
+

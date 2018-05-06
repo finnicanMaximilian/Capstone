@@ -4,6 +4,7 @@
 
 ---
 <a name="abstract">
+
 # Abstract
 <p align="left">
 &emsp; The overall objective of Poker Fanatic (PF) is to have a desktop application that can run a game of Five Card Poker against an intelligent AI to teach users strategies and basics of five card poker draw. The project consists of multiple classes and utilizes the JavaFx library to create a standalone application. All the code is written within eclipse oxygen. Eclipse is an IDE that I prefer because of the helpful auto fill options, library collections, and its debug mode. When developing PF I first began by creating the deck of cards objects. Using an array List I was able to create a list of 52 “Card” objects to be contained inside my Deck Class. Then I added the player class and opponent class, so it could interact with the deck. Using JavaFx I then was able to create an environment for the player and opponent to play against each other. 
@@ -33,7 +34,8 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 <br>
 
 ---
-<a name="introProOv"> 
+<a name="introProOv">
+
 # Introduction and Project Overview
 <p align="left">
 

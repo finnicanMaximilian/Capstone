@@ -8,7 +8,8 @@
 <p align="left" name="absract">
 &emsp; The overall objective of Poker Fanatic (PF) is to have a desktop application that can run a game of Five Card Poker against an intelligent AI to teach users strategies and basics of five card poker draw. The project consists of multiple classes and utilizes the JavaFx library to create a standalone application. All the code is written within eclipse oxygen. Eclipse is an IDE that I prefer because of the helpful auto fill options, library collections, and its debug mode. When developing PF I first began by creating the deck of cards objects. Using an array List I was able to create a list of 52 “Card” objects to be contained inside my Deck Class. Then I added the player class and opponent class, so it could interact with the deck. Using JavaFx I then was able to create an environment for the player and opponent to play against each other. 
 
-&emsp;	The product that has been developed now has a list of features: Adjustable Opponent (easy, medium, hard), A graphic containing instructions on how to play poker, a graphic containing a ranked list of poker hand combinations, results post points earned by the player and opponent, clickable cards with a gentle highlight to visualize the cards that are clicked, and fun sounds that help navigate and determine results of game. Users can launch the game then choose the level of difficulty of the computer. Poker fanatic will then deal out cards to the player and opponent. The opponent then uses a method called think() to make educated decision on cards to give back. When both players are done giving back cards the player can flip the cards to see he/her points earned for that hand. Once finished the user can click the button "show who won" from there the game will determine the winner and a sound will be played if they won or lost. If the user is satisfied with the level of difficulty they can continue to play if not there is an option to go back to the main page to change the computers difficulty.<br>
+&emsp;	The product that has been developed now has a list of features: Adjustable Opponent (easy, medium, hard), A graphic containing instructions on how to play poker, a graphic containing a ranked list of poker hand combinations, results post points earned by the player and opponent, clickable cards with a gentle highlight to visualize the cards that are clicked, and fun sounds that help navigate and determine results of game. Users can launch the game then choose the level of difficulty of the computer. Poker fanatic will then deal out cards to the player and opponent. The opponent then uses a method called think() to make educated decision on cards to give back. When both players are done giving back cards the player can flip the cards to see he/her points earned for that hand. Once finished the user can click the button "show who won" from there the game will determine the winner and a sound will be played if they won or lost. If the user is satisfied with the level of difficulty they can continue to play if not there is an option to go back to the main page to change the computers difficulty.
+
 Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 </p>
 
@@ -50,9 +51,9 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 
 </p>
 
-<img src="pokerRules.png" alt="Figure 1" align="middle"> 
+<img src="pokerRules.png" alt="Figure 1" class="center"> 
 <p align="center"><strong>Fig 1</strong></p>
-<img src="pokerMenu.png" alt="Figure 2" align="middle">
+<img src="pokerMenu.png" alt="Figure 2" class="center">
 <p align="center"><strong>Fig 2</strong></p>
 
 ## Objectives
@@ -140,8 +141,6 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 <p align="left" name="test">
 
 &emsp;To Test Poker Fanatic I created multiple test classes that tested global variables and methods of each class outside of the Gui. This way if there were any bugs inside the game’s engine I could easily debug it by running the test classes. Test classes were made for the Card class, Deck class, Player class, and Opponent class. When you run the test classes it will print to command line all the methods that its testing along with a description of the test plus the result. As far as testing the Gui I was unable to use any de bugger for JavaFx, although I made visual checks when running the program to make sure everything was appearing as intended. 
-
-<br>
 
 &emsp; One problem I ran into for testing was the findCard(Card) method which helps find the correct image for the card that is being shown on the poker stage. Because I hand wrote all the names of the image files some had some misspellings, to ensure I found all faulty spellings I played 100’s of games with the card names of the opponent and player printed to the console so I could find any mis-matches, time consuming but is an example of testing the GUI's behavior because it then separated what was actually inside the players and from what was being shown to the screen. I also created a test class to have a sandbox program from finding out which buttons were clicked by the user called testClickedCard. This was crucial in not tampering with concrete code but finding out ways to implement a handler to color cards correctly when the user clicks them.
 

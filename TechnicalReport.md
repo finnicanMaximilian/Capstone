@@ -51,9 +51,12 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 
 </p>
 
-<img src="pokerRules.png" alt="Figure 1" class="center"> 
+<img src="pokerRules.png" alt="Figure 1" class="center">
+
 <p align="center"><strong>Fig 1</strong></p>
+
 <img src="pokerMenu.png" alt="Figure 2" class="center">
+
 <p align="center"><strong>Fig 2</strong></p>
 
 ## Objectives

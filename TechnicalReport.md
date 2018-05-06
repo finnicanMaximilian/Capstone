@@ -3,15 +3,16 @@
 # 4-18-2018
 
 ---
-
+<a name="abstract">
 # Abstract
-<p align="left" name="absract">
+<p align="left">
 &emsp; The overall objective of Poker Fanatic (PF) is to have a desktop application that can run a game of Five Card Poker against an intelligent AI to teach users strategies and basics of five card poker draw. The project consists of multiple classes and utilizes the JavaFx library to create a standalone application. All the code is written within eclipse oxygen. Eclipse is an IDE that I prefer because of the helpful auto fill options, library collections, and its debug mode. When developing PF I first began by creating the deck of cards objects. Using an array List I was able to create a list of 52 “Card” objects to be contained inside my Deck Class. Then I added the player class and opponent class, so it could interact with the deck. Using JavaFx I then was able to create an environment for the player and opponent to play against each other. 
 
-&emsp;	The product that has been developed now has a list of features: Adjustable Opponent (easy, medium, hard), A graphic containing instructions on how to play poker, a graphic containing a ranked list of poker hand combinations, results post points earned by the player and opponent, clickable cards with a gentle highlight to visualize the cards that are clicked, and fun sounds that help navigate and determine results of game. Users can launch the game then choose the level of difficulty of the computer. Poker fanatic will then deal out cards to the player and opponent. The opponent then uses a method called think() to make educated decision on cards to give back. When both players are done giving back cards the player can flip the cards to see he/her points earned for that hand. Once finished the user can click the button "show who won" from there the game will determine the winner and a sound will be played if they won or lost. If the user is satisfied with the level of difficulty they can continue to play if not there is an option to go back to the main page to change the computers difficulty.
+&emsp;	The product that has been developed now has a list of features: Adjustable Opponent (easy, medium, hard), A graphic containing instructions on how to play poker, a graphic containing a ranked list of poker hand combinations, results post points earned by the player and opponent, clickable cards with a gentle highlight to visualize the cards that are clicked, and fun sounds that help navigate and determine results of game. Users can launch the game then choose the level of difficulty of the computer. Poker fanatic will then deal out cards to the player and opponent. The opponent then uses a method called think() to make educated decision on cards to give back. When both players are done giving back cards the player can flip the cards to see his or her points earned from that hand. Once finished the user can click the button "show who won" from there the game will determine the winner and a sound will be played if they won or lost. If the user is satisfied with the level of difficulty they can continue to play if not there is an option to go back to the main page to change the computers difficulty.
 
 Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 </p>
+</a>
 
 ---
 
@@ -32,9 +33,9 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 <br>
 
 ---
-
+<a name="introProOv"> 
 # Introduction and Project Overview
-<p align="left" name="introProOv">
+<p align="left">
 
 &emsp;When I was little my grandpa taught me how to play five card poker draws. As I got older my grandfather is no longer with us, but now I have little cousins who do not know how to play Poker! Kids these days are amazed with technology. I felt if there was one way to teach them how to play poker then it would have to be from the computer. Poker Fanatic is my attempt to create an educational poker game to try and help people learn how to play poker from the comfort of their computer. The project needed to be completed in a semester so i limited the amount of features that would be developed. Multiplayer is a huge aspect on many other types of poker apps, without knowleadge in networking i decided to not develop multiplayer for times sake. Betting is a huge part of poker but i decided to not implement that either and focused on making the app visualing appealing and easy to use. 
 
@@ -153,7 +154,7 @@ Keywords: Java, JavaFx, Eclipse, AI, Card Games, ArrayList, GameDev.
 ---
 
 # Results
-<p align="left" name="results">
+<p align="left" name="result">
 
 &emsp;My Results were successful in creating a poker app that could help a user learn how to play five card pokers. When a user fails or succeeds against my computer a crowd cheering or a crowd booing is played for added entertainment [2]. People claim to like the feel of Poker Fanatic as well as the speed it runs. Problems I ran into was mostly my fault by forgetting to make sure if a user had a pair, but their pair was a higher ranked pair then that person would win the poker match. I overcame this obstacle and even added in notes on the winning screen to let a player know if they lost or won by higher ranked cards. The buttons clicking through the game are very addictive they make a little noise when clicked and everything loads very fast. When you are facing the opponent and you select easy mode there are distinct differences in average points when compared to medium and hard mode. To test this I ran a simulation of 25 games in easy, medium and hard mode. I then recorded the scores of each game and created a table representing the data: 
 
